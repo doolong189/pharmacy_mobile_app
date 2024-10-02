@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.fragment.cart.CartFragment">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+       <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           tools:listitem="@layout/item_product_cart"
+           />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:background="#F5F5F5"
+           android:orientation="vertical"
+           >
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Số lượng"
+                   android:textStyle="bold"
+                   android:layout_centerVertical="true" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Số lượng"
+                   android:textStyle="bold"
+                   android:layout_centerVertical="true"
+                   android:layout_alignParentEnd="true"
+                   android:textColor="#FF0000"/>
+           </RelativeLayout>
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Tổng tiền"
+                   android:textStyle="bold"
+                   android:layout_centerVertical="true" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="0 VND"
+                   android:textStyle="bold"
+                   android:textColor="#4CAF50"
+                   android:layout_centerVertical="true"
+                   android:layout_alignParentEnd="true"/>
+           </RelativeLayout>
+           <Button
+               android:layout_width="150dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:backgroundTint="#4CAF50"
+               android:text="Tiếp tục"
+               android:layout_margin="10dp"/>
+       </LinearLayout>
+   </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    android:layout_margin="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/item_child_imageProduct"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_add_category"/>
+        <TextView
+            android:id="@+id/item_child_tvDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#D02121"
+            android:text="-5%"
+            android:padding="10dp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/item_child_imageProduct"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/item_child_tvNameProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:text="PluzTP - Multi(Tuyp 20 vien nem sui) - Thanh Phat"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/item_child_tvBonusCoin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Tặng 150 coin"
+                android:textColor="#FF9800"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/item_child_tvPack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Tuýp 20 viên nén sủi"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/item_child_tvMinimum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Số lượng tối thiểu: 0"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/item_child_tvPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:text="12.000 VND"
+                android:textColor="#4CAF50"
+                android:textAlignment="center"/>
+            <Button
+                android:id="@+id/item_child_btnAddCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Thêm giỏ hàng"
+                android:backgroundTint="#4CAF50"
+                android:layout_margin="5dp"
+                android:layout_gravity="bottom|center"
+             />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

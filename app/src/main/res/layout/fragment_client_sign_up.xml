@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.ui.fragment.client.ClientSignUpFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#fff"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#4CAF50" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/cardView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                >
+                <ImageView
+                    android:id="@+id/ic_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/back_arrow"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="163dp"
+                    app:cardCornerRadius="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="@string/title_textview_sign_up"
+                            android:textColor="#4CAF50"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutEdFullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/title_ed_ho_ten_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
+                            android:layout_margin="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/client_sign_up_edFullName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                android:hint="@string/title_ed_ho_ten_sign_up"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutEdPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/title_ed_sdt_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
+                            android:layout_margin="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/client_sign_up_edPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutEdEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/title_ed_email_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
+                            android:layout_margin="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/client_sign_up_edEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutEdAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/title_ed_dia_chi1_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
+                            android:layout_margin="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/client_sign_up_edAddressClient"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutEdPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/title_ed_mat_khau_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
+                            android:layout_margin="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/client_sign_up_edPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutSpProvinces"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/string_sign_up_provinces"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_margin="10dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/client_sign_up_SpProvinces"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/client_sign_up_layoutSpAgency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nhà thuốc"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_margin="10dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/client_sign_up_spAgency"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="10dp"
+                            android:gravity="center"
+                            >
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Ảnh đại diện *"
+                                android:textStyle="bold"
+                                android:textColor="#5D5D5D"/>
+                            <ImageView
+                                android:id="@+id/client_sign_up_imgUpload"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/baseline_image_24"/>
+                        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/client_sign_up_showImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_hide_image_24"
+                            android:layout_margin="10dp"/>
+                        <TextView
+                            android:id="@+id/counter_sign_up_tvValidateImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vui lòng chọn ảnh"
+                            android:textStyle="bold"
+                            android:textColor="#FF0000"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng ký tài khoản thành viên bạn đã đồng ý với"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="Điều khoản sử dụng"
+                    android:textColor="#4CAF50"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    />
+
+                <Button
+                    android:id="@+id/client_sign_up_btnSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="#4CAF50"
+                    android:text="@string/title_button_sign_up" />
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

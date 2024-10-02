@@ -1,0 +1,308 @@
+package com.freshervnc.pharmacycounter.presentation.ui.fragment.client
+
+import android.app.Activity
+import android.app.Dialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.freshervnc.pharmacycounter.R
+import com.freshervnc.pharmacycounter.databinding.DialogChooseCameraOrGalleryBinding
+import com.freshervnc.pharmacycounter.databinding.FragmentClientSignUpBinding
+import com.freshervnc.pharmacycounter.utils.Resource
+import com.freshervnc.pharmacycounter.utils.Status
+import com.freshervnc.pharmacycounter.viewmodel.AgencyViewModel
+import com.freshervnc.pharmacycounter.viewmodel.ProvinceViewModel
+import com.freshervnc.pharmacycounter.viewmodel.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+
+
+class ClientSignUpFragment : Fragment() {
+    private lateinit var binding: FragmentClientSignUpBinding
+    private lateinit var provincesViewModel: ProvinceViewModel
+    private lateinit var agencyViewModel: AgencyViewModel
+    private lateinit var clientViewModel : RegisterViewModel
+    private var itrProvinces: Int = 1
+    private var itrAgency: Int = 1
+    private val CAMERA_REQUEST_CODE = 100
+    private val GALLERY_REQUEST_CODE = 75
+    lateinit var currentPhotoPath: String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentClientSignUpBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        validate()
+        init()
+        getDataSpinner()
+        openDialogCameraOrGallery()
+    }
+
+    private fun init() {
+        provincesViewModel = ViewModelProvider(
+            this,
+            ProvinceViewModel.ProvinceViewModelFactory(requireActivity().application)
+        )[ProvinceViewModel::class.java]
+        agencyViewModel = ViewModelProvider(
+            this,
+            AgencyViewModel.AgencyViewModelFactory(requireActivity().application)
+        )[AgencyViewModel::class.java]
+        clientViewModel = ViewModelProvider(this,
+            RegisterViewModel.RegisterViewModelFactory(requireActivity().application))[RegisterViewModel::class.java]
+    }
+
+    private fun getDataSpinner() {
+        binding.clientSignUpSpAgency.isEnabled = false
+        provincesViewModel.getProvinces().observe(viewLifecycleOwner, Observer { it ->
+            it?.let { resources ->
+                when (resources.status) {
+                    Status.SUCCESS -> {
+                        val adapterSpProvinces =
+                            ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
+                        binding.clientSignUpSpProvinces.setAdapter(adapterSpProvinces)
+                        binding.clientSignUpSpProvinces.setOnItemClickListener { parent, view, position, id ->
+                            //get value to here
+                            itrProvinces = position + 1
+                            Log.e("itrProvinces",""+itrProvinces)
+
+                            binding.clientSignUpSpAgency.isEnabled = true
+                            agencyViewModel.getAgency(itrProvinces)
+                                .observe(viewLifecycleOwner, Observer { it ->
+                                    it?.let { resources ->
+                                        when (resources.status) {
+                                            Status.SUCCESS -> {
+                                                val adapterSpAgency = ArrayAdapter(
+                                                    requireContext(),
+                                                    R.layout.list_item,
+                                                    it.data!!.response
+                                                )
+                                                binding.clientSignUpSpAgency.setAdapter(
+                                                    adapterSpAgency
+                                                )
+                                                binding.clientSignUpSpAgency.setOnItemClickListener { parent, view, position, id ->
+                                                    itrAgency = position + 1
+                                                    Log.e("itrAgency",""+itrAgency)
+                                                }
+                                            }
+
+                                            Status.ERROR -> {
+
+                                            }
+
+                                            Status.LOADING -> {
+
+                                            }
+                                        }
+                                    }
+                                })
+                        }
+                    }
+
+                    //
+                    Status.ERROR -> {
+                        Log.e("provinces", it.data!!.message.toString())
+                    }
+
+                    //
+                    Status.LOADING -> {
+
+                    }
+                }
+            }
+        })
+    }
+
+    private fun openDialogCameraOrGallery() {
+        binding.clientSignUpImgUpload.setOnClickListener {
+            val dialogBinding = DialogChooseCameraOrGalleryBinding.inflate(layoutInflater)
+            val dialog = Dialog(requireContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val lp = WindowManager.LayoutParams()
+            lp.copyFrom(dialog.window!!.attributes)
+            lp.width = WindowManager.LayoutParams.WRAP_CONTENT
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            dialog.window!!.attributes = lp
+            dialog.setCancelable(true)
+            dialog.setContentView(dialogBinding.root)
+            dialog.show()
+            checkPermissions()
+            dialogBinding.dialogChooseCamera.setOnClickListener {
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+                    takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                        val photoFile: File? = try {
+                            createImageFile()
+                        } catch (ex: IOException) {
+                            null
+                        }
+                        photoFile?.also {
+                            val photoURI: Uri = FileProvider.getUriForFile(
+                                requireContext(),
+                                "com.freshervnc.pharmacycounter.provider",
+                                it
+                            )
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                            startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE)
+                            dialog.dismiss()
+                        }
+                    }
+                }
+            }
+            dialogBinding.dialogChooseGallery.setOnClickListener {
+                val mIntent = Intent()
+                mIntent.type = "image/*"
+                mIntent.action = Intent.ACTION_GET_CONTENT
+                startActivityForResult(mIntent, GALLERY_REQUEST_CODE)
+                dialog.dismiss()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+            binding.clientSignUpShowImage.setImageBitmap(bitmap)
+        }
+        if (resultCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                binding.clientSignUpShowImage.setImageURI(data.data)
+            }
+        }
+    }
+
+    private fun validate() {
+        binding.clientSignUpBtnSignUp.setOnClickListener {
+            val strFullName = binding.clientSignUpEdFullName.text.toString()
+            val strNameCounter = binding.clientSignUpEdFullName.text.toString()
+            val strEmail = binding.clientSignUpEdEmail.text.toString()
+            val strPhone = binding.clientSignUpEdPhone.text.toString()
+            val strPassword = binding.clientSignUpEdPassword.text.toString()
+            val strAddressCounter = binding.clientSignUpEdAddressClient.text.toString()
+            if (strFullName.isEmpty()) {
+                binding.clientSignUpLayoutEdFullName.helperText =
+                    getString(R.string.validate_tv_full_name)
+            } else {
+                binding.clientSignUpLayoutEdFullName.helperText = ""
+            }
+
+            if (strNameCounter.isEmpty()) {
+                binding.clientSignUpLayoutEdFullName.helperText =
+                    getString(R.string.validate_tv_name_counter)
+            } else {
+                binding.clientSignUpLayoutEdFullName.helperText = ""
+            }
+
+            if (strAddressCounter.isEmpty()) {
+                binding.clientSignUpLayoutEdAddress.helperText =
+                    getString(R.string.validate_tv_counter_address_counter)
+            } else {
+                binding.clientSignUpLayoutEdAddress.helperText = ""
+
+            }
+
+            if (strPhone.isEmpty()) {
+                binding.clientSignUpLayoutEdPhone.helperText =
+                    getString(R.string.validate_tv_counter_phone)
+            } else {
+                binding.clientSignUpLayoutEdPhone.helperText = ""
+
+            }
+
+            if (strPassword.isEmpty()) {
+                binding.clientSignUpLayoutEdPassword.helperText =
+                    getString(R.string.validate_tv_counter_password)
+            } else {
+                binding.clientSignUpLayoutEdPassword.helperText = ""
+            }
+
+            val fullNameBody: RequestBody = strFullName.toRequestBody("text/plain".toMediaType())
+            val idAgency: RequestBody = itrAgency.toString().toRequestBody("text/plain".toMediaType())
+            val address: RequestBody = strAddressCounter.toRequestBody("text/plain".toMediaType())
+            val provinces: RequestBody = itrProvinces.toString().toRequestBody("text/plain".toMediaType())
+            val phone: RequestBody = strPhone.toRequestBody("text/plain".toMediaType())
+            val email: RequestBody = strEmail.toRequestBody("text/plain".toMediaType())
+            val password: RequestBody = strPassword.toRequestBody("text/plain".toMediaType())
+
+            val file = File(currentPhotoPath);
+            val requestFile = RequestBody.create("{multipart/form-data}".toMediaTypeOrNull(), file);
+            val filePart =  MultipartBody.Part.createFormData("img", file.name, requestFile);
+            clientViewModel.requestRegisterCustomer(fullNameBody, idAgency, address, provinces, phone, email, password, filePart)
+                .observe(viewLifecycleOwner, Observer { it ->
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> Snackbar.make(requireView(), it.data!!.response.decription, 2000).show()
+                            Status.ERROR -> Snackbar.make(requireView(), ""+it.data!!.response.decription, 2000).show()
+                            Status.LOADING -> {
+
+                            }
+                        }
+                    }
+                })
+        }
+    }
+
+    /* Kiểm tra xin quyền */
+    private fun checkPermissions() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(android.Manifest.permission.CAMERA),
+                CAMERA_REQUEST_CODE
+            )
+        }
+    }
+
+    /* Tạo folder để lưu trữ ảnh */
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File =
+            requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            "${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            currentPhotoPath = absolutePath
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">PharmacyCounter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_sign_in">Đăng nhập Thành viên</string>
+    <string name="title_edittext_sdt_sign_in">Số điện thoại*</string>
+    <string name="title_edittext_forgot_sdt">Số điện thoại*</string>
+    <string name="title_edittext_password_sign_in">Mật khẩu*</string>
+    <string name="title_button_sign_in">Đăng nhập</string>
+    <string name="title_button_forgot">Gửi*</string>
+    <string name="title_button_sign_up">Đăng ký</string>
+    <string name="title_textview_register_account_sign_in">Bạn chưa có tài khoản ? Đăng ký</string>
+    <string name="title_textview_forgot_password_sign_in">Quên mật khẩu ?</string>
+    <string name="title_textview_sign_up">Đăng Ký Thành Viên</string>
+    <string name="title_ed_ho_ten_sign_up">Họ tên*</string>
+    <string name="title_ed_ten_nha_thuoc_sign_up">Tên nhà thuốc*</string>
+    <string name="title_ed_sdt_sign_up">Số điện thoại*</string>
+    <string name="title_ed_email_sign_up">Email*</string>
+    <string name="title_ed_dia_chi_sign_up">Địa chỉ nhà thuốc*</string>
+    <string name="title_ed_mat_khau_sign_up">Mật khẩu*</string>
+    <string name="title_ed_dia_chi1_sign_up">Địa chỉ*</string>
+    <string name="validate_tv_full_name">Vui lòng nhập họ tên</string>
+    <string name="validate_tv_name_counter">Vui lòng nhập số điện thoại</string>
+    <string name="validate_tv_counter_address_counter">Vui lòng nhập địa chỉ nhà thuốc</string>
+    <string name="validate_tv_counter_phone">Vui lòng nhập số điện thoại</string>
+    <string name="validate_tv_counter_password">Vui lòng nhập mật khẩu</string>
+    <string name="string_not_internet">Not internet</string>
+    <string name="string_error">Error</string>
+    <string name="string_not_found_view_model">Not found view model</string>
+    <string name="string_sign_up_provinces">Tỉnh</string>
+    <string name="home">Trang chủ</string>
+    <string name="category">Danh mục</string>
+    <string name="history">Lịch sử</string>
+    <string name="manager">Quản lý</string>
+</resources>
