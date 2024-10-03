@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.counter
+package com.freshervnc.pharmacycounter.presentation.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.databinding.FragmentCounterSignInBinding
 import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
-import com.freshervnc.pharmacycounter.presentation.ui.activity.RegistrationActivity
+import com.freshervnc.pharmacycounter.presentation.ui.register.CounterSignUpFragment
+import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
+import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 import com.freshervnc.pharmacycounter.viewmodel.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -20,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 class CounterSignInFragment : Fragment() {
     private lateinit var binding : FragmentCounterSignInBinding
     private lateinit var loginViewModel : LoginViewModel
+    private lateinit var mySharedPrefer: SharedPrefer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,6 +46,7 @@ class CounterSignInFragment : Fragment() {
 
     private fun init(){
         loginViewModel = ViewModelProvider(this,LoginViewModel.LoginViewModelFactory(requireActivity().application))[LoginViewModel::class.java]
+        mySharedPrefer = SharedPrefer(requireContext())
     }
 
     private fun gotoRegister(){
@@ -61,9 +65,12 @@ class CounterSignInFragment : Fragment() {
                     it?.let { resources ->
                         when(resources.status){
                             Status.SUCCESS -> {
-                                Snackbar.make(requireView(),"Login Successfully",2000).show()
+                                it.data!!.message.let { log ->
+                                    Snackbar.make(requireView(),log.toString(),2000).show()
+                                }
                                 binding.counterSignInEdPhoneCounter.setText("")
                                 binding.counterSignInEdPasswordCounter.setText("")
+                                mySharedPrefer.saveToken(it.data.response.token ,it.data.response.fullName , it.data.response.phone, it.data.response.email ,it.data.response.address)
                                 startActivity(Intent(requireActivity(),MainActivity::class.java))
 
                             }

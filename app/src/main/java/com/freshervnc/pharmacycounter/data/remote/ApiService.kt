@@ -3,6 +3,8 @@ package com.freshervnc.pharmacycounter.data.remote
 import com.freshervnc.pharmacycounter.domain.response.AgencyResponse
 import com.freshervnc.pharmacycounter.domain.response.login.LoginResponse
 import com.freshervnc.pharmacycounter.domain.response.ProvincesResponse
+import com.freshervnc.pharmacycounter.domain.response.cart.CartResponse
+import com.freshervnc.pharmacycounter.domain.response.cart.RequestCartResponse
 import com.freshervnc.pharmacycounter.domain.response.homepage.HomePageResponse
 import com.freshervnc.pharmacycounter.domain.response.register.RegisterResponse
 import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
@@ -11,7 +13,6 @@ import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -59,4 +60,11 @@ interface ApiService {
     /* Home */
     @GET("api/v2/system/homepage")
     suspend fun getHomePage(@Header("Authorization") authHeader: String) : HomePageResponse
+    /* Cart */
+
+    @POST("api/v2/cart/update")
+    suspend fun addProductToCart(@Header("Authorization") authHeader: String, @Body cart : RequestCartResponse) : CartResponse
+
+    @POST("api/v2/cart/index")
+    suspend fun getCart(@Header("Authorization") authHeader: String) : CartResponse
 }

@@ -1,17 +1,15 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.home
+package com.freshervnc.pharmacycounter.presentation.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.ItemChildProductBinding
-import com.freshervnc.pharmacycounter.databinding.ItemParentProductBinding
 import com.freshervnc.pharmacycounter.domain.response.homepage.Data
-import com.freshervnc.pharmacycounter.domain.response.homepage.Product
+import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 
-class ChildProductAdapter(private var datas : List<Data>) :
+class ChildProductAdapter(private var datas : List<Data> , private val listener : OnClickItemProduct) :
     RecyclerView.Adapter<ChildProductAdapter.HomeViewHolder>() {
     inner class HomeViewHolder(val binding : ItemChildProductBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -36,6 +34,9 @@ class ChildProductAdapter(private var datas : List<Data>) :
                 binding.itemChildTvPack.text = this.pack
                 binding.itemChildTvMinimum.text = "Số lượng tối thiểu "+this.minimumAmount.toString()
                 binding.itemChildTvPrice.text = "${this.price} VND"
+                binding.itemChildBtnAddCart.setOnClickListener {
+                    listener.onClickItem(datas[position])
+                }
             }
         }
     }

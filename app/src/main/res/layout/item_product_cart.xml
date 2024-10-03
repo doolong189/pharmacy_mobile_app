@@ -16,9 +16,11 @@
             android:gravity="center"
             >
             <CheckBox
+                android:id="@+id/item_cart_checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView
+                android:id="@+id/item_cart_imageDelete"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_trash"
@@ -37,6 +39,7 @@
 
                 >
                 <ImageView
+                    android:id="@+id/item_cart_imageProduct"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_history"
@@ -48,22 +51,26 @@
                     android:gravity="center_vertical"
                     >
                     <TextView
+                        android:id="@+id/item_cart_tvNameProduct"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Silkeron (Srinron) (Tuýp 10g) - Minh Hải"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/item_cart_tvPackProduct"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tuýp 10g"
                         />
                     <TextView
+                        android:id="@+id/item_cart_tvPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="6.500 VND"
                         android:textStyle="bold"
                         android:textColor="#4CAF50" />
                     <TextView
+                        android:id="@+id/item_cart_tvMaxQualityProduct"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Số lượng tối thiểu: 10" />
@@ -93,10 +100,12 @@
             android:gravity="center_vertical"
             >
             <ImageView
+                android:id="@+id/item_cart_imageMinus"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_minus"/>
             <TextView
+                android:id="@+id/item_cart_tvQuality"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,9 +116,14 @@
                 android:layout_margin="10dp"
                 />
             <ImageView
+                android:id="@+id/item_cart_imagePlus"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_plus"/>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#BCBCBC"/>
 </LinearLayout>

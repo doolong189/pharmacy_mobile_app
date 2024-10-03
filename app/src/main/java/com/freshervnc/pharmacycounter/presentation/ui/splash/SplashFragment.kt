@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.splash
+package com.freshervnc.pharmacycounter.presentation.ui.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.freshervnc.pharmacycounter.databinding.FragmentSplashBinding
-import com.freshervnc.pharmacycounter.presentation.ui.activity.RegistrationActivity
-import com.freshervnc.pharmacycounter.presentation.ui.fragment.client.ClientSignUpFragment
-import com.freshervnc.pharmacycounter.presentation.ui.fragment.counter.CounterSignInFragment
+import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
+import com.freshervnc.pharmacycounter.presentation.ui.register.ClientSignUpFragment
+import com.freshervnc.pharmacycounter.presentation.ui.login.CounterSignInFragment
 
 
 class SplashFragment : Fragment() {

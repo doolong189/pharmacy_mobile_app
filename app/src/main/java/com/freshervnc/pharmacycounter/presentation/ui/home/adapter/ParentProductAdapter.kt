@@ -1,15 +1,15 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.home
+package com.freshervnc.pharmacycounter.presentation.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.freshervnc.pharmacycounter.databinding.ItemParentProductBinding
-import com.freshervnc.pharmacycounter.domain.response.homepage.Product
+import com.freshervnc.pharmacycounter.domain.models.Product
+import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 
-class ParentProductAdapter() :
-    RecyclerView.Adapter<ParentProductAdapter.HomeViewHolder>() {
+class ParentProductAdapter(private val listener : OnClickItemProduct) :
+    RecyclerView.Adapter<ParentProductAdapter.HomeViewHolder>(){
     private var products : List<Product> = listOf()
 
     inner class HomeViewHolder(val binding : ItemParentProductBinding) : RecyclerView.ViewHolder(binding.root)
@@ -27,7 +27,7 @@ class ParentProductAdapter() :
         with(holder){
             with(products[position]){
                 binding.itemParentTvDiscount.text = this.name
-                val childAdapter: ChildProductAdapter = ChildProductAdapter(this.data)
+                val childAdapter: ChildProductAdapter = ChildProductAdapter(this.data,listener)
                 binding.itemParentRcChildProduct.setLayoutManager(GridLayoutManager(holder.itemView.context, 2))
                 binding.itemParentRcChildProduct.setAdapter(childAdapter)
                 binding.itemParentRcChildProduct.setHasFixedSize(true)

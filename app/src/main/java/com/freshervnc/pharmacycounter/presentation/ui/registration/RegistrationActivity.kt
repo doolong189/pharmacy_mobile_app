@@ -1,11 +1,11 @@
-package com.freshervnc.pharmacycounter.presentation.ui.activity
+package com.freshervnc.pharmacycounter.presentation.ui.registration
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.ActivityRegistrationBinding
-import com.freshervnc.pharmacycounter.presentation.ui.fragment.splash.SplashFragment
+import com.freshervnc.pharmacycounter.presentation.ui.splash.SplashFragment
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegistrationBinding

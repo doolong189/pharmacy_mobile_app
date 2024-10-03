@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.client
+package com.freshervnc.pharmacycounter.presentation.ui.register
 
 import android.app.Activity
 import android.app.Dialog
@@ -17,7 +17,6 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -26,7 +25,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.DialogChooseCameraOrGalleryBinding
 import com.freshervnc.pharmacycounter.databinding.FragmentClientSignUpBinding
-import com.freshervnc.pharmacycounter.utils.Resource
 import com.freshervnc.pharmacycounter.utils.Status
 import com.freshervnc.pharmacycounter.viewmodel.AgencyViewModel
 import com.freshervnc.pharmacycounter.viewmodel.ProvinceViewModel

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottomsheet_rounded_background"
     android:layout_gravity="bottom"
-    android:background="#FFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,14 +15,14 @@
         android:gravity="center"
         >
         <TextView
-            android:id="@+id/dialog_bill_tvQuality"
+            android:id="@+id/dialog_payment_tvQuality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số lượng: 7"
             android:layout_margin="10dp"
             android:textStyle="bold"/>
         <TextView
-            android:id="@+id/dialog_bill_tvAmount"
+            android:id="@+id/dialog_payment_tvAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tổng tiền: 700.000 VND"
@@ -35,13 +36,13 @@
         android:gravity="center"
         >
         <EditText
-            android:id="@+id/dialog_bill_edIdDiscount"
+            android:id="@+id/dialog_payment_edIdDiscount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Nhập mã giảm giá"/>
         <TextView
-            android:id="@+id/dialog_bill_tvApply"
+            android:id="@+id/dialog_payment_tvApply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Áp dụng"
@@ -50,7 +51,7 @@
             android:textStyle="bold"
             />
         <ImageView
-            android:id="@+id/dialog_bill_tvChooseVoucher"
+            android:id="@+id/dialog_payment_tvChooseVoucher"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_plus"
@@ -67,7 +68,7 @@
             android:layout_margin="10dp"
             android:textStyle="bold"/>
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/dialog_bill_swUsingCoint"
+            android:id="@+id/dialog_payment_swUsingCoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -89,7 +90,7 @@
             android:textStyle="bold"
             />
         <EditText
-            android:id="@+id/dialog_bill_edFullName"
+            android:id="@+id/dialog_payment_edFullName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -109,7 +110,7 @@
             android:textStyle="bold"
             />
         <EditText
-            android:id="@+id/dialog_bill_edPhone"
+            android:id="@+id/dialog_payment_edPhone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -129,7 +130,7 @@
             android:textStyle="bold"
             />
         <EditText
-            android:id="@+id/dialog_bill_edEmail"
+            android:id="@+id/dialog_payment_edEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -149,7 +150,7 @@
             android:textStyle="bold"
             />
         <EditText
-            android:id="@+id/dialog_bill_edFax"
+            android:id="@+id/dialog_payment_edFax"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -169,7 +170,7 @@
             android:textStyle="bold"
             />
         <EditText
-            android:id="@+id/dialog_bill_edAddress"
+            android:id="@+id/dialog_payment_edAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -189,20 +190,20 @@
             android:textStyle="bold"
             />
         <EditText
-            android:id="@+id/dialog_bill_edNote"
+            android:id="@+id/dialog_payment_edNote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/dialog_bill_tvCoin"
+        android:id="@+id/dialog_payment_tvCoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đơn được tặng tổng 300 Coin"
         android:textColor="#FF9800"
         android:textStyle="bold"/>
     <TextView
-        android:id="@+id/dialog_bill_tvVoucher"
+        android:id="@+id/dialog_payment_tvVoucher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sử dụng voucher 3gmp_50k được giảm 50.000 VND"
@@ -216,13 +217,13 @@
         android:padding="10dp"
         >
         <CheckBox
-            android:id="@+id/dialog_bill_cbPaymentOnline"
+            android:id="@+id/dialog_payment_cbPaymentOnline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thanh toán online -0.5%"
             android:layout_centerVertical="true"/>
         <Button
-            android:id="@+id/dialog_bill_btnCreateBill"
+            android:id="@+id/dialog_payment_btnCreateBill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tạo đơn"

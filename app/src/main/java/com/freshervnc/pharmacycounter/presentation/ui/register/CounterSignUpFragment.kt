@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.counter
+package com.freshervnc.pharmacycounter.presentation.ui.register
 
 import android.app.Activity
 import android.app.Dialog
@@ -29,15 +29,11 @@ import com.freshervnc.pharmacycounter.utils.Status
 import com.freshervnc.pharmacycounter.viewmodel.ProvinceViewModel
 import com.freshervnc.pharmacycounter.viewmodel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.create
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.http.Part
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat

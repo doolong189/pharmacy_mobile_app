@@ -1,5 +1,6 @@
 package com.freshervnc.pharmacycounter.domain.response.homepage
 
+import com.freshervnc.pharmacycounter.domain.models.Product
 import com.google.gson.annotations.SerializedName
 
 data class HomePageResponse(
@@ -42,13 +43,6 @@ data class EventIcon(
     val badge : Int,
 )
 
-data class Product(
-    val key: String,
-    val value: String,
-    val name: String,
-    val data : List<Data>
-)
-
 data class Data(
     val id : Int,
     @SerializedName("khuyen_mai")
@@ -58,7 +52,7 @@ data class Data(
     @SerializedName("quy_cach_dong_goi")
     val pack: String,
     @SerializedName("so_luong")
-    val amount: Int,
+    var quality: Int,
     @SerializedName("don_gia")
     val price : Int,
     @SerializedName("bonus_coins")

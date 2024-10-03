@@ -23,11 +23,13 @@
                 android:layout_height="wrap_content"
                 >
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/item_confirm_tv_imgView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="5dp"
                     android:src="@drawable/ic_history" />
                 <TextView
+                    android:id="@+id/item_confirm_tv_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-30%"
@@ -44,17 +46,20 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/item_confirm_tv_name_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Silkeron (Srinron) (Tuýp 10g) - Minh Hải"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/item_confirm_tv_pack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tuýp 10g" />
 
                 <TextView
+                    android:id="@+id/item_confirm_tv_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="6.500 VND"
@@ -62,6 +67,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/item_confirm_tv_price_sale"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10.500 VND" />
@@ -70,6 +76,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/item_confirm_tv_quality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

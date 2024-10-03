@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="bottom"
-    android:background="#FFF"
+    android:background="@drawable/bottomsheet_rounded_background"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -17,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
             >
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/dialog_bottom_cart_imageProduct"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:src="@drawable/ic_history"
                 android:padding="5dp"/>
             <LinearLayout
@@ -31,22 +31,34 @@
                 android:gravity="center_vertical"
                 >
                 <TextView
+                    android:id="@+id/dialog_bottom_cart_tvNameProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Silkeron (Srinron) (Tuýp 10g) - Minh Hải"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/dialog_bottom_cart_tvBonusCoin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tặng 100 coin"
+                    android:textStyle="bold"
+                    android:textColor="#FF9800"
+                    />
+                <TextView
+                    android:id="@+id/dialog_bottom_cart_tvPack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tuýp 10g"
                     />
                 <TextView
+                    android:id="@+id/dialog_bottom_cart_tvPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="6.500 VND"
                     android:textStyle="bold"
                     android:textColor="#4CAF50" />
                 <TextView
+                    android:id="@+id/dialog_bottom_cart_tvMinimum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Số lượng tối thiểu: 10" />
@@ -75,10 +87,12 @@
             android:gravity="center_vertical"
             >
             <ImageView
+                android:id="@+id/dialog_bottom_cart_imageMinus"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_minus"/>
             <TextView
+                android:id="@+id/dialog_bottom_cart_tvAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,12 +103,14 @@
                 android:layout_margin="10dp"
                 />
             <ImageView
+                android:id="@+id/dialog_bottom_cart_imagePlus"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_plus"/>
         </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/dialog_bottom_cart_btnAddCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -32,4 +32,6 @@
     <string name="category">Danh mục</string>
     <string name="history">Lịch sử</string>
     <string name="manager">Quản lý</string>
+    <string name="string_add_cart_successfully">Thêm sản phẩm vào giỏ hàng thành công</string>
+    <string name="string_add_cart_failed">Thêm sản phẩm vào giỏ hàng thất bại</string>
 </resources>

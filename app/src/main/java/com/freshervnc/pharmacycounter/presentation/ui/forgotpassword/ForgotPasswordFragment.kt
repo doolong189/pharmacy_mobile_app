@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.fragment.cart
+package com.freshervnc.pharmacycounter.presentation.ui.forgotpassword
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import com.freshervnc.pharmacycounter.R
 
 
-class CartFragment : Fragment() {
-
+class ForgotPasswordFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,6 +19,7 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        return inflater.inflate(R.layout.fragment_forgot_password, container, false)
     }
+
 }

@@ -15,18 +15,18 @@ data class Response(
     private val id_agency : Int, // customer
 
     @SerializedName("ten")
-    private val fullName: String,
+     val fullName: String,
 
     @SerializedName("ten_nha_thuoc")
-    private val nameCounter: String,
+     val nameCounter: String,
 
     @SerializedName("sdt")
-    private val phone : String,
+     val phone : String,
 
-    private val email: String ,
+     val email: String ,
 
     @SerializedName("dia_chi")
-    private val address: String,
+     val address: String,
 
     @SerializedName("ma_so_thue")
     private val taxCode : String,
@@ -36,7 +36,7 @@ data class Response(
 
     private val agency : Int, // customer
 
-    private val token : String,
+    val token : String,
 
     //
     private val description : String

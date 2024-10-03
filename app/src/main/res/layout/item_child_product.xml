@@ -39,6 +39,8 @@
                 android:layout_margin="5dp"
                 android:textStyle="bold"
                 android:text="PluzTP - Multi(Tuyp 20 vien nem sui) - Thanh Phat"
+                android:lines="1"
+                android:ellipsize="end"
                 android:textAlignment="center"/>
             <TextView
                 android:id="@+id/item_child_tvBonusCoin"

@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.fragment.confirmpayment.PaymentConfirmFragment">
+    tools:context=".presentation.ui.confirmpayment.PaymentConfirmFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/payment_rcProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_product_confirm_payment"
@@ -24,15 +25,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 >
                 <TextView
+                    android:id="@+id/payment_tvQuality"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Số lượng: 0"
                     android:textStyle="bold"
                     android:layout_centerVertical="true" />
                 <TextView
+                    android:id="@+id/payment_tvAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tổng tiền: 0 VND"
@@ -42,12 +44,12 @@
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
             <Button
-                android:layout_width="150dp"
+                android:id="@+id/payment_btnConfirm"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="#4CAF50"
-                android:text="Xác nhận"
-                android:layout_margin="10dp"/>
+                android:text="Xác nhận" />
         </LinearLayout>
     </RelativeLayout>
 
