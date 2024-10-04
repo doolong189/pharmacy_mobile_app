@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.login
+package com.freshervnc.pharmacycounter.presentation.ui.registration.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.databinding.FragmentCounterSignInBinding
 import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
-import com.freshervnc.pharmacycounter.presentation.ui.register.CounterSignUpFragment
+import com.freshervnc.pharmacycounter.presentation.ui.registration.register.CounterSignUpFragment
 import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
-import com.freshervnc.pharmacycounter.viewmodel.LoginViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.registration.login.viewmodel.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -45,7 +45,8 @@ class CounterSignInFragment : Fragment() {
     }
 
     private fun init(){
-        loginViewModel = ViewModelProvider(this,LoginViewModel.LoginViewModelFactory(requireActivity().application))[LoginViewModel::class.java]
+        loginViewModel = ViewModelProvider(this,
+            LoginViewModel.LoginViewModelFactory(requireActivity().application))[LoginViewModel::class.java]
         mySharedPrefer = SharedPrefer(requireContext())
     }
 

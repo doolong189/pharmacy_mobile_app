@@ -31,8 +31,8 @@ class CartAdapter(private val listener: OnClickItemCart) :
                 binding.itemCartTvNameProduct.text = item.name
                 binding.itemCartTvPackProduct.text = item.pack
                 binding.itemCartTvPrice.text = "" + item.price + " VND"
-                binding.itemCartTvQuality.text = "x"+item.quality.toString()
-
+                binding.itemCartTvQuality.text = ""+item.quality.toString()
+                binding.itemCartTvDiscount.text = ""+item.discount + "\t \t" + item.discountPrice
                 binding.itemCartCheckBox.setOnCheckedChangeListener { _, isChecked ->
                     listener.onClickItem(item,item.quality,isChecked)
                 }

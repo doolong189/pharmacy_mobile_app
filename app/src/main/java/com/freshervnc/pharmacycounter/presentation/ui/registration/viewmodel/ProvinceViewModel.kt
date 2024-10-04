@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.viewmodel
+package com.freshervnc.pharmacycounter.presentation.ui.registration.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

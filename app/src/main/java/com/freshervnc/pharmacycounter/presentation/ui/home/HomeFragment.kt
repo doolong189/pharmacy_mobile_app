@@ -27,7 +27,7 @@ import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 import com.freshervnc.pharmacycounter.presentation.ui.cart.CartFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
-import com.freshervnc.pharmacycounter.viewmodel.HomeViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.home.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 

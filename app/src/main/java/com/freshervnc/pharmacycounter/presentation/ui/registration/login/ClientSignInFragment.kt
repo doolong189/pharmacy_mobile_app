@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.login
+package com.freshervnc.pharmacycounter.presentation.ui.registration.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.freshervnc.pharmacycounter.databinding.FragmentClientSignInBinding
-import com.freshervnc.pharmacycounter.presentation.ui.register.ClientSignUpFragment
+import com.freshervnc.pharmacycounter.presentation.ui.registration.register.ClientSignUpFragment
 import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
 
 class ClientSignInFragment : Fragment() {

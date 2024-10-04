@@ -51,7 +51,7 @@
             android:textStyle="bold"
             />
         <ImageView
-            android:id="@+id/dialog_payment_tvChooseVoucher"
+            android:id="@+id/dialog_payment_imgChooseVoucher"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_plus"

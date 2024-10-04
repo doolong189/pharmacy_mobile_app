@@ -9,7 +9,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.freshervnc.pharmacycounter.databinding.ActivityMainBinding
 import com.freshervnc.pharmacycounter.domain.response.homepage.Data
+import com.freshervnc.pharmacycounter.presentation.ui.bill.fragment.BillFragment
 import com.freshervnc.pharmacycounter.presentation.ui.cart.CartFragment
+import com.freshervnc.pharmacycounter.presentation.ui.category.CategoryFragment
 import com.freshervnc.pharmacycounter.presentation.ui.home.HomeFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 
@@ -35,13 +37,13 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.icon_cart -> {
-                    replaceFragment(CartFragment())
+                R.id.icon_category -> {
+                    replaceFragment(CategoryFragment())
                     true
                 }
 
                 R.id.icon_history -> {
-                    replaceFragment(CartFragment())
+                    replaceFragment(BillFragment())
                     true
                 }
 

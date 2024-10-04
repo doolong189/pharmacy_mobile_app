@@ -74,6 +74,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Số lượng tối thiểu: 10" />
+                    <TextView
+                        android:id="@+id/item_cart_tvDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Khuyến mãi" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

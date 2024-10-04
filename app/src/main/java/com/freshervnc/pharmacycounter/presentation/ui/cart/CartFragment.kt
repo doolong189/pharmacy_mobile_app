@@ -2,7 +2,6 @@ package com.freshervnc.pharmacycounter.presentation.ui.cart
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.freshervnc.pharmacycounter.MainActivity
-import com.freshervnc.pharmacycounter.R
-import com.freshervnc.pharmacycounter.databinding.BottomDialogAddToCartBinding
-import com.freshervnc.pharmacycounter.databinding.BottomDialogPaymentBinding
 import com.freshervnc.pharmacycounter.databinding.FragmentCartBinding
 import com.freshervnc.pharmacycounter.domain.response.cart.RequestCartResponse
 import com.freshervnc.pharmacycounter.domain.response.homepage.Data
@@ -23,8 +19,7 @@ import com.freshervnc.pharmacycounter.presentation.ui.cart.viewmodel.CartViewMod
 import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.PaymentConfirmFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
-import com.freshervnc.pharmacycounter.viewmodel.HomeViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.freshervnc.pharmacycounter.presentation.ui.home.viewmodel.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -140,7 +135,6 @@ class CartFragment : Fragment(), OnClickItemCart {
 
     override fun onStop() {
         super.onStop()
-        Log.e("vong doi","onstop goi o day")
         (activity as MainActivity).showBottomNav()
         (activity as MainActivity).getListData().clear()
     }
@@ -154,14 +148,14 @@ class CartFragment : Fragment(), OnClickItemCart {
     }
 
     private fun setDataToTextView(){
+        var totalQuality = 0
         var totalAmount = 0
-        var totalPrice = 0
 
         for (x in (activity as MainActivity).getListData()) {
-            totalAmount += x.quality
-            totalPrice += (x.price * x.quality)
+            totalQuality += x.quality
+            totalAmount += (x.price * x.quality)
         }
-        binding.cartTvTotalAmount.text = "Tổng số tiền: $totalPrice"
-        binding.cartTotalQuality.text = "Số lượng: $totalAmount VND"
+        binding.cartTotalQuality.text = "$totalQuality"
+        binding.cartTvTotalAmount.text = "$totalAmount VND"
     }
 }

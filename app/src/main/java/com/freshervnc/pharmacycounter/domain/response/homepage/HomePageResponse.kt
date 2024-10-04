@@ -44,6 +44,10 @@ data class EventIcon(
 )
 
 data class Data(
+    @SerializedName("gio_hang_id")
+    val gioHangId : Int,
+    @SerializedName("id_member")
+    val memberId : Int,
     val id : Int,
     @SerializedName("khuyen_mai")
     val discount: Int,

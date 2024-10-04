@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.register
+package com.freshervnc.pharmacycounter.presentation.ui.registration.register
 
 import android.app.Activity
 import android.app.Dialog
@@ -26,8 +26,8 @@ import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.DialogChooseCameraOrGalleryBinding
 import com.freshervnc.pharmacycounter.databinding.FragmentCounterSignUpBinding
 import com.freshervnc.pharmacycounter.utils.Status
-import com.freshervnc.pharmacycounter.viewmodel.ProvinceViewModel
-import com.freshervnc.pharmacycounter.viewmodel.RegisterViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.registration.viewmodel.ProvinceViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.registration.register.viewmodel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

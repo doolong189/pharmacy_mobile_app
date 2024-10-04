@@ -11,8 +11,6 @@ import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCart
 
 class ConfirmAdapter() : RecyclerView.Adapter<ConfirmAdapter.CartViewHolder>() {
     private var carts: List<Data> = listOf()
-    private var selectedPosition = RecyclerView.NO_POSITION
-    private val checkedItems = mutableSetOf<Int>()
     inner class CartViewHolder(val binding: ItemProductConfirmPaymentBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -31,7 +29,7 @@ class ConfirmAdapter() : RecyclerView.Adapter<ConfirmAdapter.CartViewHolder>() {
                 binding.itemConfirmTvNameProduct.text = item.name
                 binding.itemConfirmTvPack.text = item.pack
                 binding.itemConfirmTvPrice.text = "" + item.price + " VND"
-                binding.itemConfirmTvQuality.text = item.quality.toString()
+                binding.itemConfirmTvQuality.text = "x"+item.quality.toString()
             }
         }
     }

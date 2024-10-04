@@ -3,11 +3,19 @@ package com.freshervnc.pharmacycounter.data.remote
 import com.freshervnc.pharmacycounter.domain.response.AgencyResponse
 import com.freshervnc.pharmacycounter.domain.response.login.LoginResponse
 import com.freshervnc.pharmacycounter.domain.response.ProvincesResponse
+import com.freshervnc.pharmacycounter.domain.response.bill.BillResponse
+import com.freshervnc.pharmacycounter.domain.response.bill.DetailBillResponse
 import com.freshervnc.pharmacycounter.domain.response.cart.CartResponse
 import com.freshervnc.pharmacycounter.domain.response.cart.RequestCartResponse
 import com.freshervnc.pharmacycounter.domain.response.homepage.HomePageResponse
 import com.freshervnc.pharmacycounter.domain.response.register.RegisterResponse
 import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
+import com.freshervnc.pharmacycounter.domain.response.bill.RequestBillResponse
+import com.freshervnc.pharmacycounter.domain.response.bill.RequestDetailBillResponse
+import com.freshervnc.pharmacycounter.domain.response.category.CategoryResponse
+import com.freshervnc.pharmacycounter.domain.response.history.HistoryResponse
+import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
+import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -67,4 +75,23 @@ interface ApiService {
 
     @POST("api/v2/cart/index")
     suspend fun getCart(@Header("Authorization") authHeader: String) : CartResponse
+
+    /* Voucher */
+    @GET("api/v2/cart/list_voucher")
+    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body request : RequestVoucherResponse) : VoucherResponse
+//    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body data_id : List<Int>) : VoucherResponse
+
+    /* Bill */
+    @POST("api/v2/cart/payment")
+    suspend fun createBill(@Header("Authorization") authHeader: String, @Body request : RequestBillResponse) : BillResponse
+
+    @POST("api/v2/history/payment")
+    suspend fun getHistoryBill(@Header("Authorization") authHeader: String , @Body page : Int) : HistoryResponse
+
+    @POST("api/v2/history/payment_details")
+    suspend fun getDetailHistoryBill(@Header("Authorization") authHeader: String, @Body request : RequestDetailBillResponse) : DetailBillResponse
+
+    /* Category */
+    @GET("/api/v2/system/category")
+    suspend fun getCategory(@Header("Authorization") authHeader: String) : CategoryResponse
 }
