@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.freshervnc.pharmacycounter.databinding.ItemParentProductBinding
 import com.freshervnc.pharmacycounter.domain.models.Product
+import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemHomePage
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 
-class ParentProductAdapter(private val listener : OnClickItemProduct) :
+class ParentProductAdapter(private val listener : OnClickItemProduct , private val homeListener : OnClickItemHomePage) :
     RecyclerView.Adapter<ParentProductAdapter.HomeViewHolder>(){
     private var products : List<Product> = listOf()
 
@@ -26,12 +27,16 @@ class ParentProductAdapter(private val listener : OnClickItemProduct) :
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         with(holder){
             with(products[position]){
-                binding.itemParentTvDiscount.text = this.name
+                binding.itemParentTvCategory.text = this.name
                 val childAdapter: ChildProductAdapter = ChildProductAdapter(this.data,listener)
                 binding.itemParentRcChildProduct.setLayoutManager(GridLayoutManager(holder.itemView.context, 2))
                 binding.itemParentRcChildProduct.setAdapter(childAdapter)
                 binding.itemParentRcChildProduct.setHasFixedSize(true)
                 childAdapter.notifyDataSetChanged()
+
+                binding.itemParentImgMore.setOnClickListener {
+                    homeListener.onClickItem(products[position])
+                }
             }
         }
     }

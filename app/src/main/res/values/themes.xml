@@ -1,7 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PharmacyCounter" parent="Theme.AppCompat.DayNight.NoActionBar">
-<!--    bottom nav ngon-->
+    <style name="Base.Theme.PharmacyCounter" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorHint">#6E7C78</item>
+<!--        <item name="android:textColor">#FFFFFF</item>-->
+<!--    bottom nav nên dùng-->
 <!--    <style name="Base.Theme.PharmacyCounter" parent="Theme.AppCompat.Light.NoActionBar">-->
 <!--    nên dùng-->
 <!--    <style name="Base.Theme.PharmacyCounter" parent="Theme.Design.Light.NoActionBar">-->

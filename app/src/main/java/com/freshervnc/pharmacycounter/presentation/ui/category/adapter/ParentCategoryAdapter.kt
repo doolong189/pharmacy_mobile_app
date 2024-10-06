@@ -12,9 +12,10 @@ import com.freshervnc.pharmacycounter.databinding.ItemParentProductBinding
 import com.freshervnc.pharmacycounter.domain.models.Product
 import com.freshervnc.pharmacycounter.domain.response.category.Response
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCategory
+import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemParentCategory
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 
-class ParentCategoryAdapter(private val listener : OnClickItemCategory) :
+class ParentCategoryAdapter(private val listener : OnClickItemCategory , private val listenerParent : OnClickItemParentCategory) :
     RecyclerView.Adapter<ParentCategoryAdapter.HomeViewHolder>(){
     private var lists : List<Response> = listOf()
 
@@ -34,11 +35,16 @@ class ParentCategoryAdapter(private val listener : OnClickItemCategory) :
             with(lists[position]){
                 binding.itemCategoryTvName.text = this.name
                 Glide.with(holder.itemView.context).load(lists[position].icon).error(R.drawable.ic_picture).into(binding.itemCategoryImgView)
-                val childAdapter: ChildCategoryAdapter = ChildCategoryAdapter(this.category,listener)
+                val childAdapter: ChildCategoryAdapter = ChildCategoryAdapter(listener)
+                childAdapter.setList(this.category)
                 binding.itemCategoryRcChildCategory.setLayoutManager(LinearLayoutManager(holder.itemView.context))
                 binding.itemCategoryRcChildCategory.setAdapter(childAdapter)
                 binding.itemCategoryRcChildCategory.setHasFixedSize(true)
                 childAdapter.notifyDataSetChanged()
+
+                binding.itemCategoryTvName.setOnClickListener {
+                    listenerParent.onClickItem(lists[position].key)
+                }
             }
         }
     }

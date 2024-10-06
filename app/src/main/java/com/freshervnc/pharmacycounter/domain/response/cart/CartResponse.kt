@@ -1,6 +1,6 @@
 package com.freshervnc.pharmacycounter.domain.response.cart
 
-import com.freshervnc.pharmacycounter.domain.response.homepage.Data
+import com.freshervnc.pharmacycounter.domain.models.Data
 import com.google.gson.annotations.SerializedName
 
 data class CartResponse (

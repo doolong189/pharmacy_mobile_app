@@ -13,12 +13,11 @@ import com.freshervnc.pharmacycounter.utils.Resource
 import com.freshervnc.pharmacycounter.utils.Utils
 import kotlinx.coroutines.Dispatchers
 
-class PaymentConfirmViewModel(private val application: Application) :
-    AndroidViewModel(application) {
+class PaymentConfirmViewModel(private val application: Application) : AndroidViewModel(application) {
     private val repository: PaymentConfirmRepository = PaymentConfirmRepository()
 
-    fun getVoucher(authHeader: String, request: RequestVoucherResponse) = liveData(Dispatchers.IO) {
-//        fun getVoucher(authHeader: String, request : List<Int>) = liveData(Dispatchers.IO) {
+//    fun getVoucher(authHeader: String, request: RequestVoucherResponse) = liveData(Dispatchers.IO) {
+        fun getVoucher(authHeader: String, request : List<Int>) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
             if (Utils.hasInternetConnection(getApplication<MyApplication>())) {

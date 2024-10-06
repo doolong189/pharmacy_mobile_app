@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.DialogInfoDetailHistoryBinding
 import com.freshervnc.pharmacycounter.databinding.DialogVoucherBinding
@@ -49,6 +50,7 @@ class DetailHistoryFragment : Fragment() {
     }
 
     private fun init(){
+        (activity as MainActivity).hideBottomNav()
         mySharedPrefer = SharedPrefer(requireContext())
         detailHistoryAdapter = DetailHistoryAdapter()
         historyViewModel = ViewModelProvider(this,HistoryViewModel.HistoryViewModelFactory(requireActivity().application))[HistoryViewModel::class.java]
@@ -62,6 +64,7 @@ class DetailHistoryFragment : Fragment() {
     }
 
     private fun getDataBundle(){
+        /* get bundle from  purchase or sales*/
         val b = arguments
         val id = b!!.getInt("id")
         val page = b.getInt("page")

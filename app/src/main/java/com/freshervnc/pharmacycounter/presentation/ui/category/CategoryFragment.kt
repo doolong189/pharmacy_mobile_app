@@ -1,30 +1,33 @@
 package com.freshervnc.pharmacycounter.presentation.ui.category
 
+import android.R.attr
+import android.R.attr.value
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.freshervnc.pharmacycounter.R
+import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.databinding.FragmentCategoryBinding
-import com.freshervnc.pharmacycounter.domain.response.category.Category
+import com.freshervnc.pharmacycounter.domain.models.Category
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCategory
-import com.freshervnc.pharmacycounter.presentation.ui.cart.viewmodel.CartViewModel
+import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemParentCategory
+import com.freshervnc.pharmacycounter.presentation.ui.bill.fragment.DetailHistoryFragment
 import com.freshervnc.pharmacycounter.presentation.ui.category.adapter.ParentCategoryAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.category.viewmodel.CategoryViewModel
-import com.freshervnc.pharmacycounter.presentation.ui.home.adapter.ParentProductAdapter
-import com.freshervnc.pharmacycounter.presentation.ui.home.viewmodel.HomeViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.product.ProductFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 
 
-class CategoryFragment : Fragment(), OnClickItemCategory {
+class CategoryFragment : Fragment(), OnClickItemCategory , OnClickItemParentCategory{
     private lateinit var binding : FragmentCategoryBinding
     private lateinit var categoryViewModel : CategoryViewModel
     private lateinit var parentCategoryAdapter: ParentCategoryAdapter
     private lateinit var mySharedPrefer: SharedPrefer
+    private var checkCategoryType = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,8 +50,9 @@ class CategoryFragment : Fragment(), OnClickItemCategory {
 
     private fun init() {
         categoryViewModel = ViewModelProvider(this, CategoryViewModel.CategoryViewModelFactory(requireActivity().application))[CategoryViewModel::class.java]
-        parentCategoryAdapter = ParentCategoryAdapter(this)
+        parentCategoryAdapter = ParentCategoryAdapter(this,this)
         mySharedPrefer = SharedPrefer(requireContext())
+        (activity as MainActivity).showBottomNav()
     }
     private fun initVariable() {
         binding.categoryRcView.setHasFixedSize(true)
@@ -74,6 +78,19 @@ class CategoryFragment : Fragment(), OnClickItemCategory {
     }
 
     override fun onClickItem(item: Category) {
+        val args = Bundle()
+        args.putInt("key_product", item.value)
+        args.putString("key_category",checkCategoryType)
+        val newFragment: ProductFragment = ProductFragment()
+        newFragment.setArguments(args)
+        (activity as MainActivity).replaceFragment(newFragment)
+    }
 
+    override fun onClickItem(key: String) {
+        val args = Bundle()
+        args.putString("key_category", key)
+        val newFragment: CategoryTypeFragment = CategoryTypeFragment()
+        newFragment.setArguments(args)
+        (activity as MainActivity).replaceFragment(newFragment)
     }
 }

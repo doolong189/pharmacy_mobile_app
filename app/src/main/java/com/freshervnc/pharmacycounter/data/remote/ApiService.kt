@@ -13,7 +13,11 @@ import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
 import com.freshervnc.pharmacycounter.domain.response.bill.RequestBillResponse
 import com.freshervnc.pharmacycounter.domain.response.bill.RequestDetailBillResponse
 import com.freshervnc.pharmacycounter.domain.response.category.CategoryResponse
+import com.freshervnc.pharmacycounter.domain.response.category.CategoryTypeResponse
+import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
 import com.freshervnc.pharmacycounter.domain.response.history.HistoryResponse
+import com.freshervnc.pharmacycounter.domain.response.product.ProductResponse
+import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
 import okhttp3.MultipartBody
@@ -78,8 +82,8 @@ interface ApiService {
 
     /* Voucher */
     @GET("api/v2/cart/list_voucher")
-    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body request : RequestVoucherResponse) : VoucherResponse
-//    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body data_id : List<Int>) : VoucherResponse
+//    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body request : RequestVoucherResponse) : VoucherResponse
+    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body data_id : List<Int>) : VoucherResponse
 
     /* Bill */
     @POST("api/v2/cart/payment")
@@ -94,4 +98,11 @@ interface ApiService {
     /* Category */
     @GET("/api/v2/system/category")
     suspend fun getCategory(@Header("Authorization") authHeader: String) : CategoryResponse
+
+    @POST("api/v2/system/category_type")
+    suspend fun getCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestCategoryTypeResponse) : CategoryTypeResponse
+
+    /* Product */
+    @POST("/api/v2/product/index")
+    suspend fun getProduct(@Header("Authorization") authHeader: String, @Body request : RequestProductResponse) : ProductResponse
 }

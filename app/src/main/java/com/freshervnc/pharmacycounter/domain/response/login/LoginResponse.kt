@@ -39,5 +39,5 @@ data class Response(
     val token : String,
 
     //
-    private val description : String
+    val description : String
 )

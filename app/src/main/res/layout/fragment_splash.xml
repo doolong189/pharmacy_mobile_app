@@ -52,8 +52,10 @@
                         android:layout_height="wrap_content"
                         android:text="Dành cho quầy thuốc"
                         android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_margin="5dp"/>
+                        android:textSize="16sp"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/gray"
+                        />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -80,8 +82,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dành cho khách hàng cá nhân"
+                        android:textColor="@color/gray"
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_margin="5dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

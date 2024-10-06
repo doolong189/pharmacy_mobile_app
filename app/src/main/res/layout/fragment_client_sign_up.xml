@@ -179,13 +179,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/string_sign_up_provinces"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_margin="10dp">
                             <AutoCompleteTextView
                                 android:id="@+id/client_sign_up_SpProvinces"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="none"
+                                android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -194,7 +194,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Nhà thuốc"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_margin="10dp">
 
                             <AutoCompleteTextView
@@ -202,6 +201,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="none"
+                                android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>

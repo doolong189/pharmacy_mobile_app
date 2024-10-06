@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_dialog_voucher"
-        android:layout_above="@id/dialog_voucher_btnVoucher"
+        android:layout_above="@id/dialog_voucher_btnCancel"
         android:layout_below="@+id/dialog_voucher_tvTitle"
         />
     <LinearLayout
@@ -35,7 +35,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        android:layout_above="@id/dialog_voucher_btnVoucher"
+        android:layout_above="@id/dialog_voucher_btnCancel"
         android:layout_below="@+id/dialog_voucher_tvTitle"
         >
         <ImageView
@@ -53,7 +53,7 @@
             android:padding="10dp"/>
     </LinearLayout>
     <Button
-        android:id="@+id/dialog_voucher_btnVoucher"
+        android:id="@+id/dialog_voucher_btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hủy"

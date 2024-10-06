@@ -8,6 +8,7 @@ import androidx.lifecycle.liveData
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.application.MyApplication
 import com.freshervnc.pharmacycounter.data.repository.CategoryRepository
+import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
 import com.freshervnc.pharmacycounter.presentation.ui.cart.viewmodel.CartViewModel
 import com.freshervnc.pharmacycounter.utils.Resource
 import com.freshervnc.pharmacycounter.utils.Utils
@@ -21,6 +22,20 @@ class CategoryViewModel(private val application: Application) : AndroidViewModel
         try {
             if (Utils.hasInternetConnection(getApplication<MyApplication>())){
                 emit(Resource.success(repository.requestGetCategory(authHeader)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun getCategoryType(authHeader : String  , request : RequestCategoryTypeResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestGetCategoryType(authHeader,request)))
             }else{
                 emit(Resource.error(null,application.getString(R.string.string_not_internet)))
             }
