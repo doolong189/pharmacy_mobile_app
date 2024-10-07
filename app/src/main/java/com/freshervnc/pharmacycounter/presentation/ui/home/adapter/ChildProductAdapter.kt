@@ -35,7 +35,7 @@ class ChildProductAdapter(private var datas: List<Data>, private val listener: O
                 .into(binding.itemChildImageProduct)
             binding.itemChildTvNameProduct.text = item.name
 
-            if (item.bonusCoins == 0) {
+            if (item.bonusCoins <= 0) {
                 binding.itemChildTvBonusCoin.visibility = View.GONE
             }
             binding.itemChildTvBonusCoin.text = "Tặng ${item.bonusCoins} coin"
@@ -45,12 +45,12 @@ class ChildProductAdapter(private var datas: List<Data>, private val listener: O
             }
             binding.itemChildTvPack.text = item.pack
 
-            if (item.minimumAmount == 0) {
+            if (item.minimumAmount <= 0) {
                 binding.itemChildTvMinimum.visibility = View.GONE
             }
             binding.itemChildTvMinimum.text = "Số lượng tối thiểu: " + item.minimumAmount.toString()
 
-            if (item.maxAmount == 0) {
+            if (item.maxAmount <= 0) {
                 binding.itemChildTvMaximum.visibility = View.GONE
             } else {
                 binding.itemChildTvMaximum.text =
@@ -58,7 +58,7 @@ class ChildProductAdapter(private var datas: List<Data>, private val listener: O
             }
 
             binding.itemChildTvPrice.text = "Giá tiền: ${item.discountPrice} VND"
-            if (item.discount == 0 || item.discount == null) {
+            if (item.discount <= 0 || item.discount == null) {
                 binding.itemChildTvDiscount.visibility = View.GONE
                 binding.itemChildTvDiscountPrice.visibility = View.GONE
             } else {
@@ -68,9 +68,9 @@ class ChildProductAdapter(private var datas: List<Data>, private val listener: O
                     binding.itemChildTvDiscountPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
 
-            if (item.quality == 0) {
+            if (item.quality <= 0 || item.quality == null) {
                 binding.itemChildTvStatus.visibility = View.VISIBLE
-                binding.itemChildTvQuality.visibility = View.VISIBLE
+                binding.itemChildTvQuality.visibility = View.GONE
                 binding.itemChildBtnAddCart.isEnabled = false
                 binding.itemChildBtnAddCart.setBackgroundResource(R.color.gray)
             } else {

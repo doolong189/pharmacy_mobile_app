@@ -5,29 +5,23 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottomsheet_rounded_background"
     android:layout_gravity="bottom"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp"
         >
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text= "Đơn hàng số"
-            android:textAlignment="viewStart"/>
-        <TextView
             android:id="@+id/dialog_info_detail_tvIdBill"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
             android:textStyle="bold"
-            android:textAlignment="viewEnd"/>
+            android:textAlignment="center"
+            android:background="@color/green"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,19 +65,21 @@
             android:textAlignment="viewEnd"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/dialog_info_detail_lnUsingCoin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:visibility="gone"
+        android:visibility="visible"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sử dụng 1000 coin"
+            android:text="Sử dụng coin được giảm"
             android:textAlignment="viewStart"/>
         <TextView
+            android:id="@+id/dialog_info_detail_tvUsingCoin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -141,7 +137,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:id="@+id/dialog_info_detail_lnCoin"
         >
         <TextView
             android:layout_width="0dp"
@@ -150,6 +147,7 @@
             android:text="Coin được tặng"
             android:textAlignment="viewStart"/>
         <TextView
+            android:id="@+id/dialog_info_detail_tvCoin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.provider.ContactsContract
 import android.util.Log
@@ -36,5 +37,22 @@ object Utils {
             }
         }
         return false
+    }
+
+    fun buildPaymentOnline(maDonHang : String , totalPrice : String , email : String, sdt : String) : String{
+        val URL_PAYMENT = "http://18.138.176.213/agency/megapay/va?ma_don_hang=${maDonHang}&total_price=${totalPrice}&email=${email}&sdt=${sdt}"
+        return URL_PAYMENT
+    }
+
+    fun buildUrl(maDonHang: String, totalPrice: Int, email: String, sdt: String): String {
+        val baseUrl = "http://18.138.176.213/agency/megapay/va"
+
+        return Uri.parse(baseUrl).buildUpon()
+            .appendQueryParameter("ma_don_hang", maDonHang)
+            .appendQueryParameter("total_price", totalPrice.toString())
+            .appendQueryParameter("email", email)
+            .appendQueryParameter("sdt", sdt)
+            .build()
+            .toString()
     }
 }

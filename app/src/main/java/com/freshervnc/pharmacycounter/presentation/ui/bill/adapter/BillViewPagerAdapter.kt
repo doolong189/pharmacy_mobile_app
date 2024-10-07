@@ -17,7 +17,7 @@ class BillViewPagerAdapter(fm: FragmentManager, behavior: Int) :
         return when (position) {
             0 -> PurchaseHistoryFragment()
             1 -> SalesHistoryFragment()
-            else -> BillFragment() // Default case
+            else -> BillFragment()
         }
     }
 

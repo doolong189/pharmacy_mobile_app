@@ -76,14 +76,16 @@ class ProductFragment : Fragment() , OnClickItemProduct {
             val strIdProduct = b.getInt("key_product")
             val strIdCategory = b.getString("key_category")
             var requestProductTemp = RequestProductResponse()
-//            if (strIdCategory == "hoat_chat"){
-//                requestProductTemp = RequestProductResponse(activeIngredient = strIdProduct)
-//            }else if(strIdCategory == "nhom_thuoc"){
-//                requestProductTemp = RequestProductResponse(typeMedicine = strIdProduct)
-//            }else if (strIdCategory == "nha_san_xuat"){
-//                requestProductTemp = RequestProductResponse(manufacturer = strIdProduct)
-//            }
-            requestProductTemp = RequestProductResponse(category = strIdCategory.toString())
+            if (strIdCategory == "hoat_chat"){
+                requestProductTemp = RequestProductResponse(activeIngredient = strIdProduct)
+            }else if(strIdCategory == "nhom_thuoc"){
+                requestProductTemp = RequestProductResponse(typeMedicine = strIdProduct)
+            }else if (strIdCategory == "nha_san_xuat"){
+                requestProductTemp = RequestProductResponse(manufacturer = strIdProduct)
+            }
+            else {
+                requestProductTemp = RequestProductResponse(category = strIdCategory.toString())
+            }
             Log.e("requestProductTemp" , ""+ requestProductTemp)
             productViewModel.getProduct("Bearer "+mySharedPrefer.token, requestProductTemp ).observe(viewLifecycleOwner,
                 Observer { it ->

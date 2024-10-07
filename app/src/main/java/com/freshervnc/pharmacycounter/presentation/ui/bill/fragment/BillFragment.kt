@@ -55,7 +55,7 @@ class BillFragment : Fragment() {
     private fun setImageButtonStateNew(mContext: Context?): StateListDrawable {
         val states = StateListDrawable()
         states.addState(intArrayOf(android.R.attr.state_selected), ContextCompat.getDrawable(mContext!!, R.drawable.tab_bg_normal_blue))
-        states.addState(intArrayOf(-android.R.attr.state_selected), ContextCompat.getDrawable(mContext, R.drawable.tab_bg_normal) , )
+        states.addState(intArrayOf(-android.R.attr.state_selected), ContextCompat.getDrawable(mContext, R.drawable.tab_bg_normal))
         return states
     }
 }

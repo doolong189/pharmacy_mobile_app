@@ -1,5 +1,6 @@
 package com.freshervnc.pharmacycounter.domain.response.bill
 
+import com.freshervnc.pharmacycounter.domain.response.homepage.Tag
 import com.google.gson.annotations.SerializedName
 
 data class DetailBillResponse (
@@ -17,6 +18,13 @@ data class DetailResponse(
     @SerializedName("total_price")
     val totalPrice : Int,
     val price : Int,
+    val coin :  Int ,
+    @SerializedName("coin_value")
+    val coinValue : Int,
+    @SerializedName("coin_bonus")
+    val coinBonus : Int,
+    val voucher : String,
+    val voucherValue : String,
 )
 
 data class Products(
@@ -59,7 +67,7 @@ data class Data(
     val khuyenMai : Int,
     @SerializedName("detail_url")
     val detailUrl : String,
-    val tags: List<Tags>
+    val tags: List<Tag>
 )
 
 data class Tags(

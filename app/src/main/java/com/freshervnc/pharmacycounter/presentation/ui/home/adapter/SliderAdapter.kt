@@ -1,5 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.home.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,19 @@ class SliderAdapter(private val images: List<Banner>) : RecyclerView.Adapter<Sli
 //        holder.imageView.setImageResource(images[position])
         val item = images[position]
         Glide.with(holder.itemView.context).load(item.value).error(R.drawable.ic_picture).into(holder.imageView)
+        val url = "http://18.138.176.213/system/general_information/1"
+        holder.itemView.setOnClickListener {
+            val emptyBrowserIntent = Intent()
+            emptyBrowserIntent.action = Intent.ACTION_VIEW
+            emptyBrowserIntent.addCategory(Intent.CATEGORY_BROWSABLE)
+            emptyBrowserIntent.data = Uri.fromParts("http", "", null)
+            val targetIntent = Intent()
+            targetIntent.action = Intent.ACTION_VIEW
+            targetIntent.addCategory(Intent.CATEGORY_BROWSABLE)
+            targetIntent.data = Uri.parse(url)
+            targetIntent.selector = emptyBrowserIntent
+            holder.itemView.context.startActivity(targetIntent)
+        }
     }
 
     override fun getItemCount(): Int = images.size

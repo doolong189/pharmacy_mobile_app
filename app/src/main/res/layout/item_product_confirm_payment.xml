@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:gravity="center_vertical">
 
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 >
                 <ImageView
-                    android:id="@+id/item_confirm_tv_imgView"
+                    android:id="@+id/item_confirm_imgView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="5dp"
@@ -33,44 +34,86 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-30%"
-                    android:background="#FF0000"
+                    android:background="@drawable/custom_text_view"
                     android:textColor="#FFF"
                     android:padding="5dp"
                     android:textStyle="bold"
                     android:layout_margin="10dp"/>
             </RelativeLayout>
             <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
                 <TextView
-                    android:id="@+id/item_confirm_tv_name_product"
+                    android:id="@+id/item_confirm_tvNameProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Silkeron (Srinron) (Tuýp 10g) - Minh Hải"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/item_confirm_tv_pack"
+                    android:textStyle="bold"
+                    android:text="Tên"
+                    android:lines="2"
+                    android:ellipsize="end" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/item_confirm_rcTags"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tuýp 10g" />
-
+                    tools:listitem="@layout/item_tags"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal" />
                 <TextView
-                    android:id="@+id/item_confirm_tv_price"
+                    android:id="@+id/item_confirm_tvPack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="6.500 VND"
+                    android:textStyle="bold"
+                    android:text="Quy cách đóng gói"
+                    />
+                <TextView
+                    android:id="@+id/item_confirm_tvQualityProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Số lượng"
+                    />
+                <TextView
+                    android:id="@+id/item_confirm_tvBonusCoin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Tặng 150 coin"
+                    android:textColor="#FF9800"
+                    />
+                <TextView
+                    android:id="@+id/item_confirm_tvMinimum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Số lượng tối thiểu: 0"
+                    />
+                <TextView
+                    android:id="@+id/item_confirm_tvMaximum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Số lượng tối đa: 0"
+                    />
+                <TextView
+                    android:id="@+id/item_confirm_tvPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="0 VND"
                     android:textColor="#4CAF50"
-                    android:textStyle="bold" />
-
+                    />
                 <TextView
-                    android:id="@+id/item_confirm_tv_price_sale"
+                    android:id="@+id/item_confirm_tvDiscountPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="10.500 VND" />
+                    android:textStyle="bold"
+                    android:text="0 VND"
+                    android:textColor="@color/gray"
+                    />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

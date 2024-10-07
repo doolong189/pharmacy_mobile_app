@@ -33,6 +33,7 @@ class CartFragment : Fragment(), OnClickItemCart {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var cartAdapter: CartAdapter
     private lateinit var mySharedPrefer: SharedPrefer
+    private val selectedProductIds = mutableSetOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -174,11 +175,12 @@ class CartFragment : Fragment(), OnClickItemCart {
         if (id == R.id.icon_cart_checkBox) {
             if (item.isChecked) {
                 item.setChecked(false)
+
             } else {
                 item.setChecked(true)
             }
         }
         return super.onOptionsItemSelected(item)
-    }
 
+    }
 }
