@@ -11,17 +11,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="5dp"
+
         >
-        <TextView
-            android:id="@+id/item_history_tvId"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2710"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:padding="10dp"/>
+            android:layout_height="match_parent"
+            android:background="#4CAF50"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/item_history_tvId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2710"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFF"
+                android:padding="10dp"/>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,18 +41,21 @@
                 android:id="@+id/item_history_tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ngay"/>
+                android:text="Date"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/item_history_tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address"/>
+                android:text="Address"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/item_history_tvTotalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VND"
-                android:textColor="#FF0000"/>
+                android:textColor="#FF0000"
+                android:textStyle="bold"/>
         </LinearLayout>
     <RelativeLayout
         android:layout_width="0dp"
@@ -60,7 +71,8 @@
             android:text="Status"
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
-            android:textColor="#FF0000"/>
+            android:textColor="#FF0000"
+            android:textStyle="bold"/>
         <ImageView
             android:id="@+id/item_history_imgStatus"
             android:layout_width="25dp"

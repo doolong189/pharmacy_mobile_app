@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentBillBinding
 import com.freshervnc.pharmacycounter.presentation.ui.bill.adapter.BillViewPagerAdapter
@@ -35,6 +36,7 @@ class BillFragment : Fragment() {
 
 
     private fun action() {
+        (activity as MainActivity).showBottomNav()
         val adapter: BillViewPagerAdapter = BillViewPagerAdapter(requireActivity().supportFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
         binding.billViewPager.setAdapter(adapter)
         binding.billTabLayout.setupWithViewPager(binding.billViewPager)

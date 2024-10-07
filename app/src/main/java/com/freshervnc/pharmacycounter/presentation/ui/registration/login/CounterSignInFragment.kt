@@ -66,17 +66,16 @@ class CounterSignInFragment : Fragment() {
                     it?.let { resources ->
                         when(resources.status){
                             Status.SUCCESS -> {
-                                it.data!!.message.let { log ->
-                                    Snackbar.make(requireView(),log.toString(),2000).show()
-                                }
+                                Snackbar.make(requireView(),it.data!!.response.description,3000).show()
                                 binding.counterSignInEdPhoneCounter.setText("")
                                 binding.counterSignInEdPasswordCounter.setText("")
                                 mySharedPrefer.saveToken(it.data.response.token ,it.data.response.fullName , it.data.response.phone, it.data.response.email ,it.data.response.address)
                                 startActivity(Intent(requireActivity(),MainActivity::class.java))
-
                             }
                             Status.ERROR -> {
-
+                                it.data!!.message.let { log ->
+                                    Snackbar.make(requireView(),log.toString(),3000).show()
+                                }
                             }
                             Status.LOADING -> {
 

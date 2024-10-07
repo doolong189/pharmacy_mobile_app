@@ -32,14 +32,17 @@
                         android:padding="10dp"
                         >
                         <EditText
+                            android:id="@+id/category_type_edSearch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#FFF"
                             android:hint="Tìm kiếm sản phẩm"
                             android:textStyle="bold"
                             android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@id/category_type_imgSearchView"
                             />
                         <ImageView
+                            android:id="@+id/category_type_imgSearchView"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_search"
@@ -50,10 +53,11 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_type_rcView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_child_product"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_child_category"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:spanCount="2"
                 android:scrollbars="none"
                 />

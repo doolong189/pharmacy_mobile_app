@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.freshervnc.pharmacycounter.databinding.ItemDialogVoucherBinding
 import com.freshervnc.pharmacycounter.databinding.ItemProductCartBinding
 import com.freshervnc.pharmacycounter.databinding.ItemProductConfirmPaymentBinding
-import com.freshervnc.pharmacycounter.domain.response.homepage.Data
 import com.freshervnc.pharmacycounter.domain.response.voucher.Response
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCart
 

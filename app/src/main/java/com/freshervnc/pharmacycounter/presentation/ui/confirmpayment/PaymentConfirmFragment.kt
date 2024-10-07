@@ -165,9 +165,11 @@ class PaymentConfirmFragment : Fragment() {
         }
         Log.e("list temp product cart o day",""+listProductCartTemp)
         val requestTemp = RequestVoucherResponse(listProductCartTemp)
+        Log.e("requestTemp cart o day",""+requestTemp)
+
         paymentConfirmViewModel = ViewModelProvider(this,
             PaymentConfirmViewModel.PaymentConfirmViewModelFactory(requireActivity().application))[PaymentConfirmViewModel::class.java]
-        paymentConfirmViewModel.getVoucher("Bearer " + mySharedPrefer.token.toString() , requestTemp)
+        paymentConfirmViewModel.getVoucher("Bearer " + mySharedPrefer.token  , listProductCartTemp)
             .observe(viewLifecycleOwner, Observer { it ->
                 it?.let { resource ->
                     when (resource.status) {
@@ -180,7 +182,6 @@ class PaymentConfirmFragment : Fragment() {
                                     voucherAdapter.setList(item.response)
                                     voucherAdapter.notifyDataSetChanged()
                                     viewVoucher.dialogVoucherLnEmpty.visibility = View.GONE
-
                                 }
                             }
                         }
@@ -191,5 +192,9 @@ class PaymentConfirmFragment : Fragment() {
                     }
                 }
             })
+
+        viewVoucher.dialogVoucherBtnCancel.setOnClickListener {
+            dialogVoucher.dismiss()
+        }
     }
 }

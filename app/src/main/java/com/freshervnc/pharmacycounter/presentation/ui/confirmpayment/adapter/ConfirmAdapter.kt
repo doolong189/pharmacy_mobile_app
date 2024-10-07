@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.freshervnc.pharmacycounter.databinding.ItemProductCartBinding
 import com.freshervnc.pharmacycounter.databinding.ItemProductConfirmPaymentBinding
-import com.freshervnc.pharmacycounter.domain.response.homepage.Data
+import com.freshervnc.pharmacycounter.domain.models.Data
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCart
 
 class ConfirmAdapter() : RecyclerView.Adapter<ConfirmAdapter.CartViewHolder>() {

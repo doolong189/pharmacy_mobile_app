@@ -1,5 +1,7 @@
 package com.freshervnc.pharmacycounter.domain.response.category
 
+import com.freshervnc.pharmacycounter.domain.models.Category
+
 data class CategoryResponse(
     val code: Int,
     val message: List<String>,
@@ -11,9 +13,4 @@ data class Response(
     val icon: String,
     val key: String,
     val name: String
-)
-
-data class Category(
-    val name: String,
-    val value: Int
 )

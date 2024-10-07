@@ -43,34 +43,6 @@ data class EventIcon(
     val badge : Int,
 )
 
-data class Data(
-    @SerializedName("gio_hang_id")
-    val gioHangId : Int,
-    @SerializedName("id_member")
-    val memberId : Int,
-    val id : Int,
-    @SerializedName("khuyen_mai")
-    val discount: Int,
-    @SerializedName("ten_san_pham")
-    val name: String,
-    @SerializedName("quy_cach_dong_goi")
-    val pack: String,
-    @SerializedName("so_luong")
-    var quality: Int,
-    @SerializedName("don_gia")
-    val price : Int,
-    @SerializedName("bonus_coins")
-    val bonusCoins : Int,
-    @SerializedName("so_luong_toi_thieu")
-    val minimumAmount : Int,
-    @SerializedName("so_luong_toi_da")
-    val maxAmount: Int,
-    @SerializedName("img_url")
-    val imgUrl : String,
-    val discountPrice : Int,
-    val detailUrl : String,
-    val tags : List<Tag>
-)
 
 data class Tag(
     val key : String,
