@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class RequestVoucherResponse (
     @SerializedName("data_id")
-    val dataId : List<Int>
+    val data_id : List<Int>
 )

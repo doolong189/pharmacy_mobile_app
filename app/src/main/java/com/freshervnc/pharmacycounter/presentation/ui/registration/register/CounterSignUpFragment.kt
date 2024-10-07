@@ -47,7 +47,7 @@ class CounterSignUpFragment : Fragment() {
     private var itr = 0
     private val CAMERA_REQUEST_CODE = 100
     private val GALLERY_REQUEST_CODE = 75
-    lateinit var currentPhotoPath: String
+    private var currentPhotoPath: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

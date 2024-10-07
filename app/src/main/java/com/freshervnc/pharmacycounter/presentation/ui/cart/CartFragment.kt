@@ -175,7 +175,6 @@ class CartFragment : Fragment(), OnClickItemCart {
         if (id == R.id.icon_cart_checkBox) {
             if (item.isChecked) {
                 item.setChecked(false)
-
             } else {
                 item.setChecked(true)
             }

@@ -2,6 +2,7 @@ package com.freshervnc.pharmacycounter.presentation.ui.confirmpayment
 
 import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -133,12 +134,12 @@ class PaymentConfirmFragment : Fragment() {
                     view.dialogPaymentTvCoin.text = "Sử dụng $totalCoin coin được giảm "+(totalPriceAfterUsingCoin) + " VND"
                     view.dialogPaymentTvAmount.text = "Tổng tiền: $totalPrice VND"
                     view.dialogPaymentTvCoin.visibility = View.VISIBLE
-                    checkStatusCoin += 1
+                    checkStatusCoin = 1
                 }else{
                     totalPriceAfterUsingCoin = totalPrice + (totalCoin * 10)
                     view.dialogPaymentTvCoin.visibility = View.GONE
                     view.dialogPaymentTvAmount.text = "Tổng tiền: "+totalPrice.toString() + " VND"
-                    checkStatusCoin += 0
+                    checkStatusCoin = 0
                 }
             })
 
@@ -147,32 +148,42 @@ class PaymentConfirmFragment : Fragment() {
             val reductionPercentage = 0.5 / 100
             view.dialogPaymentCbPaymentOnline.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked){
-                    checkStatusPaymentOnline += 1
+                    checkStatusPaymentOnline = 1
                     view.dialogPaymentTvAmount.text = "Tổng tiền: "+(totalPrice * (1 - reductionPercentage)).toInt() + " VND"
                 }else{
-                    checkStatusPaymentOnline += 0
+                    checkStatusPaymentOnline = 0
                     view.dialogPaymentTvAmount.text = "Tổng tiền: "+(totalPrice * (1 + reductionPercentage)).toInt() + " VND"
                 }
             })
 
             view.dialogPaymentBtnCreateBill.setOnClickListener {
                 val billTemp = RequestBillResponse(listProductCartTemp,1,strName,
-                    strPhone,strEmail,strAddress,strFax,strNote,0,"",checkStatusCoin,totalPriceAfterUsingCoin.toString())
+                    strPhone,strEmail,strAddress,strFax,strNote,checkStatusPaymentOnline,"",checkStatusCoin,totalPriceAfterUsingCoin.toString())
+                    Log.e("bill temp o day",""+billTemp)
                 billViewModel.createBill("Bearer "+mySharedPrefer.token,billTemp).observe(viewLifecycleOwner,
                     Observer { it ->
                         it?.let { resources ->
                             when(resources.status){
                                 Status.SUCCESS -> {
-                                    Snackbar.make(requireView(),resources.data!!.response.description,2000).show()
+                                    Snackbar.make(requireView(), resources.data!!.response.description, 2000).show()
                                     dialog.dismiss()
-                                    (activity as MainActivity).replaceFragment(HomeFragment())
+//                                    (activity as MainActivity).replaceFragment(HomeFragment())
+//                                    val emptyBrowserIntent = Intent()
+//                                    emptyBrowserIntent.action = Intent.ACTION_VIEW
+//                                    emptyBrowserIntent.addCategory(Intent.CATEGORY_BROWSABLE)
+//                                    emptyBrowserIntent.data = Uri.fromParts("http", "", null)
+//                                    val targetIntent = Intent()
+//                                    targetIntent.action = Intent.ACTION_VIEW
+//                                    targetIntent.addCategory(Intent.CATEGORY_BROWSABLE)
+//                                    targetIntent.data = Uri.parse(resources.data.response.description)
+//                                    targetIntent.selector = emptyBrowserIntent
+//                                   requireActivity().startActivity(targetIntent)
                                 }
                                 Status.ERROR -> {}
                                 Status.LOADING -> {}
                             }
                         }
                     })
-                Log.e("confirm o dayzz",""+billTemp)
             }
         }
     }
@@ -200,32 +211,26 @@ class PaymentConfirmFragment : Fragment() {
         for (x in (activity as MainActivity).getListDataConfirm()){
             listProductCartTemp.add(x.gioHangId)
         }
-        Log.e("list temp product cart o day",""+listProductCartTemp)
         val requestTemp = RequestVoucherResponse(listProductCartTemp)
-        Log.e("requestTemp cart o day",""+requestTemp)
-
-        paymentConfirmViewModel = ViewModelProvider(this,
-            PaymentConfirmViewModel.PaymentConfirmViewModelFactory(requireActivity().application))[PaymentConfirmViewModel::class.java]
-        paymentConfirmViewModel.getVoucher("Bearer " + mySharedPrefer.token  , requestTemp)
-            .observe(viewLifecycleOwner, Observer { it ->
-                it?.let { resource ->
-                    when (resource.status) {
+        paymentConfirmViewModel.getVoucher("Bearer "+mySharedPrefer.token,listProductCartTemp).observe(viewLifecycleOwner,
+            Observer {
+                it?.let { resources ->
+                    when(resources.status){
                         Status.SUCCESS -> {
-                            resource.data.let { item ->
-                                if (item!!.response.isEmpty()){
-                                    viewVoucher.dialogVoucherLnEmpty.visibility = View.VISIBLE
-                                    viewVoucher.dialogVoucherRcVoucher.visibility = View.GONE
-                                }else {
-                                    voucherAdapter.setList(item.response)
-                                    voucherAdapter.notifyDataSetChanged()
-                                    viewVoucher.dialogVoucherLnEmpty.visibility = View.GONE
-                                }
+                            if (resources.data!!.response.isEmpty()){
+                                viewVoucher.dialogVoucherLnEmpty.visibility = View.VISIBLE
+                                viewVoucher.dialogVoucherRcVoucher.visibility = View.GONE
+                            }else {
+                                viewVoucher.dialogVoucherLnEmpty.visibility = View.GONE
+                                viewVoucher.dialogVoucherRcVoucher.visibility = View.VISIBLE
                             }
                         }
                         Status.ERROR -> {
                             viewVoucher.dialogVoucherLnEmpty.visibility = View.VISIBLE
                         }
-                        Status.LOADING -> {}
+                        Status.LOADING -> {
+
+                        }
                     }
                 }
             })

@@ -25,6 +25,7 @@ import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
+import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
@@ -84,9 +85,7 @@ interface ApiService {
 
     /* Voucher */
     @GET("api/v2/cart/list_voucher")
-    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body request : RequestVoucherResponse) : VoucherResponse
-//    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body data_id : List<Int>) : VoucherResponse
-
+    suspend fun getVoucher(@Header("Authorization") authHeader: String , @Query("data_id[]", encoded = true) dataId : List<Int>) : VoucherResponse
     /* Bill */
     @POST("api/v2/cart/payment")
     suspend fun createBill(@Header("Authorization") authHeader: String, @Body request : RequestBillResponse) : BillResponse
