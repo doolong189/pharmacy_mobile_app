@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
+import com.freshervnc.pharmacycounter.databinding.FragmentManagerBinding
+import com.freshervnc.pharmacycounter.presentation.ui.profile.ProfileFragment
 
 
 class ManagerFragment : Fragment() {
+    private lateinit var binding: FragmentManagerBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,7 +23,22 @@ class ManagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manager, container, false)
+        binding =  FragmentManagerBinding.inflate(layoutInflater ,container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        features()
+    }
+
+    private fun features(){
+        binding.managerLnInfo.setOnClickListener {
+            (activity as MainActivity).replaceFragment((ProfileFragment()))
+        }
+        binding.managerLnStore.setOnClickListener {
+
+        }
     }
 
 }

@@ -16,8 +16,10 @@ import com.freshervnc.pharmacycounter.domain.response.category.CategoryResponse
 import com.freshervnc.pharmacycounter.domain.response.category.CategoryTypeResponse
 import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
 import com.freshervnc.pharmacycounter.domain.response.history.HistoryResponse
+import com.freshervnc.pharmacycounter.domain.response.logout.LogoutResponse
 import com.freshervnc.pharmacycounter.domain.response.product.ProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
+import com.freshervnc.pharmacycounter.domain.response.profile.ProfileResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
 import okhttp3.MultipartBody
@@ -82,8 +84,8 @@ interface ApiService {
 
     /* Voucher */
     @GET("api/v2/cart/list_voucher")
-//    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body request : RequestVoucherResponse) : VoucherResponse
-    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body data_id : List<Int>) : VoucherResponse
+    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body request : RequestVoucherResponse) : VoucherResponse
+//    suspend fun getVoucher(@Header("Authorization") authHeader: String, @Body data_id : List<Int>) : VoucherResponse
 
     /* Bill */
     @POST("api/v2/cart/payment")
@@ -105,4 +107,11 @@ interface ApiService {
     /* Product */
     @POST("/api/v2/product/index")
     suspend fun getProduct(@Header("Authorization") authHeader: String, @Body request : RequestProductResponse) : ProductResponse
+
+    @GET("api/v2/member/profile")
+    suspend fun getProfile(@Header("Authorization") authHeader: String) : ProfileResponse
+
+    /* Logout */
+    @POST("api/v2/member/logout")
+    suspend fun logOut(@Header("Authorization") authHeader: String) : LogoutResponse
 }

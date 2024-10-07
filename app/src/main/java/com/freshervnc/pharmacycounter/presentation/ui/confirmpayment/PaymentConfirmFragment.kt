@@ -1,13 +1,16 @@
 package com.freshervnc.pharmacycounter.presentation.ui.confirmpayment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.CheckBox
+import android.widget.CompoundButton
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,14 +21,18 @@ import com.freshervnc.pharmacycounter.databinding.DialogVoucherBinding
 import com.freshervnc.pharmacycounter.databinding.FragmentPaymentConfirmBinding
 import com.freshervnc.pharmacycounter.domain.response.bill.RequestBillResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
+import com.freshervnc.pharmacycounter.presentation.ui.bill.viewmodel.BillViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.adapter.ConfirmAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.adapter.VoucherAdapter
+import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.viewmodel.PaymentConfirmViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.home.HomeFragment
+import com.freshervnc.pharmacycounter.presentation.ui.paymentonline.PaymentOnlineFragment
+import com.freshervnc.pharmacycounter.presentation.ui.product.ProductFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
-import com.freshervnc.pharmacycounter.presentation.ui.bill.viewmodel.BillViewModel
-import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.viewmodel.PaymentConfirmViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import okhttp3.internal.notify
 
 
 class PaymentConfirmFragment : Fragment() {
@@ -35,15 +42,11 @@ class PaymentConfirmFragment : Fragment() {
     private lateinit var mySharedPrefer: SharedPrefer
     private lateinit var paymentConfirmViewModel: PaymentConfirmViewModel
     private lateinit var billViewModel: BillViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentPaymentConfirmBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -77,7 +80,7 @@ class PaymentConfirmFragment : Fragment() {
         var totalPrice = 0
         for (x in (activity as MainActivity).getListDataConfirm()) {
             totalAmount += x.quality
-            totalPrice += (x.price * x.quality)
+            totalPrice += (x.discountPrice * x.quality)
         }
         binding.paymentTvAmount.text = "Tổng tiền: "+totalPrice.toString() + " VND"
         binding.paymentTvQuality.text = "Số lượng: "+totalAmount.toString()
@@ -91,10 +94,12 @@ class PaymentConfirmFragment : Fragment() {
             dialog.show()
             var totalAmount = 0
             var totalPrice = 0
-
+            var totalCoin = 0
+            var totalPriceAfterUsingCoin = 0
             for (x in (activity as MainActivity).getListDataConfirm()) {
                 totalAmount += x.quality
-                totalPrice += (x.price * x.quality)
+                totalPrice += (x.discountPrice * x.quality)
+                totalCoin += x.bonusCoins
             }
             view.dialogPaymentTvAmount.text = "Tổng tiền: "+totalPrice.toString() + " VND"
             view.dialogPaymentTvQuality.text = "Số lượng: "+totalAmount.toString()
@@ -120,9 +125,39 @@ class PaymentConfirmFragment : Fragment() {
             val strFax = view.dialogPaymentEdFax.text.toString()
             val strNote = view.dialogPaymentEdNote.text.toString()
 
-            val billTemp = RequestBillResponse(listProductCartTemp,1,strName,
-                strPhone,strEmail,strAddress,strFax,strNote,0,"",0,"100000")
+            //using coin
+            var checkStatusCoin = 0
+            view.dialogPaymentSwUsingCoin.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    totalPriceAfterUsingCoin = totalPrice - (totalCoin * 10)
+                    view.dialogPaymentTvCoin.text = "Sử dụng $totalCoin coin được giảm "+(totalPriceAfterUsingCoin) + " VND"
+                    view.dialogPaymentTvAmount.text = "Tổng tiền: $totalPrice VND"
+                    view.dialogPaymentTvCoin.visibility = View.VISIBLE
+                    checkStatusCoin += 1
+                }else{
+                    totalPriceAfterUsingCoin = totalPrice + (totalCoin * 10)
+                    view.dialogPaymentTvCoin.visibility = View.GONE
+                    view.dialogPaymentTvAmount.text = "Tổng tiền: "+totalPrice.toString() + " VND"
+                    checkStatusCoin += 0
+                }
+            })
+
+            //choose payment
+            var checkStatusPaymentOnline = 0
+            val reductionPercentage = 0.5 / 100
+            view.dialogPaymentCbPaymentOnline.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    checkStatusPaymentOnline += 1
+                    view.dialogPaymentTvAmount.text = "Tổng tiền: "+(totalPrice * (1 - reductionPercentage)).toInt() + " VND"
+                }else{
+                    checkStatusPaymentOnline += 0
+                    view.dialogPaymentTvAmount.text = "Tổng tiền: "+(totalPrice * (1 + reductionPercentage)).toInt() + " VND"
+                }
+            })
+
             view.dialogPaymentBtnCreateBill.setOnClickListener {
+                val billTemp = RequestBillResponse(listProductCartTemp,1,strName,
+                    strPhone,strEmail,strAddress,strFax,strNote,0,"",checkStatusCoin,totalPriceAfterUsingCoin.toString())
                 billViewModel.createBill("Bearer "+mySharedPrefer.token,billTemp).observe(viewLifecycleOwner,
                     Observer { it ->
                         it?.let { resources ->
@@ -130,12 +165,14 @@ class PaymentConfirmFragment : Fragment() {
                                 Status.SUCCESS -> {
                                     Snackbar.make(requireView(),resources.data!!.response.description,2000).show()
                                     dialog.dismiss()
+                                    (activity as MainActivity).replaceFragment(HomeFragment())
                                 }
                                 Status.ERROR -> {}
                                 Status.LOADING -> {}
                             }
                         }
                     })
+                Log.e("confirm o dayzz",""+billTemp)
             }
         }
     }
@@ -169,7 +206,7 @@ class PaymentConfirmFragment : Fragment() {
 
         paymentConfirmViewModel = ViewModelProvider(this,
             PaymentConfirmViewModel.PaymentConfirmViewModelFactory(requireActivity().application))[PaymentConfirmViewModel::class.java]
-        paymentConfirmViewModel.getVoucher("Bearer " + mySharedPrefer.token  , listProductCartTemp)
+        paymentConfirmViewModel.getVoucher("Bearer " + mySharedPrefer.token  , requestTemp)
             .observe(viewLifecycleOwner, Observer { it ->
                 it?.let { resource ->
                     when (resource.status) {

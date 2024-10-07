@@ -5,9 +5,16 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottomsheet_rounded_background"
     android:layout_gravity="bottom"
-    android:orientation="vertical"
-    android:padding="5dp">
-
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thông tin xác nhận đơn hàng"
+        android:textStyle="bold"
+        android:background="@color/green"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:padding="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +75,7 @@
             android:layout_margin="10dp"
             android:textStyle="bold"/>
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/dialog_payment_swUsingCoint"
+            android:id="@+id/dialog_payment_swUsingCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -201,13 +208,15 @@
         android:layout_height="wrap_content"
         android:text="Đơn được tặng tổng 300 Coin"
         android:textColor="#FF9800"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/dialog_payment_tvVoucher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sử dụng voucher 3gmp_50k được giảm 50.000 VND"
         android:textStyle="bold"
+        android:visibility="gone"
         android:textColor="#4CAF50"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -220,14 +229,23 @@
             android:id="@+id/dialog_payment_cbPaymentOnline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thanh toán online -0.5%"
+            android:text="Thanh toán online "
             android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-0.5%"
+            android:layout_toRightOf="@id/dialog_payment_cbPaymentOnline"
+            android:layout_centerVertical="true"
+            android:textColor="#FF0000"
+            android:textStyle="bold"/>
         <Button
             android:id="@+id/dialog_payment_btnCreateBill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tạo đơn"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="#4CAF50"/>
+            android:background="@drawable/tab_bg_normal_blue"
+            android:textColor="@color/white"/>
     </RelativeLayout>
 </LinearLayout>

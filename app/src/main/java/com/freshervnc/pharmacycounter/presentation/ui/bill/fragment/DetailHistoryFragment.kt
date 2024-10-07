@@ -85,10 +85,19 @@ class DetailHistoryFragment : Fragment() {
                             val dialogBinding = BottomSheetDialog(requireContext())
                             dialogBinding.setContentView(viewBinding.root)
                             dialogBinding.show()
-                            viewBinding.dialogInfoDetailTvIdBill.text = id.toString()
+                            viewBinding.dialogInfoDetailTvIdBill.text = "Đơn hàng số " +id.toString()
                             viewBinding.dialogInfoDetailTvDate.text = resources.data.response.dateTime
-                            viewBinding.dialogInfoDetailTvTotalAmount.text = resources.data.response.totalPrice.toString()
-                            viewBinding.dialogInfoDetailTvTotal.text = resources.data.response.price.toString()
+                            viewBinding.dialogInfoDetailTvTotalAmount.text = resources.data.response.totalPrice.toString() + " VND"
+                            viewBinding.dialogInfoDetailTvTotal.text = resources.data.response.price.toString() + " VND"
+                            if (resources.data.response.coinBonus == 0){
+                                viewBinding.dialogInfoDetailLnUsingCoin.visibility = View.GONE
+                                viewBinding.dialogInfoDetailLnCoin.visibility = View.GONE
+                            }else {
+                                viewBinding.dialogInfoDetailTvCoin.text =
+                                    "+" + resources.data.response.coinBonus.toString() + " VND"
+                                viewBinding.dialogInfoDetailTvUsingCoin.text =
+                                    "-" + (resources.data.response.coinBonus * 10).toString() + " coin"
+                            }
                         }
                     }
                     Status.ERROR -> {}

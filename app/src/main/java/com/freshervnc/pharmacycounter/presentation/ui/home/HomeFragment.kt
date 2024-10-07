@@ -11,6 +11,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,13 +40,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 
 
-class HomeFragment : Fragment(), OnClickItemProduct , OnClickItemHomePage{
+class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var cartViewModel: CartViewModel
     private lateinit var parentProductAdapter: ParentProductAdapter
     private lateinit var viewPager: ViewPager2
     private lateinit var mySharedPrefer: SharedPrefer
+
     //
     private lateinit var categoryViewModel: CategoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +79,7 @@ class HomeFragment : Fragment(), OnClickItemProduct , OnClickItemHomePage{
             this,
             CartViewModel.CartViewModelFactory(requireActivity().application)
         )[CartViewModel::class.java]
-        parentProductAdapter = ParentProductAdapter(this,this)
+        parentProductAdapter = ParentProductAdapter(this, this)
         mySharedPrefer = SharedPrefer(requireContext())
         (activity as MainActivity).showBottomNav()
     }
@@ -137,15 +139,11 @@ class HomeFragment : Fragment(), OnClickItemProduct , OnClickItemHomePage{
         view.dialogBottomCartTvBonusCoin.text = "Tặng " + item.bonusCoins.toString()
         view.dialogBottomCartTvPrice.text = "${item.price}  VND"
         view.dialogBottomCartTvMinimum.text =
-            "Số lượng tối thiểu: ${item.minimumAmount}  \n  ${item.quality}"
+            "Số lượng: ${item.quality} \n Số lượng tối thiểu: ${item.minimumAmount} \n Số lượng tối đa: ${item.maxAmount}"
         //add to cart
         var amountTemp = 0
         view.dialogBottomCartImageMinus.setOnClickListener {
-            if (amountTemp == 0) {
-                amountTemp = 0
-            } else {
-                amountTemp -= 1
-            }
+            if (amountTemp == 0) amountTemp = 0 else amountTemp -= 1
             view.dialogBottomCartTvAmount.text = amountTemp.toString()
         }
         view.dialogBottomCartImagePlus.setOnClickListener {
@@ -153,45 +151,72 @@ class HomeFragment : Fragment(), OnClickItemProduct , OnClickItemHomePage{
             view.dialogBottomCartTvAmount.text = amountTemp.toString()
         }
 
-        if (amountTemp < item.minimumAmount){
-            Snackbar.make(requireView(),"Yêu cầu nhập số lượng tối thiểu: ${item.minimumAmount}",2000).show()
-        }else if(amountTemp > item.maxAmount){
-            Snackbar.make(requireView(),"Yêu cầu nhập số lượng tối đa: ${item.minimumAmount}",2000).show()
-        }else if (amountTemp > item.quality){
-            Snackbar.make(requireView(),"Yêu cầu không nhập quá số lượng",2000).show()
-        }else{
-            view.dialogBottomCartBtnAddCart.setOnClickListener {
-                val cartTemp: RequestCartResponse = RequestCartResponse(item.id, amountTemp)
-                cartViewModel.addToCart("Bearer " + mySharedPrefer.token, cartTemp)
-                    .observe(viewLifecycleOwner,
-                        Observer { it ->
-                            it?.let { resources ->
-                                when (resources.status) {
-                                    Status.SUCCESS -> {
-                                        Snackbar.make(
-                                            requireView(),
-                                            getString(R.string.string_add_cart_successfully),
-                                            2000
-                                        ).show()
-                                        dialog.dismiss()
-                                    }
+        view.dialogBottomCartBtnAddCart.setOnClickListener {
+            if (amountTemp == 0) {
+                Toast.makeText(requireContext(), "Yêu cầu nhập số lượng", Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
+            if (amountTemp < item.minimumAmount) {
+                Toast.makeText(
+                    requireContext(),
+                    "Yêu cầu nhập số lượng tối thiểu: ${item.minimumAmount}",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
 
-                                    Status.ERROR -> {
-                                        Snackbar.make(
-                                            requireView(),
-                                            getString(R.string.string_add_cart_failed),
-                                            2000
-                                        ).show()
-                                        dialog.dismiss()
-                                    }
+            }
+            if (amountTemp > item.quality) {
+                Toast.makeText(
+                    requireContext(),
+                    "Yêu cầu không nhập quá số lượng",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+                return@setOnClickListener
 
-                                    Status.LOADING -> {
+            }else{
+                if (amountTemp > item.maxAmount) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Yêu cầu nhập số lượng tối đa: ${item.minimumAmount}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
 
-                                    }
+                }
+            }
+
+            val cartTemp: RequestCartResponse = RequestCartResponse(item.id, amountTemp)
+            cartViewModel.addToCart("Bearer " + mySharedPrefer.token, cartTemp)
+                .observe(viewLifecycleOwner,
+                    Observer { it ->
+                        it?.let { resources ->
+                            when (resources.status) {
+                                Status.SUCCESS -> {
+                                    Snackbar.make(
+                                        requireView(),
+                                        getString(R.string.string_add_cart_successfully),
+                                        2000
+                                    ).show()
+                                    dialog.dismiss()
+                                }
+
+                                Status.ERROR -> {
+                                    Snackbar.make(
+                                        requireView(),
+                                        getString(R.string.string_add_cart_failed),
+                                        2000
+                                    ).show()
+                                    dialog.dismiss()
+                                }
+
+                                Status.LOADING -> {
+
                                 }
                             }
-                        })
-            }
+                        }
+                    })
         }
     }
 
@@ -211,8 +236,7 @@ class HomeFragment : Fragment(), OnClickItemProduct , OnClickItemHomePage{
     override fun onClickItem(item: Product) {
         val args = Bundle()
         args.putInt("key_product", 0)
-        args.putString("key_category",item.value)
-        Log.e("key",item.value)
+        args.putString("key_category", item.value)
         val newFragment: ProductFragment = ProductFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
