@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentManagerBinding
-import com.freshervnc.pharmacycounter.presentation.ui.profile.ProfileFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.ProfileFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.store.StoreFragment
 
 
 class ManagerFragment : Fragment() {
@@ -37,6 +38,7 @@ class ManagerFragment : Fragment() {
             (activity as MainActivity).replaceFragment((ProfileFragment()))
         }
         binding.managerLnStore.setOnClickListener {
+            (activity as MainActivity).replaceFragment((StoreFragment()))
 
         }
     }

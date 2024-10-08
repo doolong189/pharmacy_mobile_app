@@ -196,7 +196,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/string_sign_up_provinces"
                             android:layout_margin="10dp"
-                            android:background="@drawable/shape_custom_tab_layout"
+                            android:background="@drawable/spring_dot_stroke_background"
                             >
                             <Spinner
                                 android:id="@+id/counter_sign_up_spProvinces"

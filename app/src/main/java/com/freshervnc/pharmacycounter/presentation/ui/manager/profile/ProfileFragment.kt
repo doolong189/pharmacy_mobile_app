@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.profile
+package com.freshervnc.pharmacycounter.presentation.ui.manager.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentProfileBinding
-import com.freshervnc.pharmacycounter.presentation.ui.profile.viewmodel.ProfileViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.viewmodel.ProfileViewModel
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 

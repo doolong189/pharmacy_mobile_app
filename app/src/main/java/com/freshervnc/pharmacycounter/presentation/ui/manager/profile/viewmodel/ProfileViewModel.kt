@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.profile.viewmodel
+package com.freshervnc.pharmacycounter.presentation.ui.manager.profile.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

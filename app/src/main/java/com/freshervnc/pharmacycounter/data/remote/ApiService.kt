@@ -122,4 +122,8 @@ interface ApiService {
     /* Search */
     @POST("api/v2/search")
     suspend fun searchProduct(@Header("Authorization") authHeader: String, @Body request : RequestSearchResponse) : SearchResponse
+
+    /* Store */
+    @POST("api/v2/agency/category_type")
+    suspend fun getCategoryStore(@Header("Authorization") authHeader: String, @Body request : RequestCategoryTypeResponse) : CategoryTypeResponse
 }

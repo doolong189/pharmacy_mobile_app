@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.forgotpassword
+package com.freshervnc.pharmacycounter.presentation.ui.registration.forgotpassword
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

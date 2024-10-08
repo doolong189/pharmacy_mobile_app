@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.manager.store.StoreFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/store_rcView"
+            tools:listitem="@layout/item_category"
+            android:layout_above="@id/ln_bottom"/>
+        <LinearLayout
+            android:id="@+id/ln_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+
+            >
+            <LinearLayout
+                android:id="@+id/store_lnBanChay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/green"
+                android:padding="5dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/baseline_data_exploration_24"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bán chạy"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/store_lnKhuyenMai"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/red"
+                android:padding="5dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/baseline_discount_24_1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khuyến mãi"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/store_lnAllSP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/blue"
+                android:padding="5dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/baseline_category_24_1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tất cả sản phẩm"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>
