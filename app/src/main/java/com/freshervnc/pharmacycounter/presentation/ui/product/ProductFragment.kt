@@ -82,11 +82,12 @@ class ProductFragment : Fragment() , OnClickItemProduct {
                 requestProductTemp = RequestProductResponse(typeMedicine = strIdProduct)
             }else if (strIdCategory == "nha_san_xuat"){
                 requestProductTemp = RequestProductResponse(manufacturer = strIdProduct)
+            }else if(strIdProduct == -1){
+                requestProductTemp = RequestProductResponse(search = strIdCategory.toString())
             }
             else {
                 requestProductTemp = RequestProductResponse(category = strIdCategory.toString())
             }
-            Log.e("requestProductTemp" , ""+ requestProductTemp)
             productViewModel.getProduct("Bearer "+mySharedPrefer.token, requestProductTemp ).observe(viewLifecycleOwner,
                 Observer { it ->
                     it?.let { resources ->
@@ -122,7 +123,7 @@ class ProductFragment : Fragment() , OnClickItemProduct {
         view.dialogBottomCartTvBonusCoin.text = "Tặng " + item.bonusCoins.toString()
         view.dialogBottomCartTvPrice.text = "${item.price}  VND"
         view.dialogBottomCartTvMinimum.text =
-            "Số lượng tối thiểu: ${item.minimumAmount}  \n  ${item.quality}"
+            "Số lượng: ${item.quality} \n Số lượng tối thiểu: ${item.minimumAmount} \n Số lượng tối đa: ${item.maxAmount}"
         //add to cart
         var amountTemp = 0
         view.dialogBottomCartImageMinus.setOnClickListener {

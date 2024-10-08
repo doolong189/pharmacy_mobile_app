@@ -195,8 +195,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/string_sign_up_provinces"
-                            android:layout_margin="10dp">
-                            <AutoCompleteTextView
+                            android:layout_margin="10dp"
+                            android:background="@drawable/shape_custom_tab_layout"
+                            >
+                            <Spinner
                                 android:id="@+id/counter_sign_up_spProvinces"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

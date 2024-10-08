@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.home.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
             }
         }catch (ex : Exception){
             emit(Resource.error(null,ex.message ?: application.getString(R.string.string_error)))
+            Log.e("home", ex.localizedMessage!!.toString())
         }
     }
 

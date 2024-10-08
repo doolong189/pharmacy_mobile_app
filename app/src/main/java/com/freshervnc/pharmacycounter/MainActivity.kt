@@ -23,7 +23,6 @@ import com.freshervnc.pharmacycounter.utils.Status
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mySharedPrefer: SharedPrefer
     val listDataTemp = mutableListOf<Data>()
     val listDataConfirmTemp = mutableListOf<Data>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +88,9 @@ class MainActivity : AppCompatActivity() {
 
     fun addAllListData(item : List<Data>){
         listDataTemp.addAll(item)
+    }
+    fun removeAllListData(item : List<Data>){
+        listDataTemp.clear()
     }
 
     fun removeData(item : Data){

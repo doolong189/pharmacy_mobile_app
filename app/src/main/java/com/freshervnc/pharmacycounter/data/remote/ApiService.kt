@@ -20,6 +20,8 @@ import com.freshervnc.pharmacycounter.domain.response.logout.LogoutResponse
 import com.freshervnc.pharmacycounter.domain.response.product.ProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
 import com.freshervnc.pharmacycounter.domain.response.profile.ProfileResponse
+import com.freshervnc.pharmacycounter.domain.response.search.RequestSearchResponse
+import com.freshervnc.pharmacycounter.domain.response.search.SearchResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
 import okhttp3.MultipartBody
@@ -54,6 +56,9 @@ interface ApiService {
 
     @POST("api/v2/member/login")
     suspend fun loginCounter(@Body login : RequestLoginResponse) : LoginResponse
+
+    @POST("api/v2/customer/login")
+    suspend fun loginCustomer(@Body login : RequestLoginResponse) : LoginResponse
     /* customer */
 
     @Multipart
@@ -113,4 +118,8 @@ interface ApiService {
     /* Logout */
     @POST("api/v2/member/logout")
     suspend fun logOut(@Header("Authorization") authHeader: String) : LogoutResponse
+
+    /* Search */
+    @POST("api/v2/search")
+    suspend fun searchProduct(@Header("Authorization") authHeader: String, @Body request : RequestSearchResponse) : SearchResponse
 }

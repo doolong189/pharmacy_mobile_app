@@ -36,6 +36,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -49,7 +50,7 @@ class ClientSignUpFragment : Fragment() {
     private var itrProvinces: Int = 1
     private var itrAgency: Int = 1
     private val CAMERA_REQUEST_CODE = 100
-    private val GALLERY_REQUEST_CODE = 75
+    private val GALLERY_REQUEST_CODE = 100
     lateinit var currentPhotoPath: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -183,8 +184,8 @@ class ClientSignUpFragment : Fragment() {
             }
             dialogBinding.dialogChooseGallery.setOnClickListener {
                 val mIntent = Intent()
-                mIntent.type = "image/*"
                 mIntent.action = Intent.ACTION_GET_CONTENT
+                mIntent.type = "image/*"
                 startActivityForResult(mIntent, GALLERY_REQUEST_CODE)
                 dialog.dismiss()
             }
@@ -196,9 +197,25 @@ class ClientSignUpFragment : Fragment() {
             val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
             binding.clientSignUpShowImage.setImageBitmap(bitmap)
         }
-        if (resultCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { uri ->
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data!!.data != null) {
                 binding.clientSignUpShowImage.setImageURI(data.data)
+                val selectedImageUri: Uri? = data.data
+                selectedImageUri?.let {
+                    try {
+                        val imageFile = createImageFile()
+                        val inputStream = requireContext().contentResolver.openInputStream(it)
+                        val outputStream = FileOutputStream(imageFile)
+                        inputStream?.copyTo(outputStream)
+                        val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                        binding.clientSignUpShowImage.setImageBitmap(bitmap)
+                        inputStream?.close()
+                        outputStream.close()
+                    } catch (ex: IOException) {
+                        ex.printStackTrace()
+                        // Handle the error
+                    }
+                }
             }
         }
     }
@@ -238,9 +255,7 @@ class ClientSignUpFragment : Fragment() {
                     getString(R.string.validate_tv_counter_phone)
             } else {
                 binding.clientSignUpLayoutEdPhone.helperText = ""
-
             }
-
             if (strPassword.isEmpty()) {
                 binding.clientSignUpLayoutEdPassword.helperText =
                     getString(R.string.validate_tv_counter_password)

@@ -5,7 +5,7 @@ import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
 
 class LoginRepository {
 
-//    suspend fun requestLoginCustomer(login : RequestLoginResponse) = RetrofitInstance.api.loginCounter(login)
+    suspend fun requestLoginCustomer(login : RequestLoginResponse) = RetrofitInstance.api.loginCustomer(login)
 
     suspend fun requestLoginCounter(login: RequestLoginResponse) = RetrofitInstance.api.loginCounter((login))
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.freshervnc.pharmacycounter.databinding.FragmentSplashBinding
 import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
+import com.freshervnc.pharmacycounter.presentation.ui.registration.login.ClientSignInFragment
 import com.freshervnc.pharmacycounter.presentation.ui.registration.register.ClientSignUpFragment
 import com.freshervnc.pharmacycounter.presentation.ui.registration.login.CounterSignInFragment
 
@@ -36,7 +37,7 @@ class SplashFragment : Fragment() {
         }
 
         binding.splashCvClient.setOnClickListener {
-            (activity as RegistrationActivity).replaceFragment(ClientSignUpFragment())
+            (activity as RegistrationActivity).replaceFragment(ClientSignInFragment())
         }
     }
 

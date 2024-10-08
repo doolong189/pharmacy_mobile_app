@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.home.HomeFragment">
+    tools:context=".presentation.ui.searchproduct.SearchProductFragment">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,8 +18,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#4CAF50"
+                android:background="@drawable/custom_button"
                 >
+                <ImageView
+                    android:id="@+id/search_imgBack"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/back_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    />
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -30,51 +39,40 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         >
+
                         <EditText
-                            android:id="@+id/home_edSearch"
+                            android:id="@+id/search_edSearch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#FFF"
                             android:hint="Tìm kiếm sản phẩm"
                             android:textStyle="bold"
                             android:layout_centerVertical="true"
-                            android:focusable="false"
+                            android:lines="1"
+                            android:singleLine="true"
+                            android:layout_toStartOf="@id/search_imgClear"
                             />
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_search"
+                            android:id="@+id/search_imgClear"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/baseline_cancel_24"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="16dp"
-                >
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    />
-            </androidx.cardview.widget.CardView>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_rcProduct"
+                android:id="@+id/search_rcView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:itemCount="4"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_parent_product"
+                tools:listitem="@layout/item_child_product"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
                 android:scrollbars="none"
-                android:padding="5dp"/>
+                />
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

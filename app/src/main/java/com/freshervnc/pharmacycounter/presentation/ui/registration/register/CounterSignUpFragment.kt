@@ -33,8 +33,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -46,17 +48,13 @@ class CounterSignUpFragment : Fragment() {
     private lateinit var registerViewModel: RegisterViewModel
     private var itr = 0
     private val CAMERA_REQUEST_CODE = 100
-    private val GALLERY_REQUEST_CODE = 75
+    private val GALLERY_REQUEST_CODE = 25
     private var currentPhotoPath: String = ""
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCounterSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -131,8 +129,13 @@ class CounterSignUpFragment : Fragment() {
                     getString(R.string.validate_tv_counter_password)
             } else {
                 binding.counterSignUpLayoutPassword.helperText = ""
-
             }
+            if (currentPhotoPath.isEmpty()){
+                binding.counterSignUpTvValidateImage.text = getString(R.string.validate_tv_counter_image)
+            }else{
+                binding.counterSignUpTvValidateImage.text = ""
+            }
+
             val fullNameBody: RequestBody = strFullName.toRequestBody("text/plain".toMediaType())
             val nameCounter: RequestBody = strNameCounter.toRequestBody("text/plain".toMediaType())
             val address: RequestBody = strAddressCounter.toRequestBody("text/plain".toMediaType())
@@ -142,28 +145,46 @@ class CounterSignUpFragment : Fragment() {
             val password: RequestBody = strPassword.toRequestBody("text/plain".toMediaType())
 
             val file = File(currentPhotoPath)
-            val requestFile = RequestBody.create("{multipart/form-data}".toMediaTypeOrNull(), file);
-            val filePart =  MultipartBody.Part.createFormData("img", file.name, requestFile);
-//            val response = RequestRegisterCounter(strFullName,strNameCounter,strAddressCounter,itr,strPhone,strEmail,strPassword,filePart)
-            registerViewModel.requestRegisterCounter(fullNameBody, nameCounter, address, provinces, phone, email, password, filePart)
+            val requestFile = file.asRequestBody("{multipart/form-data}".toMediaTypeOrNull())
+            val filePart = MultipartBody.Part.createFormData("img", file.name, requestFile)
+            registerViewModel.requestRegisterCounter(
+                fullNameBody,
+                nameCounter,
+                address,
+                provinces,
+                phone,
+                email,
+                password,
+                filePart
+            )
                 .observe(viewLifecycleOwner, Observer { it ->
-                it?.let { resources ->
-                    when (resources.status) {
-                        Status.SUCCESS -> Snackbar.make(requireView(), "" + it.data!!.response.decription, 2000).show()
-                        Status.ERROR -> Snackbar.make(requireView(), "return code"+it.data!!.response.decription, 2000).show()
-                        Status.LOADING -> {
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> Snackbar.make(
+                                requireView(),
+                                "" + it.data!!.response.decription,
+                                2000
+                            ).show()
 
+                            Status.ERROR -> Snackbar.make(
+                                requireView(),
+                                "return code" + it.data!!.response.decription,
+                                2000
+                            ).show()
+
+                            Status.LOADING -> {
+
+                            }
                         }
                     }
-                }
-            })
+                })
         }
     }
 
     private fun openDialogCameraOrGallery() {
         binding.counterSignUpImgUpload.setOnClickListener {
             val dialogBinding = DialogChooseCameraOrGalleryBinding.inflate(layoutInflater)
-            val dialog = Dialog(requireContext());
+            val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             val lp = WindowManager.LayoutParams()
             lp.copyFrom(dialog.window!!.attributes)
@@ -197,8 +218,8 @@ class CounterSignUpFragment : Fragment() {
             }
             dialogBinding.dialogChooseGallery.setOnClickListener {
                 val mIntent = Intent()
-                mIntent.type = "image/*"
                 mIntent.action = Intent.ACTION_GET_CONTENT
+                mIntent.type = "image/*"
                 startActivityForResult(mIntent, GALLERY_REQUEST_CODE)
                 dialog.dismiss()
             }
@@ -210,9 +231,24 @@ class CounterSignUpFragment : Fragment() {
             val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
             binding.counterSignUpShowImage.setImageBitmap(bitmap)
         }
-        if (resultCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { uri ->
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data!!.data != null) {
                 binding.counterSignUpShowImage.setImageURI(data.data)
+                val selectedImageUri: Uri? = data.data
+                selectedImageUri?.let {
+                    try {
+                        val imageFile = createImageFile()
+                        val inputStream = requireContext().contentResolver.openInputStream(it)
+                        val outputStream = FileOutputStream(imageFile)
+                        inputStream?.copyTo(outputStream)
+                        val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                        binding.counterSignUpShowImage.setImageBitmap(bitmap)
+                        inputStream?.close()
+                        outputStream.close()
+                    } catch (ex: IOException) {
+                        ex.printStackTrace()
+                    }
+                }
             }
         }
     }
@@ -225,21 +261,15 @@ class CounterSignUpFragment : Fragment() {
                     Status.SUCCESS -> {
                         val adapter =
                             ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
-                        binding.counterSignUpSpProvinces.setAdapter(adapter)
+                        binding.counterSignUpSpProvinces.adapter = adapter
                         binding.counterSignUpSpProvinces.setOnItemClickListener { parent, view, position, id ->
-                            //get value to here
                             itr = position
                         }
                     }
-
-                    //
                     Status.ERROR -> {
                         Log.e("provinces", it.data!!.message.toString())
                     }
-
-                    //
                     Status.LOADING -> {
-
                     }
                 }
             }

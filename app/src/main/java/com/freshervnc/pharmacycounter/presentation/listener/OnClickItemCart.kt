@@ -7,4 +7,9 @@ interface OnClickItemCart {
     fun onClickItem(item : Data, amount : Int, status: Boolean)
 
     fun onClickItemDelete(item : Data, number: Int)
+
+
+    fun onUpdateTotal(total : Int , amount : Int)
+
+
 }

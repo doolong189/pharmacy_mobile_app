@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.cart.adapter
 
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,8 @@ import com.freshervnc.pharmacycounter.presentation.ui.home.adapter.TagAdapter
 class CartAdapter(private val listener: OnClickItemCart) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private var carts: List<Data> = listOf()
-    private var selectedPosition = RecyclerView.NO_POSITION
-    private val checkedItems = mutableSetOf<Int>()
+    private var selectedItems: MutableSet<Int> = mutableSetOf()
+
     inner class CartViewHolder(val binding: ItemProductCartBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -32,29 +33,31 @@ class CartAdapter(private val listener: OnClickItemCart) :
             with(carts[position]) {
                 val item = carts[position]
 
-                Glide.with(holder.itemView.context).load(item.imgUrl).error(R.drawable.ic_picture).into(binding.itemCartImageProduct)
+                Glide.with(holder.itemView.context).load(item.imgUrl).error(R.drawable.ic_picture)
+                    .into(binding.itemCartImageProduct)
 
                 binding.itemCartTvNameProduct.text = item.name
 
-                if (item.bonusCoins == 0){
+                if (item.bonusCoins == 0) {
                     binding.itemCartTvBonusCoin.visibility = View.GONE
                 }
                 binding.itemCartTvBonusCoin.text = "Tặng ${item.bonusCoins} coin"
 
-                if (item.pack == ""){
+                if (item.pack == "") {
                     binding.itemCartTvPack.visibility = View.GONE
                 }
                 binding.itemCartTvPack.text = item.pack
 
-                if (item.minimumAmount == 0){
+                if (item.minimumAmount == 0) {
                     binding.itemCartTvMinimum.visibility = View.GONE
                 }
-                binding.itemCartTvMinimum.text = "Số lượng tối thiểu: "+item.minimumAmount.toString()
+                binding.itemCartTvMinimum.text =
+                    "Số lượng tối thiểu: " + item.minimumAmount.toString()
 
-                if (item.maxAmount == 0){
+                if (item.maxAmount == 0) {
                     binding.itemCartTvMaximum.visibility = View.GONE
                 }
-                binding.itemCartTvMaximum.text = "Số lượng tối đa: "+item.maxAmount.toString()
+                binding.itemCartTvMaximum.text = "Số lượng tối đa: " + item.maxAmount.toString()
 
                 binding.itemCartTvPrice.text = "${item.price} VND"
 
@@ -66,10 +69,11 @@ class CartAdapter(private val listener: OnClickItemCart) :
                 if (item.discount == 0 || item.discount == null) {
                     binding.itemCartTvDiscount.visibility = View.GONE
                     binding.itemCartTvDiscountPrice.visibility = View.GONE
-                }else{
+                } else {
                     binding.itemCartTvDiscount.text = "${item.discount}%"
                     binding.itemCartTvDiscountPrice.text = "Giá gốc: ${item.price} VND"
-                    binding.itemCartTvDiscountPrice.paintFlags = binding.itemCartTvDiscountPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    binding.itemCartTvDiscountPrice.paintFlags =
+                        binding.itemCartTvDiscountPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
 
                 val tagsAdapter = TagAdapter(item.tags)
@@ -78,10 +82,6 @@ class CartAdapter(private val listener: OnClickItemCart) :
                 binding.itemCartRcTags.setHasFixedSize(true)
                 tagsAdapter.notifyDataSetChanged()
 
-                //action add cart
-                binding.itemCartCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                    listener.onClickItem(item,item.quality,isChecked)
-                }
                 binding.itemCartImageMinus.setOnClickListener {
                     if (item.quality == 0) {
                         item.quality = 0
@@ -95,7 +95,20 @@ class CartAdapter(private val listener: OnClickItemCart) :
                     binding.itemCartTvQuality.text = item.quality.toString()
                 }
                 binding.itemCartImageDelete.setOnClickListener {
-                    listener.onClickItemDelete(item,0)
+                    listener.onClickItemDelete(item, 0)
+                }
+
+
+                //action add cart
+                holder.binding.itemCartCheckBox.isChecked = selectedItems.contains(position)
+                holder.binding.itemCartCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        selectedItems.add(position)
+                    } else {
+                        selectedItems.remove(position)
+                    }
+                    listener.onClickItem(item, item.quality, isChecked)
+                    updateTotalPrice()
                 }
             }
         }
@@ -108,5 +121,26 @@ class CartAdapter(private val listener: OnClickItemCart) :
     fun setList(list: List<Data>) {
         this.carts = list
         notifyDataSetChanged()
+    }
+
+    fun selectAllItems(select: Boolean) {
+        if (select) {
+            selectedItems.clear()
+            selectedItems.addAll(carts.indices)
+        } else {
+            selectedItems.clear()
+        }
+        notifyDataSetChanged()
+    }
+
+    private fun updateTotalPrice() {
+        var total = 0
+        var amount = 0
+        for (index in selectedItems) {
+            val item = carts[index]
+            total += item.discountPrice * item.quality
+            amount += item.quality
+        }
+        listener.onUpdateTotal(total , amount)
     }
 }

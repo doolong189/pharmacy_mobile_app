@@ -29,6 +29,19 @@ class LoginViewModel(private val application: Application) : AndroidViewModel(ap
         }
     }
 
+    fun requestLoginCustomer(login: RequestLoginResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestLoginCustomer(login)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,ex.message ?: application.getString(R.string.string_error)))
+        }
+    }
+
     class LoginViewModelFactory(private val application: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(LoginViewModel::class.java)){

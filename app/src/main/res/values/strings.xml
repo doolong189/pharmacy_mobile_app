@@ -34,4 +34,5 @@
     <string name="manager">Quản lý</string>
     <string name="string_add_cart_successfully">Thêm sản phẩm vào giỏ hàng thành công</string>
     <string name="string_add_cart_failed">Thêm sản phẩm vào giỏ hàng thất bại</string>
+    <string name="validate_tv_counter_image">Yêu cầu chọn ảnh</string>
 </resources>

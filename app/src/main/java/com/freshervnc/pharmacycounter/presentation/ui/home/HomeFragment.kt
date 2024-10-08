@@ -36,6 +36,7 @@ import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 import com.freshervnc.pharmacycounter.presentation.ui.home.viewmodel.HomeViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.product.ProductFragment
+import com.freshervnc.pharmacycounter.presentation.ui.searchproduct.SearchProductFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 
@@ -68,6 +69,7 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
         super.onViewCreated(view, savedInstanceState)
         init()
         initVariable()
+        searchProduct()
     }
 
     private fun init() {
@@ -240,5 +242,11 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
         val newFragment: ProductFragment = ProductFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
+    }
+
+    private fun searchProduct(){
+        binding.homeEdSearch.setOnClickListener {
+            (activity as MainActivity).replaceFragment(SearchProductFragment())
+        }
     }
 }

@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/dialog_bottom_cart_imageProduct"
                 android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:src="@drawable/ic_history"
                 android:padding="5dp"/>
             <LinearLayout
@@ -57,6 +57,11 @@
                     android:text="6.500 VND"
                     android:textStyle="bold"
                     android:textColor="#4CAF50" />
+                <TextView
+                    android:id="@+id/dialog_bottom_cart_tvQuality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng" />
                 <TextView
                     android:id="@+id/dialog_bottom_cart_tvMinimum"
                     android:layout_width="match_parent"

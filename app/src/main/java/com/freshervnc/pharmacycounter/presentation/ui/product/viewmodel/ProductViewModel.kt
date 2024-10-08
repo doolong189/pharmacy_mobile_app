@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.product.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,7 @@ class ProductViewModel(private val application: Application) : AndroidViewModel(
             }
         }catch (ex : Exception){
             emit(Resource.error(null,application.getString(R.string.string_error)))
+            Log.e("log product o day",ex.localizedMessage.toString())
         }
     }
 

@@ -2,12 +2,14 @@ package com.freshervnc.pharmacycounter.presentation.ui.cart
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -57,6 +59,7 @@ class CartFragment : Fragment(), OnClickItemCart {
 
     private fun init() {
         (activity as MainActivity).hideBottomNav()
+        (requireActivity() as MainActivity).supportActionBar!!.hide()
         cartViewModel = ViewModelProvider(
             this,
             CartViewModel.CartViewModelFactory(requireActivity().application)
@@ -92,9 +95,11 @@ class CartFragment : Fragment(), OnClickItemCart {
                             resource.data.let { item ->
                                 cartAdapter.setList(item!!.response.products.data)
                                 cartAdapter.notifyDataSetChanged()
+                                binding.iconCartCheckBox1.setOnCheckedChangeListener { _, isChecked ->
+                                    cartAdapter.selectAllItems(isChecked)
+                                }
                             }
                         }
-
                         Status.ERROR -> {}
                         Status.LOADING -> {}
                     }
@@ -103,8 +108,10 @@ class CartFragment : Fragment(), OnClickItemCart {
     }
 
     override fun onClickItem(item: Data, amount: Int, status: Boolean) {
+        if (!status){
+            binding.iconCartCheckBox1.isChecked = false
+        }
         updateSelectedItems(item, status)
-        setDataToTextView()
     }
 
     override fun onClickItemDelete(item: Data, number: Int) {
@@ -140,9 +147,15 @@ class CartFragment : Fragment(), OnClickItemCart {
         builder.show()
     }
 
+    override fun onUpdateTotal(total: Int , amount: Int) {
+        binding.cartTvTotalAmount.text = "$total VND"
+        binding.cartTotalQuality.text = "$amount"
+    }
+
     override fun onStop() {
         super.onStop()
         (activity as MainActivity).getListData().clear()
+        (requireActivity() as MainActivity).supportActionBar!!.show()
     }
 
     private fun updateSelectedItems(item: Data, isChecked: Boolean) {
@@ -156,7 +169,6 @@ class CartFragment : Fragment(), OnClickItemCart {
     private fun setDataToTextView() {
         var totalQuality = 0
         var totalAmount = 0
-
         for (x in (activity as MainActivity).getListData()) {
             totalQuality += x.quality
             totalAmount += (x.discountPrice * x.quality)
@@ -173,13 +185,7 @@ class CartFragment : Fragment(), OnClickItemCart {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == R.id.icon_cart_checkBox) {
-            if (item.isChecked) {
-                item.setChecked(false)
-            } else {
-                item.setChecked(true)
-            }
         }
         return super.onOptionsItemSelected(item)
-
     }
 }
