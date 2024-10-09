@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentProfileBinding
 import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.viewmodel.ProfileViewModel
@@ -41,6 +42,7 @@ class ProfileFragment : Fragment() {
 
 
     private fun init() {
+        (activity as MainActivity).hideBottomNav()
         profileViewModel = ViewModelProvider(
             this,
             ProfileViewModel.ProfileViewModelFactory(requireActivity().application)
@@ -62,7 +64,6 @@ class ProfileFragment : Fragment() {
                                binding.profileEdGency.setText("${item.response.tinh}")
                                binding.profileEdFax.setText("${item.response.maSoThue}")
                                binding.profileEdEmail.setText("${item.response.email}")
-
                            }
                        }
                        Status.ERROR -> {}

@@ -134,12 +134,18 @@ class PaymentConfirmFragment : Fragment() {
             var checkStatusCoin = 0
             view.dialogPaymentSwUsingCoin.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
-                    totalPriceAfterUsingCoin = totalPrice - (totalCoin * 10)
-                    view.dialogPaymentTvCoin.text =
-                        "Sử dụng $totalCoin coin được giảm " + (totalPriceAfterUsingCoin) + " VND"
-                    view.dialogPaymentTvAmount.text = "Tổng tiền: $totalPrice VND"
-                    view.dialogPaymentTvCoin.visibility = View.VISIBLE
-                    checkStatusCoin = 1
+                    if (totalCoin <= 0) {
+                        view.dialogPaymentTvCoin.text =
+                            "Không đủ coin để sử dụng"
+                        view.dialogPaymentTvCoin.visibility = View.VISIBLE
+                    } else {
+                        totalPriceAfterUsingCoin = totalPrice - (totalCoin * 10)
+                        view.dialogPaymentTvCoin.text =
+                            "Sử dụng $totalCoin coin được giảm " + (totalPriceAfterUsingCoin) + " VND"
+                        view.dialogPaymentTvAmount.text = "Tổng tiền: $totalPrice VND"
+                        view.dialogPaymentTvCoin.visibility = View.VISIBLE
+                        checkStatusCoin = 1
+                    }
                 } else {
                     totalPriceAfterUsingCoin = totalPrice + (totalCoin * 10)
                     view.dialogPaymentTvCoin.visibility = View.GONE
@@ -150,16 +156,13 @@ class PaymentConfirmFragment : Fragment() {
 
             //choose payment
             var checkStatusPaymentOnline = 0
-            val reductionPercentage = 0.5 / 100
             view.dialogPaymentCbPaymentOnline.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     checkStatusPaymentOnline = 1
-                    view.dialogPaymentTvAmount.text =
-                        "Tổng tiền: " + (totalPrice * (1 - reductionPercentage)).toInt() + " VND"
+                    view.dialogPaymentTvAmount.text = "Tổng tiền: " + (totalPrice * 0.995).toInt() + " VND"
                 } else {
                     checkStatusPaymentOnline = 0
-                    view.dialogPaymentTvAmount.text =
-                        "Tổng tiền: " + (totalPrice * (1 + reductionPercentage)).toInt() + " VND"
+                    view.dialogPaymentTvAmount.text = "Tổng tiền: " + totalPrice + " VND"
                 }
             })
 
@@ -185,7 +188,12 @@ class PaymentConfirmFragment : Fragment() {
                             it?.let { resources ->
                                 when (resources.status) {
                                     Status.SUCCESS -> {
-                                        Snackbar.make(requireView(), resources.data!!.response.description, 2000).show()
+                                        Snackbar.make(
+                                            requireView(),
+                                            resources.data!!.response.description,
+                                            2000
+                                        ).show()
+                                        (activity as MainActivity).replaceFragment(HomeFragment())
                                         dialog.dismiss()
 //                                    (activity as MainActivity).replaceFragment(HomeFragment())
 //                                    val emptyBrowserIntent = Intent()
@@ -199,6 +207,7 @@ class PaymentConfirmFragment : Fragment() {
 //                                    targetIntent.selector = emptyBrowserIntent
 //                                   requireActivity().startActivity(targetIntent)
                                     }
+
                                     Status.ERROR -> {}
                                     Status.LOADING -> {}
                                 }
@@ -261,6 +270,14 @@ class PaymentConfirmFragment : Fragment() {
 
         viewVoucher.dialogVoucherBtnCancel.setOnClickListener {
             dialogVoucher.dismiss()
+        }
+    }
+
+    fun applyDiscount(price: Int, isDiscount: Boolean): Int {
+        return if (isDiscount) {
+            (price * 0.995).toInt()
+        } else {
+            price
         }
     }
 }

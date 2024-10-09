@@ -1,8 +1,12 @@
 package com.freshervnc.pharmacycounter.presentation.ui.manager.store
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +17,11 @@ import com.freshervnc.pharmacycounter.databinding.FragmentStoreBinding
 import com.freshervnc.pharmacycounter.domain.models.Category
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCategory
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemParentCategory
-import com.freshervnc.pharmacycounter.presentation.ui.category.CategoryTypeFragment
+import com.freshervnc.pharmacycounter.presentation.ui.cart.CartFragment
 import com.freshervnc.pharmacycounter.presentation.ui.category.adapter.ParentCategoryAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.category.viewmodel.CategoryViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.manager.categorytype.StoreCategoryTypeFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.product.ProductStoreFragment
 import com.freshervnc.pharmacycounter.presentation.ui.product.ProductFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
@@ -28,6 +34,7 @@ class StoreFragment : Fragment(), OnClickItemCategory, OnClickItemParentCategory
     private var checkCategoryType = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +49,7 @@ class StoreFragment : Fragment(), OnClickItemCategory, OnClickItemParentCategory
         super.onViewCreated(view, savedInstanceState)
         init()
         initVariable()
+        actionButton()
     }
     private fun init() {
         categoryViewModel = ViewModelProvider(this, CategoryViewModel.CategoryViewModelFactory(requireActivity().application))[CategoryViewModel::class.java]
@@ -56,7 +64,7 @@ class StoreFragment : Fragment(), OnClickItemCategory, OnClickItemParentCategory
         getData()
     }
     private fun getData() {
-        categoryViewModel.getCategory("Bearer "+mySharedPrefer.token)
+        categoryViewModel.getStoreCategory("Bearer "+mySharedPrefer.token)
             .observe(viewLifecycleOwner) { it ->
                 it?.let { resources ->
                     when (resources.status) {
@@ -72,11 +80,38 @@ class StoreFragment : Fragment(), OnClickItemCategory, OnClickItemParentCategory
             }
     }
 
+    private fun actionButton(){
+        binding.storeLnBanChay.setOnClickListener {
+            val args = Bundle()
+            args.putInt("key_product", 0)
+            args.putString("key_category", "ban_chay")
+            val newFragment: ProductStoreFragment = ProductStoreFragment()
+            newFragment.setArguments(args)
+            (activity as MainActivity).replaceFragment(newFragment)
+        }
+        binding.storeLnKhuyenMai.setOnClickListener {
+            val args = Bundle()
+            args.putInt("key_product", 0)
+            args.putString("key_category", "khuyen_mai")
+            val newFragment: ProductStoreFragment = ProductStoreFragment()
+            newFragment.setArguments(args)
+            (activity as MainActivity).replaceFragment(newFragment)
+        }
+        binding.storeLnAllSP.setOnClickListener {
+            val args = Bundle()
+            args.putInt("key_product", 0)
+            args.putString("key_category", "all")
+            val newFragment: ProductStoreFragment = ProductStoreFragment()
+            newFragment.setArguments(args)
+            (activity as MainActivity).replaceFragment(newFragment)
+        }
+    }
+
     override fun onClickItem(item: Category) {
         val args = Bundle()
         args.putInt("key_product", item.value)
         args.putString("key_category",checkCategoryType)
-        val newFragment: ProductFragment = ProductFragment()
+        val newFragment: ProductStoreFragment = ProductStoreFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
     }
@@ -84,8 +119,10 @@ class StoreFragment : Fragment(), OnClickItemCategory, OnClickItemParentCategory
     override fun onClickItem(key: String) {
         val args = Bundle()
         args.putString("key_category", key)
-        val newFragment: CategoryTypeFragment = CategoryTypeFragment()
+        //hoa chat - nhom thuoc - nha san xuat
+        val newFragment: StoreCategoryTypeFragment = StoreCategoryTypeFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
     }
+
 }

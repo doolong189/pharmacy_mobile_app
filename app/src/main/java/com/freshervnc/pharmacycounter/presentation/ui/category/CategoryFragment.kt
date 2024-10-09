@@ -3,6 +3,7 @@ package com.freshervnc.pharmacycounter.presentation.ui.category
 import android.R.attr
 import android.R.attr.value
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

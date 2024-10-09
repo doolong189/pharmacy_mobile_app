@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentSalesHistoryBinding
 import com.freshervnc.pharmacycounter.domain.response.history.Data
@@ -88,6 +89,11 @@ class SalesHistoryFragment : Fragment() , OnClickItemHistory{
     }
 
     override fun onClickItem(id: Int, page: Int) {
-        view
+        val args = Bundle()
+        args.putInt("id", id)
+        args.putInt("page",page)
+        val newFragment: DetailHistoryFragment = DetailHistoryFragment()
+        newFragment.setArguments(args)
+        (activity as MainActivity).replaceFragment(newFragment)
     }
 }

@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.category.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +10,9 @@ import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.application.MyApplication
 import com.freshervnc.pharmacycounter.data.repository.CategoryRepository
 import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestCreateCategoryResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestDeleteCategoryResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestUpdateCategoryResponse
 import com.freshervnc.pharmacycounter.presentation.ui.cart.viewmodel.CartViewModel
 import com.freshervnc.pharmacycounter.utils.Resource
 import com.freshervnc.pharmacycounter.utils.Utils
@@ -31,6 +35,20 @@ class CategoryViewModel(private val application: Application) : AndroidViewModel
         }
     }
 
+    fun getStoreCategory(authHeader : String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestGetStoreCategory(authHeader)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
     fun getCategoryType(authHeader : String  , request : RequestCategoryTypeResponse) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
@@ -42,6 +60,66 @@ class CategoryViewModel(private val application: Application) : AndroidViewModel
         }
         catch (ex : Exception){
             emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun getStoreCategoryType(authHeader : String  , request : RequestCategoryTypeResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestGetStoreCategoryType(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun getCreateStoreCategoryType(authHeader : String  , request : RequestCreateCategoryResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestCreateStoreCategoryType(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+
+    fun getUpdateStoreCategoryType(authHeader : String  , request : RequestUpdateCategoryResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestUpdateStoreCategoryType(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+            Log.e("update",ex.localizedMessage!!.toString())
+        }
+    }
+
+
+    fun getDeleteStoreCategoryType(authHeader : String  , request : RequestDeleteCategoryResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestDeleteStoreCategoryType(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+            Log.e("delete",ex.localizedMessage!!.toString())
         }
     }
 

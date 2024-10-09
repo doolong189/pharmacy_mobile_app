@@ -83,6 +83,7 @@ class ProductFragment : Fragment() , OnClickItemProduct {
             }else if (strIdCategory == "nha_san_xuat"){
                 requestProductTemp = RequestProductResponse(manufacturer = strIdProduct)
             }else if(strIdProduct == -1){
+                //edittext search
                 requestProductTemp = RequestProductResponse(search = strIdCategory.toString())
             }
             else {

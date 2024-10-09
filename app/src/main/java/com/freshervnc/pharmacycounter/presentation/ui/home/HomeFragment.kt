@@ -249,4 +249,11 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
             (activity as MainActivity).replaceFragment(SearchProductFragment())
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("log o day 1" , "onStop")
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.freshervnc.pharmacycounter.presentation.ui.bill.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class DetailHistoryFragment : Fragment() {
     private lateinit var detailHistoryAdapter: DetailHistoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("log o day 1" , "onCreate")
 
     }
 
@@ -40,6 +42,8 @@ class DetailHistoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentDetailHistoryBinding.inflate(layoutInflater, container, false)
+        Log.e("log o day 1" , "onCreateView")
+
         return binding.root
     }
 
@@ -47,6 +51,8 @@ class DetailHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         initVariable()
+        Log.e("log o day 1" , "onViewCreated")
+
     }
 
     private fun init(){
@@ -105,8 +111,6 @@ class DetailHistoryFragment : Fragment() {
                 }
             }
         })
-
-
 
     }
 

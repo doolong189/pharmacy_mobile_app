@@ -18,10 +18,14 @@ import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTy
 import com.freshervnc.pharmacycounter.domain.response.history.HistoryResponse
 import com.freshervnc.pharmacycounter.domain.response.logout.LogoutResponse
 import com.freshervnc.pharmacycounter.domain.response.product.ProductResponse
+import com.freshervnc.pharmacycounter.domain.response.product.RequestDeleteProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
 import com.freshervnc.pharmacycounter.domain.response.profile.ProfileResponse
 import com.freshervnc.pharmacycounter.domain.response.search.RequestSearchResponse
 import com.freshervnc.pharmacycounter.domain.response.search.SearchResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestCreateCategoryResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestDeleteCategoryResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestUpdateCategoryResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
 import okhttp3.MultipartBody
@@ -111,9 +115,11 @@ interface ApiService {
     /* Product */
     @POST("/api/v2/product/index")
     suspend fun getProduct(@Header("Authorization") authHeader: String, @Body request : RequestProductResponse) : ProductResponse
+    @POST("/api/v2/agency/products")
+    suspend fun getStoreProduct(@Header("Authorization") authHeader: String, @Body request : RequestProductResponse) : ProductResponse
 
-    @GET("api/v2/member/profile")
-    suspend fun getProfile(@Header("Authorization") authHeader: String) : ProfileResponse
+    @POST("api/v2/agency/product/delete")
+    suspend fun deleteProduct(@Header("Authorization") authHeader: String, @Body request : RequestDeleteProductResponse) : RegisterResponse
 
     /* Logout */
     @POST("api/v2/member/logout")
@@ -125,5 +131,19 @@ interface ApiService {
 
     /* Store */
     @POST("api/v2/agency/category_type")
-    suspend fun getCategoryStore(@Header("Authorization") authHeader: String, @Body request : RequestCategoryTypeResponse) : CategoryTypeResponse
+    suspend fun getStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestCategoryTypeResponse) : CategoryTypeResponse
+
+    @GET("/api/v2/agency/category")
+    suspend fun getStoreCategory(@Header("Authorization") authHeader: String) : CategoryResponse
+
+    @GET("api/v2/member/profile")
+    suspend fun getProfile(@Header("Authorization") authHeader: String) : ProfileResponse
+
+    @POST("api/v2/agency/category_type/create")
+    suspend fun getCreateStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestCreateCategoryResponse) : CategoryTypeResponse
+    @POST("api/v2/agency/category_type/edit")
+    suspend fun getUpdateStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestUpdateCategoryResponse) : CategoryTypeResponse
+    @POST("api/v2/agency/category_type/delete")
+    suspend fun getDeleteStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestDeleteCategoryResponse) : CategoryTypeResponse
+
 }

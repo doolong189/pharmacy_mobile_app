@@ -74,8 +74,13 @@ class CartFragment : Fragment(), OnClickItemCart {
 
     private fun features() {
         binding.cartBtnContinue.setOnClickListener {
-            (activity as MainActivity).replaceFragment(PaymentConfirmFragment())
-            (activity as MainActivity).addAllListDataConfirm((activity as MainActivity).getListData())
+            if ((activity as MainActivity).getListData().isEmpty()) {
+                Snackbar.make(requireView(), "Yêu cầu chọn sản phẩm", 3000).show()
+            } else {
+                (activity as MainActivity).replaceFragment(PaymentConfirmFragment())
+                (activity as MainActivity).addAllListDataConfirm((activity as MainActivity).getListData())
+                binding.iconCartCheckBox1.isChecked = false
+            }
         }
     }
 
@@ -100,6 +105,7 @@ class CartFragment : Fragment(), OnClickItemCart {
                                 }
                             }
                         }
+
                         Status.ERROR -> {}
                         Status.LOADING -> {}
                     }
@@ -108,7 +114,7 @@ class CartFragment : Fragment(), OnClickItemCart {
     }
 
     override fun onClickItem(item: Data, amount: Int, status: Boolean) {
-        if (!status){
+        if (!status) {
             binding.iconCartCheckBox1.isChecked = false
         }
         updateSelectedItems(item, status)
@@ -147,7 +153,7 @@ class CartFragment : Fragment(), OnClickItemCart {
         builder.show()
     }
 
-    override fun onUpdateTotal(total: Int , amount: Int) {
+    override fun onUpdateTotal(total: Int, amount: Int) {
         binding.cartTvTotalAmount.text = "$total VND"
         binding.cartTotalQuality.text = "$amount"
     }
