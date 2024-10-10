@@ -82,7 +82,8 @@
                     android:hint="@string/title_edittext_sdt_sign_in"
                     app:helperText=""
                     app:helperTextTextColor="#FF0000"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/client_sign_in_edPhoneCounter"
                         android:layout_width="match_parent"
@@ -100,18 +101,20 @@
                     android:hint="@string/title_edittext_password_sign_in"
                     app:helperText=""
                     app:helperTextTextColor="#FF0000"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/client_sign_in_edPasswordCounter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLength="255"
                         android:singleLine="true"
+                        android:inputType="textPassword"
                         android:lines="1"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/client_sign_in_btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

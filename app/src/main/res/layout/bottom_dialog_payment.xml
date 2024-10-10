@@ -1,251 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottomsheet_rounded_background"
-    android:layout_gravity="bottom"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thông tin xác nhận đơn hàng"
-        android:textStyle="bold"
-        android:background="@color/green"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:padding="10dp"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="bottom">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:orientation="vertical"
+        android:background="#FFF"
         >
         <TextView
-            android:id="@+id/dialog_payment_tvQuality"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Số lượng: 7"
-            android:layout_margin="10dp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/dialog_payment_tvAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tổng tiền: 700.000 VND"
-            android:layout_margin="10dp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <EditText
-            android:id="@+id/dialog_payment_edIdDiscount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Nhập mã giảm giá"/>
-        <TextView
-            android:id="@+id/dialog_payment_tvApply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Áp dụng"
-            android:textColor="#4CAF50"
-            android:layout_margin="10dp"
+            android:text="@string/title_bill"
             android:textStyle="bold"
+            android:background="@color/green"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="16sp"
             />
-        <ImageView
-            android:id="@+id/dialog_payment_imgChooseVoucher"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_plus"
-            android:layout_margin="10dp"/>
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sử dụng coin"
-            android:layout_margin="10dp"
-            android:textStyle="bold"/>
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/dialog_payment_swUsingCoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/counter_sign_up_layoutEdFullName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/title_ed_ho_ten_sign_up"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="0dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Họ tên*"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/dialog_payment_edFullName"
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_bill_layoutEdPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/title_edittext_sdt_sign_in"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_bill_layoutEdEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/title_ed_email_sign_up"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Số điện thoại*"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/dialog_payment_edPhone"
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_bill_layoutEdFax"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/title_edittext_ma_so_thue_sign_in"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edFax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_bill_layoutEdAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/title_ed_dia_chi1_sign_up"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Email*"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/dialog_payment_edEmail"
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_bill_layoutEdNote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/title_ed_ghi_chu_sign_up"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Mã số thuế*"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/dialog_payment_edFax"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Địa chỉ*"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/dialog_payment_edAddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Ghi chú*"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/dialog_payment_edNote"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/dialog_payment_tvCoin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đơn được tặng tổng 300 Coin"
-        android:textColor="#FF9800"
-        android:textStyle="bold"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/dialog_payment_tvVoucher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sử dụng voucher 3gmp_50k được giảm 50.000 VND"
-        android:textStyle="bold"
-        android:visibility="gone"
-        android:textColor="#4CAF50"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="10dp"
-        >
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/counter_sign_up_layoutEdIdDiscount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Nhập mã giảm giá"
+                app:helperText=""
+                app:helperTextTextColor="#FF0000"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_margin="5dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialog_bill_edIdDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/dialog_bill_tvApply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Áp dụng"
+                android:textColor="#4CAF50"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                />
+            <ImageView
+                android:id="@+id/dialog_bill_tvChooseVoucher"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_plus"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
         <CheckBox
-            android:id="@+id/dialog_payment_cbPaymentOnline"
-            android:layout_width="wrap_content"
+            android:id="@+id/dialog_bill_cbPaymentOnline"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thanh toán online "
-            android:layout_centerVertical="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-0.5%"
-            android:layout_toRightOf="@id/dialog_payment_cbPaymentOnline"
-            android:layout_centerVertical="true"
-            android:textColor="#FF0000"
+            android:text="@string/bill_title_checkbox"
+            android:textColor="@color/green"
             android:textStyle="bold"/>
-        <Button
-            android:id="@+id/dialog_payment_btnCreateBill"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bill_title_tvUsingCoin"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/dialog_bill_swUsingCoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/dialog_bill_tvCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tạo đơn"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/tab_bg_normal_blue"
-            android:textColor="@color/white"/>
-    </RelativeLayout>
-</LinearLayout>
+            android:text=""
+            android:textColor="#FF9800"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/dialog_bill_tvVoucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/dialog_bill_tvQuality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                />
+            <TextView
+                android:id="@+id/dialog_bill_tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/red"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_bill_btnCreateBill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bill_title_button_create_bill"
+            android:backgroundTint="#4CAF50"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

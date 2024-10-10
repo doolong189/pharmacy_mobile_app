@@ -35,7 +35,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#FFF"
-                            android:hint="Tìm kiếm sản phẩm"
+                            android:hint="@string/t_m_ki_m_s_n_ph_m"
                             android:textStyle="bold"
                             android:layout_centerVertical="true"
                             android:focusable="false"

@@ -51,7 +51,7 @@ class ClientSignUpFragment : Fragment() {
     private var itrAgency: Int = 1
     private val CAMERA_REQUEST_CODE = 100
     private val GALLERY_REQUEST_CODE = 100
-    lateinit var currentPhotoPath: String
+    var currentPhotoPath: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -87,49 +87,17 @@ class ClientSignUpFragment : Fragment() {
     }
 
     private fun getDataSpinner() {
-        binding.clientSignUpSpAgency.isEnabled = false
         provincesViewModel.getProvinces().observe(viewLifecycleOwner, Observer { it ->
             it?.let { resources ->
                 when (resources.status) {
                     Status.SUCCESS -> {
                         val adapterSpProvinces =
                             ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
-                        binding.clientSignUpSpProvinces.setAdapter(adapterSpProvinces)
+                        binding.clientSignUpSpProvinces.adapter = adapterSpProvinces
                         binding.clientSignUpSpProvinces.setOnItemClickListener { parent, view, position, id ->
                             //get value to here
                             itrProvinces = position + 1
                             Log.e("itrProvinces",""+itrProvinces)
-
-                            binding.clientSignUpSpAgency.isEnabled = true
-                            agencyViewModel.getAgency(itrProvinces)
-                                .observe(viewLifecycleOwner, Observer { it ->
-                                    it?.let { resources ->
-                                        when (resources.status) {
-                                            Status.SUCCESS -> {
-                                                val adapterSpAgency = ArrayAdapter(
-                                                    requireContext(),
-                                                    R.layout.list_item,
-                                                    it.data!!.response
-                                                )
-                                                binding.clientSignUpSpAgency.setAdapter(
-                                                    adapterSpAgency
-                                                )
-                                                binding.clientSignUpSpAgency.setOnItemClickListener { parent, view, position, id ->
-                                                    itrAgency = position + 1
-                                                    Log.e("itrAgency",""+itrAgency)
-                                                }
-                                            }
-
-                                            Status.ERROR -> {
-
-                                            }
-
-                                            Status.LOADING -> {
-
-                                            }
-                                        }
-                                    }
-                                })
                         }
                     }
 
@@ -145,6 +113,30 @@ class ClientSignUpFragment : Fragment() {
                 }
             }
         })
+        binding.clientSignUpSpAgency.isEnabled = true
+        agencyViewModel.getAgency(itrProvinces)
+            .observe(viewLifecycleOwner, Observer { it ->
+                it?.let { resources ->
+                    when (resources.status) {
+                        Status.SUCCESS -> {
+                            val adapterSpAgency = ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
+                            binding.clientSignUpSpAgency.adapter = adapterSpAgency
+                            binding.clientSignUpSpAgency.setOnItemClickListener { parent, view, position, id ->
+                                itrAgency = position + 1
+                                Log.e("itrAgency",""+itrAgency)
+                            }
+                        }
+
+                        Status.ERROR -> {
+
+                        }
+
+                        Status.LOADING -> {
+
+                        }
+                    }
+                }
+            })
     }
 
     private fun openDialogCameraOrGallery() {
@@ -223,38 +215,35 @@ class ClientSignUpFragment : Fragment() {
     private fun validate() {
         binding.clientSignUpBtnSignUp.setOnClickListener {
             val strFullName = binding.clientSignUpEdFullName.text.toString()
-            val strNameCounter = binding.clientSignUpEdFullName.text.toString()
             val strEmail = binding.clientSignUpEdEmail.text.toString()
             val strPhone = binding.clientSignUpEdPhone.text.toString()
             val strPassword = binding.clientSignUpEdPassword.text.toString()
             val strAddressCounter = binding.clientSignUpEdAddressClient.text.toString()
             if (strFullName.isEmpty()) {
-                binding.clientSignUpLayoutEdFullName.helperText =
-                    getString(R.string.validate_tv_full_name)
+                binding.clientSignUpLayoutEdFullName.helperText = getString(R.string.validate_tv_full_name)
             } else {
                 binding.clientSignUpLayoutEdFullName.helperText = ""
-            }
-
-            if (strNameCounter.isEmpty()) {
-                binding.clientSignUpLayoutEdFullName.helperText =
-                    getString(R.string.validate_tv_name_counter)
-            } else {
-                binding.clientSignUpLayoutEdFullName.helperText = ""
-            }
-
-            if (strAddressCounter.isEmpty()) {
-                binding.clientSignUpLayoutEdAddress.helperText =
-                    getString(R.string.validate_tv_counter_address_counter)
-            } else {
-                binding.clientSignUpLayoutEdAddress.helperText = ""
-
             }
 
             if (strPhone.isEmpty()) {
                 binding.clientSignUpLayoutEdPhone.helperText =
-                    getString(R.string.validate_tv_counter_phone)
+                    getString(R.string.validate_tv_name_counter)
             } else {
                 binding.clientSignUpLayoutEdPhone.helperText = ""
+            }
+
+            if (strEmail.isEmpty()) {
+                binding.clientSignUpLayoutEdEmail.helperText =
+                    getString(R.string.validate_tv_email_counter)
+            } else {
+                binding.clientSignUpLayoutEdEmail.helperText = ""
+            }
+
+            if (strAddressCounter.isEmpty()) {
+                binding.clientSignUpLayoutEdAddress.helperText =
+                    getString(R.string.validate_tv_customer_address)
+            } else {
+                binding.clientSignUpLayoutEdAddress.helperText = ""
             }
             if (strPassword.isEmpty()) {
                 binding.clientSignUpLayoutEdPassword.helperText =
@@ -263,6 +252,7 @@ class ClientSignUpFragment : Fragment() {
                 binding.clientSignUpLayoutEdPassword.helperText = ""
             }
 
+
             val fullNameBody: RequestBody = strFullName.toRequestBody("text/plain".toMediaType())
             val idAgency: RequestBody = itrAgency.toString().toRequestBody("text/plain".toMediaType())
             val address: RequestBody = strAddressCounter.toRequestBody("text/plain".toMediaType())
@@ -270,19 +260,25 @@ class ClientSignUpFragment : Fragment() {
             val phone: RequestBody = strPhone.toRequestBody("text/plain".toMediaType())
             val email: RequestBody = strEmail.toRequestBody("text/plain".toMediaType())
             val password: RequestBody = strPassword.toRequestBody("text/plain".toMediaType())
-
-            val file = File(currentPhotoPath);
-            val requestFile = RequestBody.create("{multipart/form-data}".toMediaTypeOrNull(), file);
-            val filePart =  MultipartBody.Part.createFormData("img", file.name, requestFile);
+            val filePart : MultipartBody.Part
+            if (currentPhotoPath != "") {
+                val file = File(currentPhotoPath)
+                val requestFile =
+                    RequestBody.create("{multipart/form-data}".toMediaTypeOrNull(), file);
+                filePart = MultipartBody.Part.createFormData("img", file.name, requestFile);
+            }else{
+                val file = File("")
+                val requestFile =
+                    RequestBody.create("{multipart/form-data}".toMediaTypeOrNull(), file);
+                filePart = MultipartBody.Part.createFormData("img", file.name, requestFile);
+            }
             clientViewModel.requestRegisterCustomer(fullNameBody, idAgency, address, provinces, phone, email, password, filePart)
                 .observe(viewLifecycleOwner, Observer { it ->
                     it?.let { resources ->
                         when (resources.status) {
                             Status.SUCCESS -> Snackbar.make(requireView(), it.data!!.response.decription, 2000).show()
-                            Status.ERROR -> Snackbar.make(requireView(), ""+it.data!!.response.decription, 2000).show()
-                            Status.LOADING -> {
-
-                            }
+                            Status.ERROR -> {}
+                            Status.LOADING -> {}
                         }
                     }
                 })

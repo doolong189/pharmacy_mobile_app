@@ -21,7 +21,9 @@
         android:id="@+id/dialog_bottom_store_layoutEdCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên danh mục*"
+        android:hint="@string/title_ed_category"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_margin="5dp"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_bottom_store_EdCategory"
@@ -34,7 +36,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dialog_bottom_store_btnCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,7 +46,7 @@
             android:backgroundTint="@color/gray"
             android:textColor="@color/white"
             android:textStyle="bold"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dialog_bottom_store_btnSave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

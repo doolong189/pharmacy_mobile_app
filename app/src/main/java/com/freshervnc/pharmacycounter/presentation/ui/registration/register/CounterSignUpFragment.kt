@@ -166,11 +166,12 @@ class CounterSignUpFragment : Fragment() {
                                 2000
                             ).show()
 
-                            Status.ERROR -> Snackbar.make(
-                                requireView(),
-                                "return code" + it.data!!.response.decription,
-                                2000
-                            ).show()
+                            Status.ERROR -> {}
+//                                Snackbar.make(
+//                                requireView(),
+//                                "return code" + it.data!!.message,
+//                                2000
+//                            ).show()
 
                             Status.LOADING -> {
 
@@ -259,9 +260,12 @@ class CounterSignUpFragment : Fragment() {
             it?.let { resources ->
                 when (resources.status) {
                     Status.SUCCESS -> {
-                        val adapter =
-                            ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
-                        binding.counterSignUpSpProvinces.adapter = adapter
+//                        val adapter =
+//                            ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
+//                        binding.counterSignUpSpProvinces.setAdapter(adapter)
+
+                        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
+                        binding.counterSignUpSpProvinces.setAdapter(adapter)
                         binding.counterSignUpSpProvinces.setOnItemClickListener { parent, view, position, id ->
                             itr = position
                         }

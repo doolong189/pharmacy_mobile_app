@@ -13,6 +13,7 @@ import com.freshervnc.pharmacycounter.databinding.FragmentCounterSignInBinding
 import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
 import com.freshervnc.pharmacycounter.presentation.ui.registration.register.CounterSignUpFragment
 import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
+import com.freshervnc.pharmacycounter.presentation.ui.registration.forgotpassword.ForgotPasswordFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 import com.freshervnc.pharmacycounter.presentation.ui.registration.login.viewmodel.LoginViewModel
@@ -83,6 +84,9 @@ class CounterSignInFragment : Fragment() {
                         }
                     }
                 })
+        }
+        binding.counterSignInTvForgotPassword.setOnClickListener {
+            (activity as RegistrationActivity).replaceFragment(ForgotPasswordFragment())
         }
     }
 }

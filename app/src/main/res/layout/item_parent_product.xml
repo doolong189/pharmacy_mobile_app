@@ -16,7 +16,7 @@
             android:id="@+id/item_parent_tvCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sản phẩm khuyến mãi"
+            android:text="@string/s_n_ph_m_khuy_n_m_i"
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:textSize="18sp"

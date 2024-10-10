@@ -119,7 +119,6 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
                                 slideShow(item.response.banners)
                             }
                         }
-
                         Status.ERROR -> {}
                         Status.LOADING -> {}
                     }
@@ -168,25 +167,22 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
                 return@setOnClickListener
 
             }
-            if (amountTemp > item.quality) {
+            if (amountTemp > item.quality && item.maxAmount == 0) {
                 Toast.makeText(
                     requireContext(),
                     "Yêu cầu không nhập quá số lượng",
                     Toast.LENGTH_LONG
                 )
                     .show()
-                return@setOnClickListener
-
-            }else{
-                if (amountTemp > item.maxAmount) {
+                if (amountTemp > item.maxAmount){
                     Toast.makeText(
                         requireContext(),
-                        "Yêu cầu nhập số lượng tối đa: ${item.minimumAmount}",
+                        "Yêu cầu không nhập quá số lượng tối đa",
                         Toast.LENGTH_LONG
-                    ).show()
-                    return@setOnClickListener
-
+                    )
+                        .show()
                 }
+                return@setOnClickListener
             }
 
             val cartTemp: RequestCartResponse = RequestCartResponse(item.id, amountTemp)
@@ -249,11 +245,5 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
             (activity as MainActivity).replaceFragment(SearchProductFragment())
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-        Log.e("log o day 1" , "onStop")
-    }
-
 
 }

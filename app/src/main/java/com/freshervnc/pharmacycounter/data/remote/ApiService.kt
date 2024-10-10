@@ -15,8 +15,10 @@ import com.freshervnc.pharmacycounter.domain.response.bill.RequestDetailBillResp
 import com.freshervnc.pharmacycounter.domain.response.category.CategoryResponse
 import com.freshervnc.pharmacycounter.domain.response.category.CategoryTypeResponse
 import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
+import com.freshervnc.pharmacycounter.domain.response.contact.ContactResponse
 import com.freshervnc.pharmacycounter.domain.response.history.HistoryResponse
 import com.freshervnc.pharmacycounter.domain.response.logout.LogoutResponse
+import com.freshervnc.pharmacycounter.domain.response.news.NewsResponse
 import com.freshervnc.pharmacycounter.domain.response.product.ProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestDeleteProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
@@ -44,6 +46,7 @@ interface ApiService {
     @GET("api/v2/system/provinces")
     suspend fun getProvinces() : ProvincesResponse
 
+    @GET
     /* member */
     @Multipart
     @POST("api/v2/member/register")
@@ -146,4 +149,14 @@ interface ApiService {
     @POST("api/v2/agency/category_type/delete")
     suspend fun getDeleteStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestDeleteCategoryResponse) : CategoryTypeResponse
 
+    /* Contact */
+    @GET("api/v2/system/contact")
+    suspend fun getContact() : ContactResponse
+
+    /* News */
+    @GET("api/v2/system/list_news")
+    suspend fun getNews() : NewsResponse
+
+    @POST("api/v2/member/logout")
+    suspend fun requestLogout(@Header("Authorization") authHeader: String) : RegisterResponse
 }

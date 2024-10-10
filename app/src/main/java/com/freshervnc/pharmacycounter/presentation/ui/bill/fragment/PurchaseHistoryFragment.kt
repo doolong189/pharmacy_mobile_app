@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.bill.fragment
 
 import android.R.attr.value
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.freshervnc.pharmacycounter.MainActivity
+import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentPurchaseHistoryBinding
 import com.freshervnc.pharmacycounter.domain.response.bill.RequestDetailBillResponse
 import com.freshervnc.pharmacycounter.domain.response.history.Data
@@ -97,4 +99,6 @@ class PurchaseHistoryFragment : Fragment(), OnClickItemHistory {
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
     }
+
+
 }

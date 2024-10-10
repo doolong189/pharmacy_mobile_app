@@ -23,7 +23,7 @@
                 android:id="@+id/item_history_tvId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2710"
+                android:text="@string/_1809"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#FFF"
@@ -41,19 +41,19 @@
                 android:id="@+id/item_history_tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text="@string/date"
                 android:textColor="#000000"/>
             <TextView
                 android:id="@+id/item_history_tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="@string/address"
                 android:textColor="#000000"/>
             <TextView
                 android:id="@+id/item_history_tvTotalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VND"
+                android:text="@string/vnd"
                 android:textColor="#FF0000"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -68,7 +68,7 @@
             android:id="@+id/item_history_tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status"
+            android:text="@string/status"
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
             android:textColor="#FF0000"

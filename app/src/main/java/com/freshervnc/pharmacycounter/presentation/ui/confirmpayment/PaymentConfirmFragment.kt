@@ -1,16 +1,12 @@
 package com.freshervnc.pharmacycounter.presentation.ui.confirmpayment
 
 import android.app.Dialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.CheckBox
-import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,13 +23,10 @@ import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.adapter.Con
 import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.adapter.VoucherAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.confirmpayment.viewmodel.PaymentConfirmViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.home.HomeFragment
-import com.freshervnc.pharmacycounter.presentation.ui.paymentonline.PaymentOnlineFragment
-import com.freshervnc.pharmacycounter.presentation.ui.product.ProductFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
-import okhttp3.internal.notify
 
 
 class PaymentConfirmFragment : Fragment() {
@@ -43,7 +36,6 @@ class PaymentConfirmFragment : Fragment() {
     private lateinit var mySharedPrefer: SharedPrefer
     private lateinit var paymentConfirmViewModel: PaymentConfirmViewModel
     private lateinit var billViewModel: BillViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,14 +57,8 @@ class PaymentConfirmFragment : Fragment() {
         confirmAdapter = ConfirmAdapter()
         voucherAdapter = VoucherAdapter()
         mySharedPrefer = SharedPrefer(requireContext())
-        paymentConfirmViewModel = ViewModelProvider(
-            this,
-            PaymentConfirmViewModel.PaymentConfirmViewModelFactory(requireActivity().application)
-        )[PaymentConfirmViewModel::class.java]
-        billViewModel = ViewModelProvider(
-            this,
-            BillViewModel.BillViewModelFactory(requireActivity().application)
-        )[BillViewModel::class.java]
+        paymentConfirmViewModel = ViewModelProvider(this, PaymentConfirmViewModel.PaymentConfirmViewModelFactory(requireActivity().application))[PaymentConfirmViewModel::class.java]
+        billViewModel = ViewModelProvider(this, BillViewModel.BillViewModelFactory(requireActivity().application))[BillViewModel::class.java]
     }
 
     private fun getData() {
@@ -100,21 +86,21 @@ class PaymentConfirmFragment : Fragment() {
             var totalAmount = 0
             var totalPrice = 0
             var totalCoin = 0
-            var totalPriceAfterUsingCoin = 0
+//            var totalPriceAfterUsingCoin = 0
             for (x in (activity as MainActivity).getListDataConfirm()) {
                 totalAmount += x.quality
                 totalPrice += (x.discountPrice * x.quality)
                 totalCoin += x.bonusCoins
             }
-            view.dialogPaymentTvAmount.text = "Tổng tiền: " + totalPrice.toString() + " VND"
-            view.dialogPaymentTvQuality.text = "Số lượng: " + totalAmount.toString()
-            view.dialogPaymentEdFullName.setText(mySharedPrefer.name!!.toString())
-            view.dialogPaymentEdPhone.setText(mySharedPrefer.phone!!.toString())
-            view.dialogPaymentEdEmail.setText(mySharedPrefer.email!!.toString())
-            view.dialogPaymentEdAddress.setText(mySharedPrefer.address!!.toString())
+            view.dialogBillTvAmount.text = "Tổng tiền: " + totalPrice.toString() + " VND"
+            view.dialogBillTvQuality.text = "Số lượng: " + totalAmount.toString()
+            view.dialogBillEdFullName.setText(mySharedPrefer.name!!.toString())
+            view.dialogBillEdPhone.setText(mySharedPrefer.phone!!.toString())
+            view.dialogBillEdEmail.setText(mySharedPrefer.email!!.toString())
+            view.dialogBillEdAddress.setText(mySharedPrefer.address!!.toString())
 
             //apply voucher
-            view.dialogPaymentImgChooseVoucher.setOnClickListener {
+            view.dialogBillTvChooseVoucher.setOnClickListener {
                 getDataVoucher()
             }
 
@@ -123,50 +109,70 @@ class PaymentConfirmFragment : Fragment() {
             for (x in (activity as MainActivity).getListDataConfirm()) {
                 listProductCartTemp.add(x.gioHangId)
             }
-            val strName = view.dialogPaymentEdFullName.text.toString()
-            val strPhone = view.dialogPaymentEdPhone.text.toString()
-            val strEmail = view.dialogPaymentEdEmail.text.toString()
-            val strAddress = view.dialogPaymentEdAddress.text.toString()
-            val strFax = view.dialogPaymentEdFax.text.toString()
-            val strNote = view.dialogPaymentEdNote.text.toString()
+            val strName = view.dialogBillEdFullName.text.toString()
+            val strPhone = view.dialogBillEdPhone.text.toString()
+            val strEmail = view.dialogBillEdEmail.text.toString()
+            val strAddress = view.dialogBillEdAddress.text.toString()
+            val strFax = view.dialogBillEdFax.text.toString()
+            val strNote = view.dialogBillEdNote.text.toString()
 
-            //using coin
+
             var checkStatusCoin = 0
-            view.dialogPaymentSwUsingCoin.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            var checkStatusPaymentOnline = 0
+            var totalPriceAfterUsingCoin = totalPrice
+            view.dialogBillSwUsingCoint.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     if (totalCoin <= 0) {
-                        view.dialogPaymentTvCoin.text =
-                            "Không đủ coin để sử dụng"
-                        view.dialogPaymentTvCoin.visibility = View.VISIBLE
+                        view.dialogBillTvCoin.text = "Không đủ coin để sử dụng"
+                        view.dialogBillTvCoin.visibility = View.VISIBLE
+                        checkStatusCoin = 0
                     } else {
-                        totalPriceAfterUsingCoin = totalPrice - (totalCoin * 10)
-                        view.dialogPaymentTvCoin.text =
-                            "Sử dụng $totalCoin coin được giảm " + (totalPriceAfterUsingCoin) + " VND"
-                        view.dialogPaymentTvAmount.text = "Tổng tiền: $totalPrice VND"
-                        view.dialogPaymentTvCoin.visibility = View.VISIBLE
+                        view.dialogBillTvCoin.text = "Sử dụng $totalCoin coin được giảm " + (totalCoin * 10) + " VND"
+                        view.dialogBillTvCoin.visibility = View.VISIBLE
                         checkStatusCoin = 1
                     }
                 } else {
-                    totalPriceAfterUsingCoin = totalPrice + (totalCoin * 10)
-                    view.dialogPaymentTvCoin.visibility = View.GONE
-                    view.dialogPaymentTvAmount.text = "Tổng tiền: " + totalPrice.toString() + " VND"
+                    view.dialogBillTvCoin.visibility = View.GONE
                     checkStatusCoin = 0
                 }
-            })
+                var priceAfterCoin = totalPrice
 
-            //choose payment
-            var checkStatusPaymentOnline = 0
-            view.dialogPaymentCbPaymentOnline.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    checkStatusPaymentOnline = 1
-                    view.dialogPaymentTvAmount.text = "Tổng tiền: " + (totalPrice * 0.995).toInt() + " VND"
-                } else {
-                    checkStatusPaymentOnline = 0
-                    view.dialogPaymentTvAmount.text = "Tổng tiền: " + totalPrice + " VND"
+                // If coins are used, apply the coin discount
+                if (checkStatusCoin == 1 && totalCoin > 0) {
+                    priceAfterCoin -= (totalCoin * 10)
                 }
-            })
 
-            view.dialogPaymentBtnCreateBill.setOnClickListener {
+                // If online payment is selected, apply the online discount (0.5% off)
+                if (checkStatusPaymentOnline == 1) {
+                    priceAfterCoin = (priceAfterCoin * 0.995).toInt()
+                }
+
+                totalPriceAfterUsingCoin = priceAfterCoin
+
+                // Update the total price in the UI
+                view.dialogBillTvAmount.text = "Tổng tiền: $totalPriceAfterUsingCoin VND"
+            }
+
+            view.dialogBillCbPaymentOnline.setOnCheckedChangeListener { buttonView, isChecked ->
+                checkStatusPaymentOnline = if (isChecked) 1 else 0
+                var priceAfterCoin = totalPrice
+
+                // If coins are used, apply the coin discount
+                if (checkStatusCoin == 1 && totalCoin > 0) {
+                    priceAfterCoin -= (totalCoin * 10)
+                }
+
+                // If online payment is selected, apply the online discount (0.5% off)
+                if (checkStatusPaymentOnline == 1) {
+                    priceAfterCoin = (priceAfterCoin * 0.995).toInt()
+                }
+
+                totalPriceAfterUsingCoin = priceAfterCoin
+
+                // Update the total price in the UI
+                view.dialogBillTvAmount.text = "Tổng tiền: $totalPriceAfterUsingCoin VND"
+            }
+            view.dialogBillBtnCreateBill.setOnClickListener {
                 val billTemp = RequestBillResponse(
                     listProductCartTemp,
                     1,
@@ -195,6 +201,7 @@ class PaymentConfirmFragment : Fragment() {
                                         ).show()
                                         (activity as MainActivity).replaceFragment(HomeFragment())
                                         dialog.dismiss()
+                                        /* payment by mega bank */
 //                                    (activity as MainActivity).replaceFragment(HomeFragment())
 //                                    val emptyBrowserIntent = Intent()
 //                                    emptyBrowserIntent.action = Intent.ACTION_VIEW
@@ -273,11 +280,4 @@ class PaymentConfirmFragment : Fragment() {
         }
     }
 
-    fun applyDiscount(price: Int, isDiscount: Boolean): Int {
-        return if (isDiscount) {
-            (price * 0.995).toInt()
-        } else {
-            price
-        }
-    }
 }

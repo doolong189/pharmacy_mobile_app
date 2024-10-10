@@ -53,23 +53,55 @@ class ProfileFragment : Fragment() {
     private fun getData() {
         profileViewModel.getProfile("Bearer " + mySharedPrefer.token).observe(viewLifecycleOwner,
             Observer { it ->
-               it?.let { resources ->
-                   when(resources.status){
-                       Status.SUCCESS ->{
-                           resources.data.let { item ->
-                               Glide.with(requireContext()).load(item!!.response.img).into(binding.profileImgUser)
-                               binding.profileEdName.setText("${item.response.ten}")
-                               binding.profileEdNameCounter.setText("${item.response.tenNhaThuoc}")
-                               binding.profileEdAddress.setText("${item.response.diaChi}")
-                               binding.profileEdGency.setText("${item.response.tinh}")
-                               binding.profileEdFax.setText("${item.response.maSoThue}")
-                               binding.profileEdEmail.setText("${item.response.email}")
-                           }
-                       }
-                       Status.ERROR -> {}
-                       Status.LOADING ->{}
-                   }
-               }
+                it?.let { resources ->
+                    when (resources.status) {
+                        Status.SUCCESS -> {
+                            resources.data.let { item ->
+                                Glide.with(requireContext()).load(item!!.response.img)
+                                    .into(binding.profileImgUser)
+                                if (item.response.ten == null) {
+                                    binding.profileEdName.setText("")
+                                } else {
+                                    binding.profileEdName.setText("${item.response.ten}")
+                                }
+                                if (item.response.tenNhaThuoc == null) {
+                                    binding.profileEdNameCounter.setText("")
+                                } else {
+                                    binding.profileEdNameCounter.setText("${item.response.tenNhaThuoc}")
+                                }
+                                if (item.response.diaChi == null) {
+                                    binding.profileEdAddress.setText("")
+                                } else {
+                                    binding.profileEdAddress.setText("${item.response.diaChi}")
+                                }
+
+                                if (item.response.diaChi == null) {
+                                    binding.profileSpGenCy.setText("")
+                                } else {
+                                    binding.profileSpGenCy.setText("${item.response.tinh}")
+                                }
+                                if (item.response.maSoThue == null) {
+                                    binding.profileEdFax.setText("")
+                                } else {
+                                    binding.profileEdFax.setText("${item.response.maSoThue}")
+
+                                }
+                                if (item.response.email == null) {
+                                    binding.profileEdEmail.setText("")
+                                } else {
+                                    binding.profileEdEmail.setText("${item.response.email}")
+                                }
+                            }
+                        }
+
+                        Status.ERROR -> {}
+                        Status.LOADING -> {}
+                    }
+                }
             })
+    }
+
+    private fun updateProfile() {
+
     }
 }

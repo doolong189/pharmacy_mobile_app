@@ -11,5 +11,5 @@ interface OnClickItemCart {
 
     fun onUpdateTotal(total : Int , amount : Int)
 
-
+    fun onClickQuality(item : Data , amount : Int)
 }
