@@ -84,7 +84,9 @@
                             android:hint="@string/title_ed_ho_ten_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            >
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edFullName"
@@ -104,7 +106,9 @@
                             android:hint="@string/title_ed_ten_nha_thuoc_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            >
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edNameCounter"
                                 android:layout_width="match_parent"
@@ -122,7 +126,9 @@
                             android:hint="@string/title_ed_sdt_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            >
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edPhone"
                                 android:layout_width="match_parent"
@@ -140,7 +146,9 @@
                             android:hint="@string/title_ed_email_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            >
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edEmail"
                                 android:layout_width="match_parent"
@@ -158,7 +166,9 @@
                             android:hint="@string/title_ed_dia_chi_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            >
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edAddressCounter"
                                 android:layout_width="match_parent"
@@ -179,7 +189,9 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textField"
                             app:passwordToggleEnabled="true"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            >
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edPassword"
                                 android:layout_width="match_parent"
@@ -196,14 +208,16 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/string_sign_up_provinces"
                             android:layout_margin="10dp"
-                            android:background="@drawable/spring_dot_stroke_background"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             >
-                            <Spinner
+                            <AutoCompleteTextView
                                 android:id="@+id/counter_sign_up_spProvinces"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="none"
                                 android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+                                android:textSize="16sp"
+                                android:padding="10dp"
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
                         <LinearLayout
@@ -250,7 +264,9 @@
                     android:layout_height="wrap_content"
                     android:text="Đăng ký tài khoản thành viên bạn đã đồng ý với"
                     android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:textColor="#4CAF50"
+                    />
 
                 <TextView
                     android:id="@+id/counter_sign_up_tvClause"

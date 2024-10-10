@@ -39,4 +39,8 @@
     <string name="title_button_cancel">Hủy bỏ</string>
     <string name="str_xoa_danh_muc">Xóa danh mục</string>
     <string name="str_xoa_san_pham">Xóa sản phẩm</string>
+    <string name="title_ed_fax">Mã số thuế*</string>
+    <string name="title_ed_address">Địa chỉ*</string>
+    <string name="title_ed_note">Ghi chú</string>
+    <string name="title_ed_id_discount">Mã giảm giá</string>
 </resources>
