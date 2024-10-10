@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.paymentonline.PaymentOnlineFragment">
+    tools:context=".presentation.ui.manager.news.NewsFragment">
 
-    <WebView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/payment_online_webView"/>
+        android:id="@+id/news_rcView"/>
 
 </FrameLayout>

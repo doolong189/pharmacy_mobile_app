@@ -137,8 +137,8 @@ class CartFragment : Fragment(), OnClickItemCart {
                                         cartAdapter.setList(item!!.response.products.data)
                                         cartAdapter.notifyDataSetChanged()
                                     }
+                                    setDataToTextView(resources.data!!.response.totalNumber , resources.data.response.totalPrice )
                                     (activity as MainActivity).getListData().remove(item)
-                                    setDataToTextView()
                                 }
 
                                 Status.ERROR -> {}
@@ -158,6 +158,29 @@ class CartFragment : Fragment(), OnClickItemCart {
         binding.cartTotalQuality.text = "$amount"
     }
 
+    override fun onClickQuality(item: Data, amount: Int) {
+        val cartTemp: RequestCartResponse = RequestCartResponse(item.id, item.quality)
+        cartViewModel.addToCart("Bearer " + mySharedPrefer.token, cartTemp)
+            .observe(viewLifecycleOwner,
+                Observer { it ->
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> {
+
+                            }
+
+                            Status.ERROR -> {
+
+                            }
+
+                            Status.LOADING -> {
+
+                            }
+                        }
+                    }
+                })
+    }
+
     override fun onStop() {
         super.onStop()
         (activity as MainActivity).getListData().clear()
@@ -172,26 +195,17 @@ class CartFragment : Fragment(), OnClickItemCart {
         }
     }
 
-    private fun setDataToTextView() {
-        var totalQuality = 0
-        var totalAmount = 0
-        for (x in (activity as MainActivity).getListData()) {
-            totalQuality += x.quality
-            totalAmount += (x.discountPrice * x.quality)
-        }
+    private fun setDataToTextView(totalQuality : Int,totalAmount : Int  ) {
+//        var totalQuality = 0
+//        var totalAmount = 0
+//        for (x in (activity as MainActivity).getListData()) {
+//            totalQuality += x.quality
+//            totalAmount += (x.discountPrice * x.quality)
+//        }
+//        binding.cartTotalQuality.text = "$totalQuality"
+//        binding.cartTvTotalAmount.text = "$totalAmount VND"
         binding.cartTotalQuality.text = "$totalQuality"
         binding.cartTvTotalAmount.text = "$totalAmount VND"
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_cart, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        if (id == R.id.icon_cart_checkBox) {
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }

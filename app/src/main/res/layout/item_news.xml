@@ -3,39 +3,67 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    android:gravity="center_vertical">
+
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:src="@drawable/ic_picture"/>
+        android:id="@+id/item_news_imgView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_logo"/>
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        >
         <TextView
+            android:id="@+id/item_news_tvtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tiêu đề"
-            android:textStyle="bold"/>
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/gray"/>
         <TextView
+            android:id="@+id/item_news_tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tiêu đề"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:textColor="@color/gray"
+            android:text=""
+            android:textStyle="bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tiêu đề"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tiêu đề"
-            android:textStyle="bold"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_date_range_24"/>
+            <TextView
+                android:id="@+id/item_news_tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/gray"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/item_news_tvValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text=""
+                android:selectAllOnFocus="false"
+                android:linksClickable="false"
+                android:autoLink="all"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
     </LinearLayout>
-    
 </LinearLayout>

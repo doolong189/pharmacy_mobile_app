@@ -85,8 +85,7 @@
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edFullName"
@@ -107,9 +106,8 @@
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edNameCounter"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -127,9 +125,8 @@
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edPhone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -147,9 +144,9 @@
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -167,9 +164,9 @@
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edAddressCounter"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -190,9 +187,8 @@
                             app:layout_constraintTop_toBottomOf="@+id/textField"
                             app:passwordToggleEnabled="true"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edPassword"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -208,17 +204,21 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/string_sign_up_provinces"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            >
-                            <AutoCompleteTextView
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tỉnh*"
+                                android:textStyle="bold"
+                                android:textColor="@color/gray"/>
+                            <Spinner
                                 android:id="@+id/counter_sign_up_spProvinces"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="none"
                                 android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                android:textSize="16sp"
                                 android:padding="10dp"
-                                />
+                               />
                         </com.google.android.material.textfield.TextInputLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -231,7 +231,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Ảnh giấy phép kinh doanh *"
+                                android:text="@string/nh_gi_y_ph_p_kinh_doanh"
                                 android:textStyle="bold"
                                 android:textColor="#5D5D5D"/>
                             <ImageView
@@ -252,7 +252,7 @@
                             android:id="@+id/counter_sign_up_tvValidateImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Vui lòng chọn ảnh"
+                            android:text="@string/vui_l_ng_ch_n_nh"
                             android:textStyle="bold"
                             android:textColor="#FF0000"
                             android:visibility="gone"/>
@@ -262,11 +262,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đăng ký tài khoản thành viên bạn đã đồng ý với"
+                    android:text="@string/ng_k_t_i_kho_n_th_nh_vi_n_b_n_ng_v_i"
                     android:textStyle="bold"
                     android:layout_gravity="center"
-                    android:textColor="#4CAF50"
-                    />
+                    android:textColor="@color/green"/>
 
                 <TextView
                     android:id="@+id/counter_sign_up_tvClause"
@@ -279,13 +278,16 @@
                     android:layout_gravity="center"
                     />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/counter_sign_up_btnSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:backgroundTint="#4CAF50"
-                    android:text="@string/title_button_sign_up" />
+                    android:text="@string/title_button_sign_up"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
             </LinearLayout>
         </ScrollView>
 

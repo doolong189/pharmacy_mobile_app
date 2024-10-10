@@ -33,7 +33,7 @@
                     android:id="@+id/item_confirm_tv_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-30%"
+                    android:text="@string/discount"
                     android:background="@drawable/custom_text_view"
                     android:textColor="#FFF"
                     android:padding="5dp"
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Tên"
+                    android:text="@string/t_n"
                     android:lines="2"
                     android:ellipsize="end" />
                 <androidx.recyclerview.widget.RecyclerView
@@ -67,21 +67,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Quy cách đóng gói"
+                    android:text="@string/quy_c_ch_ng_g_i"
                     />
                 <TextView
                     android:id="@+id/item_confirm_tvQualityProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Số lượng"
+                    android:text="@string/s_l_ng"
                     />
                 <TextView
                     android:id="@+id/item_confirm_tvBonusCoin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Tặng 150 coin"
+                    android:text="@string/t_ng_coin"
                     android:textColor="#FF9800"
                     />
                 <TextView
@@ -89,21 +89,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Số lượng tối thiểu: 0"
+                    android:text="@string/s_l_ng_t_i_thi_u_0"
                     />
                 <TextView
                     android:id="@+id/item_confirm_tvMaximum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Số lượng tối đa: 0"
+                    android:text="@string/s_l_ng_t_i_a_0"
                     />
                 <TextView
                     android:id="@+id/item_confirm_tvPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="0 VND"
+                    android:text="@string/_0_vnd"
                     android:textColor="#4CAF50"
                     />
                 <TextView
@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="0 VND"
+                    android:text="@string/_0_vnd"
                     android:textColor="@color/gray"
                     />
             </LinearLayout>
@@ -122,8 +122,7 @@
         android:id="@+id/item_confirm_tv_quality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="x1"
+        android:text="@string/_0"
         android:textColor="#000000"
         android:textStyle="bold"
         android:layout_margin="10dp"/>

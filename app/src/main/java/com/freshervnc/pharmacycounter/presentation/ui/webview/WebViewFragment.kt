@@ -1,4 +1,4 @@
-package com.freshervnc.pharmacycounter.presentation.ui.paymentonline
+package com.freshervnc.pharmacycounter.presentation.ui.webview
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
-import com.freshervnc.pharmacycounter.R
-import com.freshervnc.pharmacycounter.databinding.FragmentPaymentOnlineBinding
-import com.freshervnc.pharmacycounter.utils.Utils
+import com.freshervnc.pharmacycounter.MainActivity
+import com.freshervnc.pharmacycounter.databinding.FragmentWebviewBinding
 
-class PaymentOnlineFragment : Fragment() {
-    private lateinit var binding : FragmentPaymentOnlineBinding
+class WebViewFragment : Fragment() {
+    private lateinit var binding : FragmentWebviewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,7 +21,7 @@ class PaymentOnlineFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding =  FragmentPaymentOnlineBinding.inflate(layoutInflater, container, false)
+        binding =  FragmentWebviewBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -32,13 +31,14 @@ class PaymentOnlineFragment : Fragment() {
     }
 
     private fun requestPayment(){
+        (activity as MainActivity).hideBottomNav()
         val b = arguments
         if (b != null) {
-            val strUrlPayment = b.getString("url_payment")
+            val strUrlPayment = b.getInt("idPage")
+            val urlString = "http://18.138.176.213/system/general_information/${strUrlPayment}"
             binding.paymentOnlineWebView.webViewClient = WebViewClient()
-
             // this will load the url of the website
-            binding.paymentOnlineWebView.loadUrl(strUrlPayment.toString())
+            binding.paymentOnlineWebView.loadUrl(urlString)
 
             // this will enable the javascript settings, it can also allow xss vulnerabilities
             binding.paymentOnlineWebView.settings.javaScriptEnabled = true

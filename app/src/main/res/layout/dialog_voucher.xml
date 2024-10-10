@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="18dp"
-        android:text="Danh sách voucher"
+        android:textSize="18sp"
+        android:text="@string/dialog_voucher_title_voucher"
         android:textAlignment="center"
         android:background="@color/green"
         android:textColor="#FFF"
@@ -46,20 +46,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="18dp"
-            android:text="Không có voucher nào "
+            android:textSize="18sp"
+            android:text="@string/dialog_voucher_title_list_empty"
             android:textAlignment="center"
             android:textColor="#000000"
             android:padding="10dp"/>
     </LinearLayout>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/dialog_voucher_btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hủy"
+        android:text="@string/dialog_voucher_title_button"
         android:layout_gravity="end"
         android:background="#FFF"
         android:textColor="@color/green"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"/>
 </RelativeLayout>

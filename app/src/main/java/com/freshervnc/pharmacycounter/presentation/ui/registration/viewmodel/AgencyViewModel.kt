@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.registration.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +25,8 @@ class AgencyViewModel(private val application: Application) : AndroidViewModel(a
                 emit(Resource.error(null,application.getString(R.string.string_not_internet)))
             }
         }catch (ex : Exception){
-            emit(Resource.error(null,application.getString(R.string.string_error)))
+            emit(Resource.error(null,ex.localizedMessage ?: application.getString(R.string.string_error)))
+            Log.e("zzzz", ex.localizedMessage!!.toString())
         }
     }
 

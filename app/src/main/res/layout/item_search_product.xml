@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:gravity="center_vertical">
     <TextView
         android:id="@+id/item_search_tvProduct"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="abcxyz"
+        android:text="@string/dialog_product_ed_ten"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/black"/>
@@ -23,5 +24,5 @@
         android:id="@+id/item_search_imgSellWell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_data_exploration_24"/>
+        android:src="@drawable/baseline_data_exploration_24_1"/>
 </LinearLayout>

@@ -17,14 +17,14 @@
             android:id="@+id/item_voucher_tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Giảm 100k cho đơn hàng 1 triệu"
+            android:text="@string/gi_m_cho_n_h_ng_0_tri_u"
             android:textStyle="bold"
             android:textColor="#FF9800"/>
         <TextView
             android:id="@+id/item_voucher_tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ngày kết thúc: 2024-02-15 14:46"
+            android:text="@string/ng_y_k_t_th_c_18_09_2003_00_00"
             android:textStyle="bold"
             android:textColor="#2F2F2F"/>
     </LinearLayout>

@@ -30,28 +30,29 @@
                     android:id="@+id/payment_tvQuality"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Số lượng: 0"
+                    android:text="@string/s_l_ng_0"
                     android:textStyle="bold"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/gray"/>
                 <TextView
                     android:id="@+id/payment_tvAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tổng tiền: 0 VND"
+                    android:text="@string/t_ng_ti_n_0_vnd"
                     android:textStyle="bold"
-                    android:textColor="#4CAF50"
+                    android:textColor="@color/red"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/payment_btnConfirm"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/green"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Xác nhận" />
+                android:text="@string/x_c_nh_n" />
         </LinearLayout>
     </RelativeLayout>
 

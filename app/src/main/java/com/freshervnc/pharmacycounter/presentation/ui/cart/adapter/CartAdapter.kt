@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.freshervnc.pharmacycounter.databinding.ItemProductCartBinding
 import com.freshervnc.pharmacycounter.domain.models.Data
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCart
 import com.freshervnc.pharmacycounter.presentation.ui.home.adapter.TagAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class CartAdapter(private val listener: OnClickItemCart) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
@@ -61,7 +63,7 @@ class CartAdapter(private val listener: OnClickItemCart) :
 
                 binding.itemCartTvPrice.text = "${item.price} VND"
 
-                binding.itemCartTvQualityProduct.text = "Số lượng: ${item.quality}"
+//                binding.itemCartTvQualityProduct.text = "Số lượng: ${item.quality}"
 
                 binding.itemCartTvQuality.text = item.quality.toString()
 
@@ -89,10 +91,15 @@ class CartAdapter(private val listener: OnClickItemCart) :
                         item.quality -= 1
                     }
                     binding.itemCartTvQuality.text = item.quality.toString()
+                    listener.onClickQuality(item,item.quality)
+                    updateTotalPrice()
+
                 }
                 binding.itemCartImagePlus.setOnClickListener {
                     item.quality += 1
                     binding.itemCartTvQuality.text = item.quality.toString()
+                    listener.onClickQuality(item,item.quality)
+                    updateTotalPrice()
                 }
                 binding.itemCartImageDelete.setOnClickListener {
                     listener.onClickItemDelete(item, 0)

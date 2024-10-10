@@ -34,14 +34,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ngày đặt"
-            android:textAlignment="viewStart"/>
+            android:text="@string/detail_history_title_ngayDat"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            android:textColor="@color/gray"/>
         <TextView
             android:id="@+id/dialog_info_detail_tvDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="dd/mm/yyyy"
+            android:text="@string/detail_history_title_date"
             android:textAlignment="viewEnd"/>
     </LinearLayout>
     <LinearLayout
@@ -54,14 +56,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tổng hóa đơn"
-            android:textAlignment="viewStart"/>
+            android:text="@string/detail_history_title_tongHoaDon"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            />
         <TextView
             android:id="@+id/dialog_info_detail_tvTotalAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0 VND"
+            android:text=""
             android:textAlignment="viewEnd"/>
     </LinearLayout>
     <LinearLayout
@@ -76,14 +81,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sử dụng coin được giảm"
-            android:textAlignment="viewStart"/>
+            android:text="@string/detail_history_title_using_coin"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            android:textColor="@color/gray"/>
         <TextView
             android:id="@+id/dialog_info_detail_tvUsingCoin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-1.000 VND"
+            android:text=""
             android:textColor="#FF0000"
             android:textAlignment="viewEnd"/>
     </LinearLayout>
@@ -118,16 +125,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tổng"
+            android:text="@string/detail_history_title_tong_tien"
             android:textStyle="bold"
-            android:textColor="#000000"
-            android:textAlignment="viewStart"/>
+            android:textColor="@color/gray"
+            android:textAlignment="viewStart"
+            />
         <TextView
             android:id="@+id/dialog_info_detail_tvTotal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0 VND"
+            android:text=""
             android:textStyle="bold"
             android:textColor="#000000"
             android:textAlignment="viewEnd"/>
@@ -144,14 +152,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Coin được tặng"
-            android:textAlignment="viewStart"/>
+            android:text="@string/detail_history_title_get_coin"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            android:textColor="@color/gray"/>
         <TextView
             android:id="@+id/dialog_info_detail_tvCoin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="+150 Coin"
+            android:text=""
             android:textColor="@color/green"
             android:textStyle="bold"
             android:textAlignment="viewEnd"/>

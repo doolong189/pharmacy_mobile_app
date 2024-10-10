@@ -34,13 +34,13 @@
                     android:id="@+id/dialog_bottom_cart_tvNameProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Silkeron (Srinron) (Tuýp 10g) - Minh Hải"
+                    android:text=""
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/dialog_bottom_cart_tvBonusCoin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tặng 100 coin"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#FF9800"
                     />
@@ -48,25 +48,25 @@
                     android:id="@+id/dialog_bottom_cart_tvPack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tuýp 10g"
+                    android:text=""
                     />
                 <TextView
                     android:id="@+id/dialog_bottom_cart_tvPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="6.500 VND"
+                    android:text=""
                     android:textStyle="bold"
                     android:textColor="#4CAF50" />
                 <TextView
                     android:id="@+id/dialog_bottom_cart_tvQuality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Số lượng" />
+                    android:text="" />
                 <TextView
                     android:id="@+id/dialog_bottom_cart_tvMinimum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Số lượng tối thiểu: 10" />
+                    android:text="" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -82,7 +82,6 @@
             android:layout_weight="1"
             android:text="Chọn số lượng"
             android:textStyle="bold"
-            android:layout_centerVertical="true"
             android:textColor="#000000"
             />
         <LinearLayout
@@ -103,7 +102,6 @@
                 android:layout_weight="1"
                 android:text="0"
                 android:textStyle="bold"
-                android:layout_centerVertical="true"
                 android:textColor="#000000"
                 android:layout_margin="10dp"
                 />
@@ -114,13 +112,12 @@
                 android:src="@drawable/ic_plus"/>
         </LinearLayout>
     </LinearLayout>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/dialog_bottom_cart_btnAddCart"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text="Thêm giỏ hàng"
+        android:text="@string/title_ed_button_cart"
         android:backgroundTint="#4CAF50"
         android:textColor="@color/white"
         android:textStyle="bold"/>

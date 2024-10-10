@@ -27,7 +27,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdIdProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mã sản phẩm"
+            android:hint="@string/dialog_product_ed_id"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_EdIdProduct"
@@ -38,7 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nhóm thuốc*"
+            android:text="@string/dialog_product_tv_nhom_thuoc"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/gray"/>
@@ -51,7 +54,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên sản phẩm thuốc*"
+            android:hint="@string/dialog_product_ed_ten"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_EdName"
@@ -63,12 +69,15 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Combo"/>
+            android:text="@string/dialog_product_check_box"/>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialog_bottom_store_layoutEdWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cân nặng(g)"
+            android:hint="@string/dialog_product_ed_can_nang"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edWeight"
@@ -81,7 +90,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdCalculation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Đơn vị tính*"
+            android:hint="@string/dialog_product_ed_don_vi_tinh"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edCalculation"
@@ -94,7 +106,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdDiscount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Khuyến mãi*"
+            android:hint="@string/dialog_product_khuyen_mai"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edDiscount"
@@ -105,7 +120,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tên sản phẩm khuyến mãi*"
+            android:text="@string/dialog_product_tv_khuyen_mai"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/gray"/>
@@ -118,7 +133,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdQualityDiscount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Số lượng khuyến mãi"
+            android:hint="@string/dialog_product_ed_so_luong_khuyen_mai"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edQualityDiscount"
@@ -131,7 +149,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdFirstDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ngày bắt đầu khuyến mãi"
+            android:hint="@string/dialog_product_ngay_bat_dau"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edFirstDate"
@@ -145,7 +166,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ngày kết thúc khuyến mãi"
+            android:hint="@string/dialog_product_ngay_ket_thuc"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edEndDate"
@@ -159,7 +183,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdExpired"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ngày hết hạn"
+            android:hint="@string/dialog_product_ngay_het_han"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edExpired"
@@ -172,12 +199,15 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subdomain"/>
+            android:text="@string/dialog_product_subdomain"/>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dialog_bottom_store_layoutEdUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Url"
+            android:hint="@string/dialog_product_url"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edUrl"
@@ -188,7 +218,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hình ảnh*"
+            android:text="@string/dialog_product_tv_hinh_anh"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/gray"/>
@@ -209,7 +239,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nhà sản xuất*"
+            android:text="@string/dialog_product_nha_san_xuat"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/gray"/>
@@ -222,7 +252,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdCountry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nước sản xuất"
+            android:hint="@string/dialog_product_nuoc_san_xuat"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edCountry"
@@ -235,7 +268,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdHashtag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Hashtag"
+            android:hint="@string/dialog_product_hash_tag"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edHashtag"
@@ -248,7 +284,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdAmountMinimum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Số lượng tối thiểu"
+            android:hint="@string/dialog_product_so_luong_toi_thieu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edAmountMinimum"
@@ -261,7 +300,10 @@
             android:id="@+id/dialog_bottom_store_layoutEdAmountMaximum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Số lượng tối đa"
+            android:hint="@string/dialog_product_toi_da"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_margin="5dp"
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_bottom_store_edAmountMaximum"

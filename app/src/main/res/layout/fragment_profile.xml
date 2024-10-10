@@ -40,12 +40,19 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:text="Thông tin cá nhân"
-                            android:textSize="16dp"
-                            android:layout_margin="10dp"/>
+                            android:textSize="16sp"
+                            android:layout_margin="10sp"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:background="#E3E3E3"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="Hãy nhập các thông tin cần thiết mà bạn muốn chỉnh sửa."
+                            android:textSize="16sp"
+                            android:layout_margin="10dp"/>
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
@@ -68,7 +75,7 @@
                                 android:id="@+id/item_asu_imageStatus"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_alignParentBottom="true"
                                 android:src="@drawable/baseline_camera_alt_24"
                                 app:layout_constraintBottom_toBottomOf="@+id/profile_imgUser"
@@ -81,87 +88,148 @@
                                 android:padding="5dp"
                                 />
                         </androidx.constraintlayout.widget.ConstraintLayout>
-                        <EditText
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_layoutEdName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Tên"
-                            android:id="@+id/profile_edName"
+                            android:hint="@string/title_ed_ho_ten_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            android:padding="15dp"
-                            android:drawablePadding="10dp"
-                            />
-                        <EditText
-                            android:id="@+id/profile_edNameCounter"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/profile_edName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_layoutEdNameCounter"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawablePadding="10dp"
-                            android:hint="Tên nhà thuốc"
+                            android:hint="@string/title_ed_ten_nha_thuoc_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            android:padding="15dp"
-                            />
-                        <EditText
-                            android:id="@+id/profile_edAddress"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/profile_edNameCounter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="255"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_layoutEdAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Đia chỉ"
+                            android:hint="@string/title_ed_dia_chi1_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            android:drawablePadding="10dp"
-                            android:padding="15dp"
-                            />
-                        <EditText
-                            android:id="@+id/profile_edGency"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/profile_edAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="255"
+                                android:singleLine="true"
+                                android:lines="1" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_layoutSpGenCy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Tỉnh"
+                            android:hint="@string/string_sign_up_provinces"
                             android:layout_margin="10dp"
-                            android:drawablePadding="10dp"
-                            android:padding="15dp"
-                            />
-                        <EditText
-                            android:id="@+id/profile_edFax"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/profile_spGenCy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+                                android:padding="10dp"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_layoutEdFax"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Mã số thuế"
+                            android:hint="@string/title_edittext_ma_so_thue_sign_in"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            android:drawablePadding="10dp"
-                            android:padding="15dp"
-                            />
-                        <EditText
-                            android:id="@+id/profile_edEmail"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/profile_edFax"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/profile_layoutEdEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Email"
+                            android:hint="@string/title_ed_email_sign_up"
+                            app:helperText=""
+                            app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
-                            android:drawablePadding="10dp"
-                            android:padding="15dp"
-                            />
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/profile_edEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="50"
+                                android:singleLine="true"
+                                android:lines="1"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:gravity="right"
+                            android:gravity="end"
                             android:padding="5dp"
                             >
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/profile_btnCancel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Cancel"
+                                android:text="@string/cancel"
                                 android:background="@drawable/bg_btn_cancel"
                                 android:textColor="#FFF"
                                 android:textStyle="bold"
-                                android:textSize="13dp"
+                                android:textSize="13sp"
                                 android:layout_margin="5dp"
                                 android:padding="10dp"/>
                             <androidx.appcompat.widget.AppCompatButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Edit Profile"
+                                android:text="@string/edit_profile"
                                 android:id="@+id/profile_btnSave"
                                 android:background="@drawable/bg_btn_save"
                                 android:textColor="#FFF"
                                 android:textStyle="bold"
-                                android:textSize="13dp"
+                                android:textSize="13sp"
                                 android:layout_margin="5dp"
                                 android:padding="10dp"/>
                         </LinearLayout>

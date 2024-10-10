@@ -28,7 +28,7 @@
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                android:layout_weight="1"
-               android:text="Giỏ hàng"
+               android:text="@string/dialog_cart_title"
                android:textColor="@color/white"
                android:textStyle="bold"
                android:textSize="18sp"
@@ -65,14 +65,14 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Số lượng"
+                   android:text="@string/s_l_ng"
                    android:textStyle="bold"
                    android:layout_centerVertical="true" />
                <TextView
                    android:id="@+id/cart_totalQuality"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="0"
+                   android:text="@string/_0"
                    android:textStyle="bold"
                    android:layout_centerVertical="true"
                    android:layout_alignParentEnd="true"
@@ -87,26 +87,26 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="Tổng tiền"
+                   android:text="@string/t_ng_ti_n"
                    android:textStyle="bold"
                    android:layout_centerVertical="true" />
                <TextView
                    android:id="@+id/cart_tvTotalAmount"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="0 VND"
+                   android:text="@string/_0_vnd"
                    android:textStyle="bold"
                    android:textColor="#4CAF50"
                    android:layout_centerVertical="true"
                    android:layout_alignParentEnd="true"/>
            </RelativeLayout>
-           <Button
+           <androidx.appcompat.widget.AppCompatButton
                android:id="@+id/cart_btnContinue"
-               android:layout_width="150dp"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
                android:backgroundTint="#4CAF50"
-               android:text="Tiếp tục"
+               android:text="@string/dialog_cart_title_button_continue"
                android:textColor="@color/white"
                android:textStyle="bold"
                />
