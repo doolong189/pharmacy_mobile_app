@@ -19,6 +19,7 @@ import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCategory
 import com.freshervnc.pharmacycounter.presentation.ui.category.adapter.ChildCategoryAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.category.viewmodel.CategoryViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.product.ProductFragment
+import com.freshervnc.pharmacycounter.presentation.ui.searchproduct.SearchProductFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 
@@ -47,6 +48,7 @@ class CategoryTypeFragment : Fragment() , OnClickItemCategory {
         super.onViewCreated(view, savedInstanceState)
         init()
         initVariable()
+        goToSearchProduct()
     }
 
     private fun init() {
@@ -86,6 +88,12 @@ class CategoryTypeFragment : Fragment() , OnClickItemCategory {
         }
     }
 
+    private fun goToSearchProduct(){
+        binding.categoryTypeEdSearch.setOnClickListener {
+            (activity as MainActivity).replaceFragment(SearchProductFragment())
+        }
+    }
+
     override fun onClickItem(item: Category) {
         val args = Bundle()
         args.putInt("key_product", item.value)
@@ -94,4 +102,6 @@ class CategoryTypeFragment : Fragment() , OnClickItemCategory {
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
     }
+
+
 }

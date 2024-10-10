@@ -211,14 +211,20 @@
                                 android:text="Tỉnh*"
                                 android:textStyle="bold"
                                 android:textColor="@color/gray"/>
-                            <Spinner
-                                android:id="@+id/counter_sign_up_spProvinces"
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="none"
-                                android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                android:padding="10dp"
-                               />
+                                android:background="@drawable/bg_dropdown"
+                                >
+                                <Spinner
+                                    android:id="@+id/counter_sign_up_spProvinces"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="none"
+                                    android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+                                    android:padding="10dp"
+                                    />
+                            </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
                         <LinearLayout
                             android:layout_width="match_parent"

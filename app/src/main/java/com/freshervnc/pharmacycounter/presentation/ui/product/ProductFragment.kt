@@ -1,6 +1,8 @@
 package com.freshervnc.pharmacycounter.presentation.ui.product
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,23 +22,26 @@ import com.freshervnc.pharmacycounter.databinding.FragmentProductBinding
 import com.freshervnc.pharmacycounter.domain.models.Data
 import com.freshervnc.pharmacycounter.domain.response.cart.RequestCartResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
+import com.freshervnc.pharmacycounter.domain.response.search.RequestSearchResponse
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 import com.freshervnc.pharmacycounter.presentation.ui.cart.CartFragment
 import com.freshervnc.pharmacycounter.presentation.ui.cart.viewmodel.CartViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.home.adapter.ChildProductAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.product.viewmodel.ProductViewModel
+import com.freshervnc.pharmacycounter.presentation.ui.searchproduct.viewmodel.SearchViewModel
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 
 
-class ProductFragment : Fragment() , OnClickItemProduct {
+class ProductFragment : Fragment() , OnClickItemProduct  {
     private lateinit var binding : FragmentProductBinding
     private lateinit var productViewModel : ProductViewModel
     private lateinit var childProductAdapter: ChildProductAdapter
     private lateinit var mySharedPrefer: SharedPrefer
     private lateinit var cartViewModel: CartViewModel
+    private lateinit var searchViewModel: SearchViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -61,6 +66,7 @@ class ProductFragment : Fragment() , OnClickItemProduct {
     private fun init(){
         productViewModel = ViewModelProvider(this,ProductViewModel.ProductViewModelFactory(requireActivity().application))[ProductViewModel::class.java]
         cartViewModel = ViewModelProvider(this, CartViewModel.CartViewModelFactory(requireActivity().application))[CartViewModel::class.java]
+        searchViewModel = ViewModelProvider(this, SearchViewModel.SearchViewModelFactory(requireActivity().application))[SearchViewModel::class.java]
         mySharedPrefer = SharedPrefer(requireContext())
         (activity as MainActivity).hideBottomNav()
     }
@@ -75,6 +81,7 @@ class ProductFragment : Fragment() , OnClickItemProduct {
         if (b != null) {
             val strIdProduct = b.getInt("key_product")
             val strIdCategory = b.getString("key_category")
+            searchProduct(strIdCategory.toString())
             var requestProductTemp = RequestProductResponse()
             if (strIdCategory == "hoat_chat"){
                 requestProductTemp = RequestProductResponse(activeIngredient = strIdProduct)
@@ -108,6 +115,34 @@ class ProductFragment : Fragment() , OnClickItemProduct {
         }else{
             Log.e("log bundle o day","null")
         }
+    }
+
+    private fun searchProduct(idCategory : String){
+        binding.productEdSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                var requestProductTemp  = RequestProductResponse(search = s.toString() , category = idCategory)
+
+                productViewModel.getProduct("Bearer "+mySharedPrefer.token,requestProductTemp ).observe(viewLifecycleOwner,
+                    Observer { it ->
+                        it?.let { resources ->
+                            when(resources.status){
+                                Status.SUCCESS -> {
+                                    resources.data?.let { item ->
+//                                        childProductAdapter = ChildProductAdapter(item.response.data,this)
+                                        binding.productRcView.adapter = childProductAdapter
+                                        childProductAdapter.setList(item.response.data)
+                                    }
+                                }
+                                Status.ERROR -> {}
+                                Status.LOADING -> {}
+                            }
+                        }
+                    })
+            }
+        })
     }
 
     override fun onClickItem(item: Data) {

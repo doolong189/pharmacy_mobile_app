@@ -191,14 +191,20 @@
                                 android:text="Tỉnh*"
                                 android:textStyle="bold"
                                 android:textColor="@color/gray"/>
-                            <Spinner
-                                android:id="@+id/client_sign_up_SpProvinces"
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="none"
-                                android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                android:padding="10dp"
-                                />
+                                android:background="@drawable/bg_dropdown"
+                                >
+                                <Spinner
+                                    android:id="@+id/client_sign_up_SpProvinces"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="none"
+                                    android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+                                    android:padding="10dp"
+                                    />
+                            </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -214,15 +220,20 @@
                                 android:text="Nhà thuốc*"
                                 android:textStyle="bold"
                                 android:textColor="@color/gray"/>
-                            <Spinner
-                                android:id="@+id/client_sign_up_spAgency"
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="none"
-                                android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                android:padding="10dp"
-                                />
-
+                                android:background="@drawable/bg_dropdown"
+                                >
+                                <Spinner
+                                    android:id="@+id/client_sign_up_spAgency"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="none"
+                                    android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+                                    android:padding="10dp"
+                                    />
+                            </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
