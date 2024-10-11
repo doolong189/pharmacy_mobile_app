@@ -35,9 +35,14 @@
         </LinearLayout>
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/scrollView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,7 +229,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
                                     android:inputType="none"
-                                    android:padding="5dp" />
+                                  />
                             </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -300,6 +305,16 @@
             </LinearLayout>
         </ScrollView>
 
+        <ProgressBar
+            android:id="@+id/counter_sign_up_pgBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

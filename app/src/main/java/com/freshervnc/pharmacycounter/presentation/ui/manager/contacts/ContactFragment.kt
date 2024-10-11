@@ -15,10 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.freshervnc.pharmacycounter.MainActivity
-import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentContactBinding
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemContact
-import com.freshervnc.pharmacycounter.presentation.ui.manager.ManagerFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.CounterManagerFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.adapter.ContactAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.viewmodel.ContactViewModel
 import com.freshervnc.pharmacycounter.utils.Status
@@ -127,7 +126,7 @@ class ContactFragment : Fragment() , OnClickItemContact {
 
     private fun actionButton(){
         binding.contactBtnClose.setOnClickListener {
-            (activity as MainActivity).replaceFragment(ManagerFragment())
+            (activity as MainActivity).replaceFragment(CounterManagerFragment())
         }
     }
 }

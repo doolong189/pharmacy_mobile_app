@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.registration.register.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +44,7 @@ class RegisterViewModel(private val application: Application) : AndroidViewModel
             }
         } catch (ex: Exception) {
             emit(Resource.error(null, ex.message ?: application.getString(R.string.string_error)))
+            Log.e("register_counter",ex.localizedMessage!!.toString())
         }
     }
 
@@ -79,6 +81,7 @@ class RegisterViewModel(private val application: Application) : AndroidViewModel
             }
         } catch (ex: Exception) {
             emit(Resource.error(null, ex.message ?: application.getString(R.string.string_error)))
+            Log.e("register",ex.localizedMessage!!.toString())
         }
     }
 

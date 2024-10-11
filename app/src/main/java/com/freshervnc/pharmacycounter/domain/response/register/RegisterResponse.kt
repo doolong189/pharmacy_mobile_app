@@ -7,4 +7,4 @@ data class RegisterResponse (
     val response : Response
 )
 
-data class Response(var decription : String)
+data class Response(var description : String)

@@ -2,25 +2,33 @@ package com.freshervnc.pharmacycounter.presentation.ui.manager.product
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.webkit.WebViewClient
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.BottomDialogPaymentBinding
+import com.freshervnc.pharmacycounter.databinding.DialogCategoryBinding
 import com.freshervnc.pharmacycounter.databinding.DialogProductBinding
 import com.freshervnc.pharmacycounter.databinding.DialogVoucherBinding
 import com.freshervnc.pharmacycounter.databinding.FragmentProductStoreBinding
 import com.freshervnc.pharmacycounter.domain.models.Data
 import com.freshervnc.pharmacycounter.domain.response.product.RequestDeleteProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
+import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestCreateCategoryResponse
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemStoreProduct
 import com.freshervnc.pharmacycounter.presentation.ui.category.CategoryTypeFragment
@@ -41,7 +49,7 @@ class ProductStoreFragment : Fragment(), OnClickItemStoreProduct {
     private lateinit var mySharedPrefer: SharedPrefer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -146,9 +154,33 @@ class ProductStoreFragment : Fragment(), OnClickItemStoreProduct {
     }
 
     override fun onClickUpdate(item: Data) {
+
     }
 
     override fun onClickHaveInStore() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_store_category_type, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.icon_toolbar_store_category) {
+            binding.storeWebView.visibility = View.VISIBLE
+            val urlString = "http://18.138.176.213/agency/products/create"
+            binding.storeWebView.webViewClient = WebViewClient()
+            // this will load the url of the website
+//            val bearer = "Bearer " + requireContext().getSharedPreferences("app_data", 0).getString("access_token", "")!!
+            val bearer = "Bearer " + mySharedPrefer.token
+            val headerMap = HashMap<String,String>()
+            headerMap["Authorization"] = bearer
+            binding.storeWebView.loadUrl(urlString, headerMap)
+            binding.storeWebView.settings.javaScriptEnabled = true
+            binding.storeWebView.settings.setSupportZoom(true)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

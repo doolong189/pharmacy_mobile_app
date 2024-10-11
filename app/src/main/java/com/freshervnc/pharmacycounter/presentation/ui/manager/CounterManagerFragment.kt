@@ -19,10 +19,9 @@ import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationA
 import com.freshervnc.pharmacycounter.presentation.ui.webview.WebViewFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
-import com.google.android.material.snackbar.Snackbar
 
 
-class ManagerFragment : Fragment() {
+class CounterManagerFragment : Fragment() {
     private lateinit var binding: FragmentManagerBinding
     private lateinit var managerViewModel: ManagerViewModel
     private lateinit var mySharedPrefer: SharedPrefer
@@ -59,7 +58,7 @@ class ManagerFragment : Fragment() {
             (activity as MainActivity).replaceFragment((StoreFragment()))
         }
         binding.managerLnContact.setOnClickListener {
-            (activity as MainActivity).replaceFragment(ContactFragment())
+            (activity as MainActivity).replaceFragment(com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.ContactFragment())
         }
         binding.managerLnNews.setOnClickListener {
             (activity as MainActivity).replaceFragment(NewsFragment())

@@ -30,6 +30,20 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         }
     }
 
+    fun getCustomerHome(authHeader : String) = liveData(Dispatchers.IO){
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.getCustomerHomePageRepository(authHeader)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,ex.message ?: application.getString(R.string.string_error)))
+            Log.e("home", ex.localizedMessage!!.toString())
+        }
+    }
+
     class HomeViewModelFactory(private val application: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)){

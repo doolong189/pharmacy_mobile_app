@@ -68,7 +68,7 @@ class ClientSignInFragment : Fragment() {
                                 Snackbar.make(requireView(),it.data!!.response.description,3000).show()
                                 binding.clientSignInEdPhoneCounter.setText("")
                                 binding.clientSignInEdPasswordCounter.setText("")
-                                mySharedPrefer.saveToken(it.data.response.token ,it.data.response.fullName , it.data.response.phone, it.data.response.email ,it.data.response.address)
+                                mySharedPrefer.saveToken(it.data.response.token ,it.data.response.fullName , it.data.response.phone, it.data.response.email ,it.data.response.address , it.data.response.status)
                                 startActivity(Intent(requireActivity(),MainActivity::class.java))
                             }
                             Status.ERROR -> {

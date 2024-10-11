@@ -20,8 +20,7 @@ class RegisterRepository {
 
 //    suspend fun requestRegisterCustomer(response: RequestRegisterCustomer) = RetrofitInstance.api.registerCustomer(response)
 
-    suspend fun requestRegisterCustomer(fullNameBody: RequestBody,
-                                        idAgency: RequestBody,
+    suspend fun requestRegisterCustomer(fullNameBody: RequestBody, idAgency: RequestBody,
                                        address: RequestBody ,
                                        provinces: RequestBody,
                                        phone: RequestBody ,

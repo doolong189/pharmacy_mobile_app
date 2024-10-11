@@ -60,6 +60,9 @@ class PurchaseHistoryFragment : Fragment(), OnClickItemHistory {
         binding.purchaseRcHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.purchaseRcHistory.adapter = purchaseHistoryAdapter
         getData()
+        binding.dialogHistorySwLoading.setOnRefreshListener {
+            getData()
+        }
     }
 
     private fun getData(){
@@ -69,6 +72,7 @@ class PurchaseHistoryFragment : Fragment(), OnClickItemHistory {
                     when(resources.status){
                         Status.SUCCESS -> {
                             resources.data.let { item ->
+                                binding.dialogHistorySwLoading.isRefreshing = false
                                 val listTemp = mutableListOf<Data>()
                                 for (x in item!!.response.data){
                                     if (x.status == 0){
@@ -84,8 +88,12 @@ class PurchaseHistoryFragment : Fragment(), OnClickItemHistory {
                                 }
                             }
                         }
-                        Status.ERROR -> {}
-                        Status.LOADING ->{}
+                        Status.ERROR -> {
+                            binding.dialogHistorySwLoading.isRefreshing = false
+                        }
+                        Status.LOADING ->{
+                            binding.dialogHistorySwLoading.isRefreshing = true
+                        }
                     }
                 }
             })

@@ -152,16 +152,15 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/string_sign_up_provinces"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
                             <AutoCompleteTextView
                                 android:id="@+id/profile_spGenCy"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="none"
                                 android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
                                 android:padding="10dp"
-                                />
+                                android:inputType="none"
+                                android:backgroundTint="#FFF"/>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/profile_layoutEdFax"

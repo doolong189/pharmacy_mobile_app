@@ -87,8 +87,12 @@ interface ApiService {
     /* Home */
     @GET("api/v2/system/homepage")
     suspend fun getHomePage(@Header("Authorization") authHeader: String) : HomePageResponse
-    /* Cart */
 
+    //
+    @GET("api/v2/customer/homepage")
+    suspend fun getCustomerHomePage(@Header("Authorization") authHeader: String) :HomePageResponse
+
+    /* Cart */
     @POST("api/v2/cart/update")
     suspend fun addProductToCart(@Header("Authorization") authHeader: String, @Body cart : RequestCartResponse) : CartResponse
 
@@ -148,15 +152,10 @@ interface ApiService {
     suspend fun getUpdateStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestUpdateCategoryResponse) : CategoryTypeResponse
     @POST("api/v2/agency/category_type/delete")
     suspend fun getDeleteStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestDeleteCategoryResponse) : CategoryTypeResponse
-
     /* Contact */
     @GET("api/v2/system/contact")
     suspend fun getContact() : ContactResponse
-
     /* News */
     @GET("api/v2/system/list_news")
     suspend fun getNews() : NewsResponse
-
-    @POST("api/v2/member/logout")
-    suspend fun requestLogout(@Header("Authorization") authHeader: String) : RegisterResponse
 }

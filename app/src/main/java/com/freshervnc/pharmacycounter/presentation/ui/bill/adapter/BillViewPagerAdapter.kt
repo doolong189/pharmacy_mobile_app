@@ -27,8 +27,8 @@ class BillViewPagerAdapter(fm: FragmentManager, behavior: Int) :
     @Nullable
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Lịch sử bán"
-            1 -> "Lịch sử mua"
+            0 -> "Lịch sử mua"
+            1 -> "Lịch sử bán"
             else -> null
         }
     }

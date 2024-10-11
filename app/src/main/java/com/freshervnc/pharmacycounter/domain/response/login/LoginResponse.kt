@@ -32,7 +32,7 @@ data class Response(
     private val taxCode : String,
 
     @SerializedName("trang_thai")
-    private val status : Int,
+    var status : Int,
 
     private val agency : Int, // customer
 

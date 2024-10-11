@@ -1,36 +1,34 @@
 package com.freshervnc.pharmacycounter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.databinding.ActivityMainBinding
 import com.freshervnc.pharmacycounter.domain.models.Data
-import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
 import com.freshervnc.pharmacycounter.presentation.ui.bill.fragment.BillFragment
-import com.freshervnc.pharmacycounter.presentation.ui.cart.CartFragment
 import com.freshervnc.pharmacycounter.presentation.ui.category.CategoryFragment
-import com.freshervnc.pharmacycounter.presentation.ui.category.viewmodel.CategoryViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.home.HomeFragment
-import com.freshervnc.pharmacycounter.presentation.ui.manager.ManagerFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.ClientManagerFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.CounterManagerFragment
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
-import com.freshervnc.pharmacycounter.utils.Status
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val listDataTemp = mutableListOf<Data>()
     val listDataConfirmTemp = mutableListOf<Data>()
+    private lateinit var mySharedPrefer: SharedPrefer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        init()
         initVariable()
         replaceFragment(HomeFragment())
+    }
+
+    private fun init(){
+        mySharedPrefer = SharedPrefer(this)
     }
 
     private fun initVariable() {
@@ -53,7 +51,11 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.icon_manager_store -> {
-                    replaceFragment(ManagerFragment())
+                    if (mySharedPrefer.status == 1){
+                        replaceFragment(CounterManagerFragment())
+                    }else{
+                        replaceFragment(ClientManagerFragment())
+                    }
                     true
                 }
 

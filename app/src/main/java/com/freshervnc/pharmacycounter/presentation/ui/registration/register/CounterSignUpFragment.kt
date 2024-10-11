@@ -28,6 +28,7 @@ import com.freshervnc.pharmacycounter.databinding.FragmentCounterSignUpBinding
 import com.freshervnc.pharmacycounter.utils.Status
 import com.freshervnc.pharmacycounter.presentation.ui.registration.viewmodel.ProvinceViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.registration.register.viewmodel.RegisterViewModel
+import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -50,7 +51,6 @@ class CounterSignUpFragment : Fragment() {
     private val CAMERA_REQUEST_CODE = 100
     private val GALLERY_REQUEST_CODE = 25
     private var currentPhotoPath: String = ""
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -101,12 +101,6 @@ class CounterSignUpFragment : Fragment() {
                 binding.counterSignUpLayoutNameCounter.helperText = ""
             }
 
-            if (strEmail.isEmpty()) {
-                binding.counterSignUpLayoutEmail.helperText = ""
-            } else {
-                binding.counterSignUpLayoutEmail.helperText = ""
-
-            }
 
             if (strAddressCounter.isEmpty()) {
                 binding.counterSignUpLayoutAddressCounter.helperText =
@@ -130,10 +124,11 @@ class CounterSignUpFragment : Fragment() {
             } else {
                 binding.counterSignUpLayoutPassword.helperText = ""
             }
-            if (currentPhotoPath.isEmpty()){
-                binding.counterSignUpTvValidateImage.text = getString(R.string.validate_tv_counter_image)
+            if (currentPhotoPath.isEmpty()) {
+                binding.counterSignUpTvValidateImage.text =
+                    getString(R.string.validate_tv_counter_image)
                 binding.counterSignUpTvValidateImage.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.counterSignUpTvValidateImage.text = ""
                 binding.counterSignUpTvValidateImage.visibility = View.GONE
             }
@@ -149,30 +144,28 @@ class CounterSignUpFragment : Fragment() {
             val file = File(currentPhotoPath)
             val requestFile = file.asRequestBody("{multipart/form-data}".toMediaTypeOrNull())
             val filePart = MultipartBody.Part.createFormData("img", file.name, requestFile)
-            registerViewModel.requestRegisterCounter(
-                fullNameBody,
-                nameCounter,
-                address,
-                provinces,
-                phone,
-                email,
-                password,
-                filePart
-            )
+            registerViewModel.requestRegisterCounter(fullNameBody, nameCounter, address, provinces, phone, email, password, filePart)
                 .observe(viewLifecycleOwner, Observer { it ->
                     it?.let { resources ->
                         when (resources.status) {
-                            Status.SUCCESS -> Snackbar.make(requireView(), "" + it.data!!.response.decription, 2000).show()
+                            Status.SUCCESS -> {
+                                binding.counterSignUpPgBar.visibility = View.GONE
+                                Snackbar.make(requireView(), "" + it.data!!.response.description, 2000).show()
+                                binding.counterSignUpEdFullName.setText("")
+                                binding.counterSignUpEdNameCounter.setText("")
+                                binding.counterSignUpEdPhone.setText("")
+                                binding.counterSignUpEdEmail.setText("")
+                                binding.counterSignUpEdAddressCounter.setText("")
+                                binding.counterSignUpEdPassword.setText("")
+                                currentPhotoPath = ""
 
-                            Status.ERROR -> {}
-//                                Snackbar.make(
-//                                requireView(),
-//                                "return code" + it.data!!.message,
-//                                2000
-//                            ).show()
+                            }
+
+                            Status.ERROR -> {binding.counterSignUpPgBar.visibility = View.GONE}
+
 
                             Status.LOADING -> {
-
+                                binding.counterSignUpPgBar.visibility = View.VISIBLE
                             }
                         }
                     }
@@ -262,15 +255,18 @@ class CounterSignUpFragment : Fragment() {
 //                            ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
 //                        binding.counterSignUpSpProvinces.setAdapter(adapter)
 
-                        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
+                        val adapter =
+                            ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
                         binding.counterSignUpSpProvinces.setAdapter(adapter)
                         binding.counterSignUpSpProvinces.setOnItemClickListener { parent, view, position, id ->
                             itr = position
                         }
                     }
+
                     Status.ERROR -> {
                         Log.e("provinces", it.data!!.message.toString())
                     }
+
                     Status.LOADING -> {
                     }
                 }

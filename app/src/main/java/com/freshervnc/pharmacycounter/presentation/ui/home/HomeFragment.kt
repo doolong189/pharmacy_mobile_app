@@ -109,21 +109,41 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
     }
 
     private fun getData() {
-        homeViewModel.getHome("Bearer " + mySharedPrefer.token)
-            .observe(viewLifecycleOwner) { it ->
-                it?.let { resources ->
-                    when (resources.status) {
-                        Status.SUCCESS -> {
-                            resources.data?.let { item ->
-                                parentProductAdapter.setList(item.response.products)
-                                slideShow(item.response.banners)
+        if (mySharedPrefer.status == 1) {
+            homeViewModel.getHome("Bearer " + mySharedPrefer.token)
+                .observe(viewLifecycleOwner) { it ->
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> {
+                                resources.data?.let { item ->
+                                    parentProductAdapter.setList(item.response.products)
+                                    slideShow(item.response.banners)
+                                }
                             }
+
+                            Status.ERROR -> {}
+                            Status.LOADING -> {}
                         }
-                        Status.ERROR -> {}
-                        Status.LOADING -> {}
                     }
                 }
-            }
+        }else{
+            homeViewModel.getCustomerHome("Bearer " + mySharedPrefer.token)
+                .observe(viewLifecycleOwner) { it ->
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> {
+                                resources.data?.let { item ->
+                                    parentProductAdapter.setList(item.response.products)
+                                    slideShow(item.response.banners)
+                                }
+                            }
+
+                            Status.ERROR -> {}
+                            Status.LOADING -> {}
+                        }
+                    }
+                }
+        }
     }
 
     override fun onClickItem(item: Data) {

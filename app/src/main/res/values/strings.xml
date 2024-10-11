@@ -87,6 +87,7 @@
     <string name="t_m_ki_m_s_n_ph_m">Tìm kiếm sản phẩm</string>
     <string name="nh_thu_c">Nhà thuốc</string>
     <string name="nh_i_di_n">Ảnh đại diện *</string>
+    <string name="customer_nh_i_di_n">Ảnh đại diện </string>
     <string name="vui_l_ng_ch_n_nh">Vui lòng chọn ảnh</string>
     <string name="ng_k_t_i_kho_n_th_nh_vi_n_b_n_ng_v_i">Đăng ký tài khoản thành viên bạn đã đồng ý với</string>
     <string name="i_u_kho_n_s_d_ng">Điều khoản sử dụng</string>

@@ -55,6 +55,9 @@ class SalesHistoryFragment : Fragment() , OnClickItemHistory{
         binding.salesRcHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.salesRcHistory.adapter = salesHistoryAdapter
         getData()
+        binding.dialogHistorySwLoading.setOnRefreshListener {
+            getData()
+        }
     }
 
     private fun getData(){
@@ -63,6 +66,7 @@ class SalesHistoryFragment : Fragment() , OnClickItemHistory{
                 it?.let { resources ->
                     when(resources.status){
                         Status.SUCCESS -> {
+                            binding.dialogHistorySwLoading.isRefreshing = false
                             resources.data.let { item ->
                                 val listTemp = mutableListOf<Data>()
                                 for (x in item!!.response.data){
@@ -80,9 +84,12 @@ class SalesHistoryFragment : Fragment() , OnClickItemHistory{
                             }
                         }
                         Status.ERROR -> {
+                            binding.dialogHistorySwLoading.isRefreshing = false
                             binding.dialogHistoryLnEmpty.visibility = View.VISIBLE
                         }
-                        Status.LOADING ->{}
+                        Status.LOADING ->{
+                            binding.dialogHistorySwLoading.isRefreshing = true
+                        }
                     }
                 }
             })

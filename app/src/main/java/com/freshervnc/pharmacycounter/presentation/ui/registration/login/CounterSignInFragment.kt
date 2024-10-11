@@ -2,6 +2,7 @@ package com.freshervnc.pharmacycounter.presentation.ui.registration.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -70,7 +71,7 @@ class CounterSignInFragment : Fragment() {
                                 Snackbar.make(requireView(),it.data!!.response.description,3000).show()
                                 binding.counterSignInEdPhoneCounter.setText("")
                                 binding.counterSignInEdPasswordCounter.setText("")
-                                mySharedPrefer.saveToken(it.data.response.token ,it.data.response.fullName , it.data.response.phone, it.data.response.email ,it.data.response.address)
+                                mySharedPrefer.saveToken(it.data.response.token ,it.data.response.fullName , it.data.response.phone, it.data.response.email ,it.data.response.address, it.data.response.status)
                                 startActivity(Intent(requireActivity(),MainActivity::class.java))
                             }
                             Status.ERROR -> {
