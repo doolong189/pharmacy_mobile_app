@@ -252,7 +252,6 @@ class ClientSignUpFragment : Fragment() {
                 binding.clientSignUpLayoutEdPassword.helperText = ""
             }
 
-
             val fullNameBody: RequestBody = strFullName.toRequestBody("text/plain".toMediaType())
             val idAgency: RequestBody = itrAgency.toString().toRequestBody("text/plain".toMediaType())
             val address: RequestBody = strAddressCounter.toRequestBody("text/plain".toMediaType())

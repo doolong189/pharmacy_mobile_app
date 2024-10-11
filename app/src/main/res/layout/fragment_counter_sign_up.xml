@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.registration.register.CounterSignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,26 +33,26 @@
                 android:layout_weight="1"
                 android:background="#FFFFFF" />
         </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/cardView2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/linearLayout"
-                >
+                app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
                 <ImageView
                     android:id="@+id/ic_back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/icon_back_arrow"
-                    />
+                    android:src="@drawable/icon_back_arrow" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView2"
@@ -79,210 +79,214 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/counter_sign_up_layoutEdFullName"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:hint="@string/title_ed_ho_ten_sign_up"
                             app:helperText=""
-                            app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                            app:helperTextTextColor="#FF0000">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edFullName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="50"
-                                android:singleLine="true"
                                 android:lines="1"
-                                />
+                                android:maxLength="50"
+                                android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/counter_sign_up_layoutNameCounter"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:hint="@string/title_ed_ten_nha_thuoc_sign_up"
                             app:helperText=""
-                            app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                        <com.google.android.material.textfield.TextInputEditText
+                            app:helperTextTextColor="#FF0000">
+
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edNameCounter"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="255"
-                                android:singleLine="true"
                                 android:lines="1"
-                                />
+                                android:maxLength="255"
+                                android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/counter_sign_up_layoutPhone"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:hint="@string/title_ed_sdt_sign_up"
                             app:helperText=""
-                            app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                        <com.google.android.material.textfield.TextInputEditText
+                            app:helperTextTextColor="#FF0000">
+
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edPhone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="10"
-                                android:singleLine="true"
                                 android:lines="1"
-                                />
+                                android:maxLength="10"
+                                android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/counter_sign_up_layoutEmail"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:hint="@string/title_ed_email_sign_up"
                             app:helperText=""
-                            app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                            app:helperTextTextColor="#FF0000">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="50"
-                                android:singleLine="true"
                                 android:lines="1"
-                               />
+                                android:maxLength="50"
+                                android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/counter_sign_up_layoutAddressCounter"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:hint="@string/title_ed_dia_chi_sign_up"
                             app:helperText=""
-                            app:helperTextTextColor="#FF0000"
-                            android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                            app:helperTextTextColor="#FF0000">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edAddressCounter"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:lines="1"
                                 android:maxLength="255"
-                                android:singleLine="true"
-                                android:lines="1" />
+                                android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/counter_sign_up_layoutPassword"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
                             android:hint="@string/title_ed_mat_khau_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textField"
-                            app:passwordToggleEnabled="true"
-                            android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                        <com.google.android.material.textfield.TextInputEditText
+                            app:passwordToggleEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/counter_sign_up_edPassword"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="textPassword"
+                                android:lines="1"
                                 android:maxLength="255"
                                 android:minEms="8"
-                                android:singleLine="true"
-                                android:lines="1"/>
+                                android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/client_sign_up_layoutSpProvinces"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/string_sign_up_provinces"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                            android:hint="@string/string_sign_up_provinces">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Tỉnh*"
-                                android:textStyle="bold"
-                                android:textColor="@color/gray"/>
+                                android:textColor="@color/gray"
+                                android:textStyle="bold" />
+
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_dropdown"
-                                >
+                                android:background="@drawable/bg_dropdown">
+
                                 <Spinner
                                     android:id="@+id/counter_sign_up_spProvinces"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="none"
                                     android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                    android:padding="10dp"
-                                    />
+                                    android:inputType="none"
+                                    android:padding="5dp" />
                             </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            >
+                            android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/nh_gi_y_ph_p_kinh_doanh"
-                                android:textStyle="bold"
-                                android:textColor="#5D5D5D"/>
+                                android:textColor="#5D5D5D"
+                                android:textStyle="bold" />
+
                             <ImageView
                                 android:id="@+id/counter_sign_up_imgUpload"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/baseline_image_24"
                                 android:layout_gravity="center"
-                                android:scaleType="center"/>
+                                android:scaleType="center"
+                                android:src="@drawable/baseline_image_24" />
                         </LinearLayout>
+
                         <ImageView
                             android:id="@+id/counter_sign_up_showImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/baseline_hide_image_24"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:src="@drawable/baseline_hide_image_24" />
+
                         <TextView
                             android:id="@+id/counter_sign_up_tvValidateImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/vui_l_ng_ch_n_nh"
-                            android:textStyle="bold"
                             android:textColor="#FF0000"
-                            android:visibility="gone"/>
+                            android:textStyle="bold"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ng_k_t_i_kho_n_th_nh_vi_n_b_n_ng_v_i"
-                    android:textStyle="bold"
                     android:layout_gravity="center"
-                    android:textColor="@color/green"/>
+                    android:text="@string/ng_k_t_i_kho_n_th_nh_vi_n_b_n_ng_v_i"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/counter_sign_up_tvClause"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="15dp"
                     android:text="Điều khoản sử dụng"
                     android:textColor="#4CAF50"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    />
+                    android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/counter_sign_up_btnSignUp"
@@ -292,8 +296,7 @@
                     android:backgroundTint="#4CAF50"
                     android:text="@string/title_button_sign_up"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
 

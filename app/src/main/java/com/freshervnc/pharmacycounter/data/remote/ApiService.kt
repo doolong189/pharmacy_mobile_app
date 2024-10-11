@@ -46,7 +46,7 @@ interface ApiService {
     @GET("api/v2/system/provinces")
     suspend fun getProvinces() : ProvincesResponse
 
-    @GET
+
     /* member */
     @Multipart
     @POST("api/v2/member/register")

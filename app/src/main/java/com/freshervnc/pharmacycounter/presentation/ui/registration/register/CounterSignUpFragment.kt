@@ -132,8 +132,10 @@ class CounterSignUpFragment : Fragment() {
             }
             if (currentPhotoPath.isEmpty()){
                 binding.counterSignUpTvValidateImage.text = getString(R.string.validate_tv_counter_image)
+                binding.counterSignUpTvValidateImage.visibility = View.VISIBLE
             }else{
                 binding.counterSignUpTvValidateImage.text = ""
+                binding.counterSignUpTvValidateImage.visibility = View.GONE
             }
 
             val fullNameBody: RequestBody = strFullName.toRequestBody("text/plain".toMediaType())
@@ -160,11 +162,7 @@ class CounterSignUpFragment : Fragment() {
                 .observe(viewLifecycleOwner, Observer { it ->
                     it?.let { resources ->
                         when (resources.status) {
-                            Status.SUCCESS -> Snackbar.make(
-                                requireView(),
-                                "" + it.data!!.response.decription,
-                                2000
-                            ).show()
+                            Status.SUCCESS -> Snackbar.make(requireView(), "" + it.data!!.response.decription, 2000).show()
 
                             Status.ERROR -> {}
 //                                Snackbar.make(

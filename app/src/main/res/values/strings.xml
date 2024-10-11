@@ -15,7 +15,7 @@
     <string name="title_ed_ho_ten_sign_up">Họ tên*</string>
     <string name="title_ed_ten_nha_thuoc_sign_up">Tên nhà thuốc*</string>
     <string name="title_ed_sdt_sign_up">Số điện thoại*</string>
-    <string name="title_ed_email_sign_up">Email*</string>
+    <string name="title_ed_email_sign_up">Email</string>
     <string name="title_ed_dia_chi_sign_up">Địa chỉ nhà thuốc*</string>
     <string name="title_ed_mat_khau_sign_up">Mật khẩu*</string>
     <string name="title_ed_dia_chi1_sign_up">Địa chỉ*</string>

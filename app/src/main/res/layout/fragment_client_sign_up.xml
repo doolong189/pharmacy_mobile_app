@@ -175,6 +175,7 @@
                                 android:maxLength="50"
                                 android:singleLine="true"
                                 android:lines="1"
+                                android:inputType="textPassword"
                                 />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -202,7 +203,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="none"
                                     android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                    android:padding="10dp"
+                                    android:padding="5dp"
                                     />
                             </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
@@ -231,7 +232,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="none"
                                     android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
-                                    android:padding="10dp"
+                                    android:padding="5dp"
                                     />
                             </RelativeLayout>
                         </com.google.android.material.textfield.TextInputLayout>
