@@ -4,5 +4,5 @@ import com.freshervnc.pharmacycounter.domain.models.Category
 
 
 interface OnClickItemCategory {
-    fun onClickItem(item : Category)
+    fun onClickItem(item : Category , key : String)
 }

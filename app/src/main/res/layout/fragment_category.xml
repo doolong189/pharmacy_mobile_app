@@ -5,10 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.category.CategoryFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/category_swRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/category_rcView"
-        tools:listitem="@layout/item_category"/>
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/category_rcView"
+            tools:listitem="@layout/item_category"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

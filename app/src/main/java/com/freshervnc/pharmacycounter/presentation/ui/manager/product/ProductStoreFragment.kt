@@ -28,6 +28,7 @@ import com.freshervnc.pharmacycounter.databinding.FragmentProductStoreBinding
 import com.freshervnc.pharmacycounter.domain.models.Data
 import com.freshervnc.pharmacycounter.domain.response.product.RequestDeleteProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
+import com.freshervnc.pharmacycounter.domain.response.product.RequestShowProduct
 import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestCreateCategoryResponse
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemStoreProduct
@@ -157,8 +158,46 @@ class ProductStoreFragment : Fragment(), OnClickItemStoreProduct {
 
     }
 
-    override fun onClickHaveInStore() {
+    override fun onClickHaveInStore(id : Int) {
+        val showProductTemp = RequestShowProduct(id)
+        productViewModel.getShowProduct("Bearer "+mySharedPrefer.token ,showProductTemp ).observe(viewLifecycleOwner, Observer {
+            it?.let{ resources ->
+                when(resources.status){
+                    Status.SUCCESS -> {
+                        Snackbar.make(requireView(),resources.data!!.response.description,3000).show()
+                    }
+                    Status.ERROR -> {
+                        resources.data!!.message.let {item ->
+                            Snackbar.make(requireView(),item.toString(),3000).show()
+                        }
+                    }
+                    Status.LOADING -> {
 
+                    }
+                }
+            }
+        })
+    }
+
+    override fun onClickBestSeller(id: Int) {
+        val bestSellerProductTemp = RequestShowProduct(id)
+        productViewModel.getBestSellerProduct("Bearer "+mySharedPrefer.token ,bestSellerProductTemp ).observe(viewLifecycleOwner, Observer {
+            it?.let{ resources ->
+                when(resources.status){
+                    Status.SUCCESS -> {
+                        Snackbar.make(requireView(),resources.data!!.response.description,3000).show()
+                    }
+                    Status.ERROR -> {
+                        resources.data!!.message.let {item ->
+                            Snackbar.make(requireView(),item.toString(),3000).show()
+                        }
+                    }
+                    Status.LOADING -> {
+
+                    }
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -172,8 +211,6 @@ class ProductStoreFragment : Fragment(), OnClickItemStoreProduct {
             binding.storeWebView.visibility = View.VISIBLE
             val urlString = "http://18.138.176.213/agency/products/create"
             binding.storeWebView.webViewClient = WebViewClient()
-            // this will load the url of the website
-//            val bearer = "Bearer " + requireContext().getSharedPreferences("app_data", 0).getString("access_token", "")!!
             val bearer = "Bearer " + mySharedPrefer.token
             val headerMap = HashMap<String,String>()
             headerMap["Authorization"] = bearer

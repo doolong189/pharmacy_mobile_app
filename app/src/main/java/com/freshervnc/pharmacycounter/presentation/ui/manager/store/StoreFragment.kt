@@ -107,10 +107,10 @@ class StoreFragment : Fragment(), OnClickItemCategory, OnClickItemParentCategory
         }
     }
 
-    override fun onClickItem(item: Category) {
+    override fun onClickItem(item: Category , key : String) {
         val args = Bundle()
         args.putInt("key_product", item.value)
-        args.putString("key_category",checkCategoryType)
+        args.putString("key_category",key)
         val newFragment: ProductStoreFragment = ProductStoreFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)

@@ -20,4 +20,9 @@ class CategoryRepository {
     suspend fun requestUpdateStoreCategoryType(authHeader: String , request: RequestUpdateCategoryResponse) = RetrofitInstance.api.getUpdateStoreCategoryType(authHeader,request)
 
     suspend fun requestDeleteStoreCategoryType(authHeader: String, request : RequestDeleteCategoryResponse) = RetrofitInstance.api.getDeleteStoreCategoryType(authHeader,request)
+
+    suspend fun requestGetCustomerCategory(authHeader : String) = RetrofitInstance.api.getCustomerCategory(authHeader)
+    suspend fun requestGetCustomerCategoryType(authHeader: String , request : RequestCategoryTypeResponse) = RetrofitInstance.api.getCustomerCategoryType(authHeader,request)
+
+
 }

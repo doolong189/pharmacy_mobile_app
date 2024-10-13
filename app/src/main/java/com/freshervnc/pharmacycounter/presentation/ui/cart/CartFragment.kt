@@ -88,6 +88,9 @@ class CartFragment : Fragment(), OnClickItemCart {
         binding.cartRcProductCart.setHasFixedSize(true)
         binding.cartRcProductCart.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRcProductCart.adapter = cartAdapter
+        binding.cartSwRefresh.setOnRefreshListener {
+            getData()
+        }
         getData()
     }
 
@@ -98,6 +101,7 @@ class CartFragment : Fragment(), OnClickItemCart {
                     when (resource.status) {
                         Status.SUCCESS -> {
                             resource.data.let { item ->
+                                binding.cartSwRefresh.isRefreshing = false
                                 cartAdapter.setList(item!!.response.products.data)
                                 cartAdapter.notifyDataSetChanged()
                                 binding.iconCartCheckBox1.setOnCheckedChangeListener { _, isChecked ->
@@ -106,8 +110,12 @@ class CartFragment : Fragment(), OnClickItemCart {
                             }
                         }
 
-                        Status.ERROR -> {}
-                        Status.LOADING -> {}
+                        Status.ERROR -> {
+                            binding.cartSwRefresh.isRefreshing = false
+                        }
+                        Status.LOADING -> {
+                            binding.cartSwRefresh.isRefreshing = true
+                        }
                     }
                 }
             })
@@ -134,6 +142,7 @@ class CartFragment : Fragment(), OnClickItemCart {
                                 Status.SUCCESS -> {
                                     Snackbar.make(requireView(), "Delete Successfully", 2000)
                                     resources.data.let { item ->
+                                        binding.cartSwRefresh.isRefreshing = false
                                         cartAdapter.setList(item!!.response.products.data)
                                         cartAdapter.notifyDataSetChanged()
                                     }
@@ -141,8 +150,12 @@ class CartFragment : Fragment(), OnClickItemCart {
                                     (activity as MainActivity).getListData().remove(item)
                                 }
 
-                                Status.ERROR -> {}
-                                Status.LOADING -> {}
+                                Status.ERROR -> {
+                                    binding.cartSwRefresh.isRefreshing = false
+                                }
+                                Status.LOADING -> {
+                                    binding.cartSwRefresh.isRefreshing = true
+                                }
                             }
                         }
                     })
@@ -166,15 +179,15 @@ class CartFragment : Fragment(), OnClickItemCart {
                     it?.let { resources ->
                         when (resources.status) {
                             Status.SUCCESS -> {
-
+                                binding.cartSwRefresh.isRefreshing = false
                             }
 
                             Status.ERROR -> {
-
+                                binding.cartSwRefresh.isRefreshing = false
                             }
 
                             Status.LOADING -> {
-
+                                binding.cartSwRefresh.isRefreshing = true
                             }
                         }
                     }

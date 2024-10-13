@@ -11,6 +11,7 @@ import com.freshervnc.pharmacycounter.application.MyApplication
 import com.freshervnc.pharmacycounter.data.repository.ProductRepository
 import com.freshervnc.pharmacycounter.domain.response.product.RequestDeleteProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
+import com.freshervnc.pharmacycounter.domain.response.product.RequestShowProduct
 import com.freshervnc.pharmacycounter.utils.Resource
 import com.freshervnc.pharmacycounter.utils.Utils
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,34 @@ class ProductViewModel(private val application: Application) : AndroidViewModel(
         try {
             if (Utils.hasInternetConnection(getApplication<MyApplication>())){
                 emit(Resource.success(repository.getStoreProduct(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+            Log.e("log product o day", ex.localizedMessage!!.toString())
+        }
+    }
+
+    fun getShowProduct(authHeader: String, id :RequestShowProduct) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.getShowProduct(authHeader,id)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+            Log.e("log product o day", ex.localizedMessage!!.toString())
+        }
+    }
+
+    fun getBestSellerProduct(authHeader: String, id :RequestShowProduct) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.getBestSellerProduct(authHeader,id)))
             }else{
                 emit(Resource.error(null,application.getString(R.string.string_not_internet)))
             }

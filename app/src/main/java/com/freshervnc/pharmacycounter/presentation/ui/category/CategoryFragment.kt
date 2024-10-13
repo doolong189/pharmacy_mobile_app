@@ -59,35 +59,68 @@ class CategoryFragment : Fragment(), OnClickItemCategory , OnClickItemParentCate
         binding.categoryRcView.setHasFixedSize(true)
         binding.categoryRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.categoryRcView.adapter = parentCategoryAdapter
+        binding.categorySwRefresh.setOnRefreshListener {
+            getData()
+        }
         getData()
     }
     private fun getData() {
-        categoryViewModel.getCategory("Bearer "+mySharedPrefer.token)
-            .observe(viewLifecycleOwner) { it ->
-                it?.let { resources ->
-                    when (resources.status) {
-                        Status.SUCCESS -> {
-                            resources.data?.let { item ->
-                                parentCategoryAdapter.setList(item.response)
+        //1 : counter - 0 : customer
+        if (mySharedPrefer.status == 1){
+            categoryViewModel.getCategory("Bearer "+mySharedPrefer.token)
+                .observe(viewLifecycleOwner) { it ->
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> {
+                                binding.categorySwRefresh.isRefreshing = false
+                                resources.data?.let { item ->
+                                    parentCategoryAdapter.setList(item.response)
+                                }
+                            }
+                            Status.ERROR -> {
+                                binding.categorySwRefresh.isRefreshing = false
+                            }
+                            Status.LOADING -> {
+                                binding.categorySwRefresh.isRefreshing = true
                             }
                         }
-                        Status.ERROR -> {}
-                        Status.LOADING -> {}
                     }
                 }
-            }
+        }else{
+            categoryViewModel.getCustomerCategory("Bearer "+mySharedPrefer.token)
+                .observe(viewLifecycleOwner) { it ->
+                    it?.let { resources ->
+                        when (resources.status) {
+                            Status.SUCCESS -> {
+                                binding.categorySwRefresh.isRefreshing = false
+                                resources.data?.let { item ->
+                                    parentCategoryAdapter.setList(item.response)
+                                }
+                            }
+                            Status.ERROR -> {
+                                binding.categorySwRefresh.isRefreshing = false
+                            }
+                            Status.LOADING -> {
+                                binding.categorySwRefresh.isRefreshing = true
+                            }
+                        }
+                    }
+                }
+        }
     }
 
-    override fun onClickItem(item: Category) {
+    override fun onClickItem(item: Category, key: String ) {
+        // go to product
         val args = Bundle()
         args.putInt("key_product", item.value)
-        args.putString("key_category",checkCategoryType)
+        args.putString("key_category",key)
         val newFragment: ProductFragment = ProductFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)
     }
 
     override fun onClickItem(key: String) {
+        //go to category
         val args = Bundle()
         args.putString("key_category", key)
         val newFragment: CategoryTypeFragment = CategoryTypeFragment()

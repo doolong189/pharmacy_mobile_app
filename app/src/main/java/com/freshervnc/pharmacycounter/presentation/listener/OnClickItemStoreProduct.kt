@@ -6,5 +6,6 @@ import com.freshervnc.pharmacycounter.domain.models.Data
 interface OnClickItemStoreProduct {
     fun onClickDelete(item : Data)
     fun onClickUpdate(item : Data)
-    fun onClickHaveInStore()
+    fun onClickHaveInStore(id : Int)
+    fun onClickBestSeller(id : Int)
 }

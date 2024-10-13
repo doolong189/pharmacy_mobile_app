@@ -23,5 +23,5 @@ data class Response(
     var img :  String,
     @SerializedName("trang_thai")
     var trangThai : Int,
-    var provinces : List<Provinces>
+    var provinces : List<Provinces> // thanh pho
 )

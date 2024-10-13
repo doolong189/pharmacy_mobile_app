@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.manager.profile.CounterProfileFragment">
+    tools:context=".presentation.ui.manager.profile.CustomerProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,23 +110,24 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/profile_layoutEdNameCounter"
+                            android:id="@+id/profile_layoutEdAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/title_ed_ten_nha_thuoc_sign_up"
+                            android:hint="@string/title_ed_dia_chi1_sign_up"
                             app:helperText=""
                             app:helperTextTextColor="#FF0000"
                             android:layout_margin="10dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/profile_edNameCounter"
+                                android:id="@+id/profile_edAddress"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLength="255"
                                 android:singleLine="true"
-                                android:lines="1"
-                                />
+                                android:lines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/profile_layoutEdPhone"
                             android:layout_width="match_parent"
@@ -146,22 +147,19 @@
                                 android:lines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/profile_layoutEdAddress"
+                            android:id="@+id/profile_layoutSpProvinces"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/title_ed_dia_chi1_sign_up"
-                            app:helperText=""
-                            app:helperTextTextColor="#FF0000"
+                            android:hint="@string/title_ed_ten_nha_thuoc_sign_up"
                             android:layout_margin="10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/profile_edAddress"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                            <AutoCompleteTextView
+                                android:id="@+id/profile_spProvinces"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="255"
-                                android:singleLine="true"
-                                android:lines="1" />
+                                android:padding="10dp"
+                                android:inputType="none"
+                                android:backgroundTint="#FFF"/>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/profile_layoutSpGenCy"
@@ -253,4 +251,5 @@
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+
 </FrameLayout>

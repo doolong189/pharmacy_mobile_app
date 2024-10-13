@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.MainActivity
+import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentClientSignInBinding
 import com.freshervnc.pharmacycounter.domain.response.login.RequestLoginResponse
 import com.freshervnc.pharmacycounter.presentation.ui.registration.register.ClientSignUpFragment
@@ -65,6 +66,7 @@ class ClientSignInFragment : Fragment() {
                     it?.let { resources ->
                         when(resources.status){
                             Status.SUCCESS -> {
+                                binding.clientSignInPgLoading.visibility = View.GONE
                                 Snackbar.make(requireView(),it.data!!.response.description,3000).show()
                                 binding.clientSignInEdPhoneCounter.setText("")
                                 binding.clientSignInEdPasswordCounter.setText("")
@@ -72,12 +74,14 @@ class ClientSignInFragment : Fragment() {
                                 startActivity(Intent(requireActivity(),MainActivity::class.java))
                             }
                             Status.ERROR -> {
-                                it.data!!.message.let { log ->
-                                    Snackbar.make(requireView(),log.toString(),3000).show()
+                                binding.clientSignInPgLoading.visibility = View.GONE
+                                it.data!!.message.let {item ->
+                                    Snackbar.make(requireView(),
+                                        getString(R.string.validate_error_login),3000).show()
                                 }
                             }
                             Status.LOADING -> {
-
+                                binding.clientSignInPgLoading.visibility = View.VISIBLE
                             }
                         }
                     }

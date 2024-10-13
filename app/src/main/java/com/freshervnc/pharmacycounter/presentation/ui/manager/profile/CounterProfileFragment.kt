@@ -19,7 +19,7 @@ import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 
 
-class ProfileFragment : Fragment() {
+class CounterProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var mySharedPrefer: SharedPrefer

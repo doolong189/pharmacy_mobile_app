@@ -28,7 +28,7 @@ class StoreCategoryTypeAdapter(private val listener : OnClickItemCategory) :
                 binding.itemChildCategoryTvName.text = this.name
                 binding.itemChildCategoryTvSoLuong.text = this.size.toString()
                 holder.itemView.setOnClickListener {
-                    listener.onClickItem(categorytypes[position])
+                    listener.onClickItem(categorytypes[position],"")
                 }
             }
         }

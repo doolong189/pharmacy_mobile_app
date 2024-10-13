@@ -129,4 +129,11 @@
     <string name="status">Status</string>
     <string name="s_n_ph_m_khuy_n_m_i">Sản phẩm</string>
     <string name="chinh_sach_bao_hanh">Chính sách bảo hành</string>
+    <string name="validate_error_login">Tài khoản hoặc mật khẩu không đúng</string>
+    <string name="validate_event_banners">Không có sự kiện nào</string>
+    <string name="validate_category_type_empty">Loại danh mục trống</string>
+    <string name="validate_category_empty">Danh mục trống</string>
+    <string name="validate_product_empty">Sản phẩm trống</string>
+    <string name="validate_cart_empty">Giỏ hàng trống</string>
+    <string name="validate_search_empty">Không tìm thấy sản phẩm nào</string>
 </resources>

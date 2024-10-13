@@ -102,13 +102,23 @@ class ProductFragment : Fragment() , OnClickItemProduct  {
                         when(resources.status){
                             Status.SUCCESS -> {
                                 resources.data?.let { item ->
+                                    binding.productSwRefresh.isRefreshing = false
+                                    if (item.response.data.isEmpty()){
+                                        binding.productLnEmpty.visibility = View.VISIBLE
+                                    }else{
+                                        binding.productLnEmpty.visibility = View.GONE
+                                    }
                                     childProductAdapter = ChildProductAdapter(item.response.data,this)
                                     binding.productRcView.adapter = childProductAdapter
                                     childProductAdapter.setList(item.response.data)
                                 }
                             }
-                            Status.ERROR -> {}
-                            Status.LOADING -> {}
+                            Status.ERROR -> {
+                                binding.productSwRefresh.isRefreshing = false
+                            }
+                            Status.LOADING -> {
+                                binding.productSwRefresh.isRefreshing = true
+                            }
                         }
                     }
                 })
@@ -131,13 +141,22 @@ class ProductFragment : Fragment() , OnClickItemProduct  {
                             when(resources.status){
                                 Status.SUCCESS -> {
                                     resources.data?.let { item ->
-//                                        childProductAdapter = ChildProductAdapter(item.response.data,this)
+                                        if (item.response.data.isEmpty()){
+                                            binding.productLnSearchEmpty.visibility = View.VISIBLE
+                                        }else{
+                                            binding.productLnSearchEmpty.visibility = View.GONE
+                                        }
+                                        binding.productSwRefresh.isRefreshing = false
                                         binding.productRcView.adapter = childProductAdapter
                                         childProductAdapter.setList(item.response.data)
                                     }
                                 }
-                                Status.ERROR -> {}
-                                Status.LOADING -> {}
+                                Status.ERROR -> {
+                                    binding.productSwRefresh.isRefreshing = false
+                                }
+                                Status.LOADING -> {
+                                    binding.productSwRefresh.isRefreshing = true
+                                }
                             }
                         }
                     })
@@ -163,11 +182,7 @@ class ProductFragment : Fragment() , OnClickItemProduct  {
         //add to cart
         var amountTemp = 0
         view.dialogBottomCartImageMinus.setOnClickListener {
-            if (amountTemp == 0) {
-                amountTemp = 0
-            } else {
-                amountTemp -= 1
-            }
+            if (amountTemp == 0) amountTemp = 0 else amountTemp -= 1
             view.dialogBottomCartTvAmount.text = amountTemp.toString()
         }
         view.dialogBottomCartImagePlus.setOnClickListener {

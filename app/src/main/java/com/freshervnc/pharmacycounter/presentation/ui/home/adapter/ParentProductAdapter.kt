@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.home.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,14 +29,19 @@ class ParentProductAdapter(private val listener : OnClickItemProduct , private v
         with(holder){
             with(products[position]){
                 binding.itemParentTvCategory.text = this.name
-                val childAdapter: ChildProductAdapter = ChildProductAdapter(this.data,listener)
-                binding.itemParentRcChildProduct.setLayoutManager(GridLayoutManager(holder.itemView.context, 2))
-                binding.itemParentRcChildProduct.setAdapter(childAdapter)
-                binding.itemParentRcChildProduct.setHasFixedSize(true)
-                childAdapter.notifyDataSetChanged()
+                if (this.data.isEmpty()){
+                    binding.itemParentLnEmptyProduct.visibility = View.VISIBLE
+                }else{
+                    binding.itemParentLnEmptyProduct.visibility = View.GONE
+                    val childAdapter: ChildProductAdapter = ChildProductAdapter(this.data,listener)
+                    binding.itemParentRcChildProduct.setLayoutManager(GridLayoutManager(holder.itemView.context, 2))
+                    binding.itemParentRcChildProduct.setAdapter(childAdapter)
+                    binding.itemParentRcChildProduct.setHasFixedSize(true)
+                    childAdapter.notifyDataSetChanged()
 
-                binding.itemParentImgMore.setOnClickListener {
-                    homeListener.onClickItem(products[position])
+                    binding.itemParentImgMore.setOnClickListener {
+                        homeListener.onClickItem(products[position])
+                    }
                 }
             }
         }

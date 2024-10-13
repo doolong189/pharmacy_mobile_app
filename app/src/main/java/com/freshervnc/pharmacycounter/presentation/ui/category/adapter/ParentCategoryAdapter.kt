@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.category.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,12 +36,16 @@ class ParentCategoryAdapter(private val listener : OnClickItemCategory , private
             with(lists[position]){
                 binding.itemCategoryTvName.text = this.name
                 Glide.with(holder.itemView.context).load(lists[position].icon).error(R.drawable.ic_picture).into(binding.itemCategoryImgView)
-                val childAdapter: ChildCategoryAdapter = ChildCategoryAdapter(listener)
-                childAdapter.setList(this.category)
-                binding.itemCategoryRcChildCategory.setLayoutManager(LinearLayoutManager(holder.itemView.context))
-                binding.itemCategoryRcChildCategory.setAdapter(childAdapter)
-                binding.itemCategoryRcChildCategory.setHasFixedSize(true)
-                childAdapter.notifyDataSetChanged()
+                if (this.category.isEmpty()){
+                    binding.itemCategoryLnEmptyBanner.visibility = View.VISIBLE
+                }else{
+                    val childAdapter: ChildCategoryAdapter = ChildCategoryAdapter(listener , this.key)
+                    childAdapter.setList(this.category)
+                    binding.itemCategoryRcChildCategory.setLayoutManager(LinearLayoutManager(holder.itemView.context))
+                    binding.itemCategoryRcChildCategory.setAdapter(childAdapter)
+                    binding.itemCategoryRcChildCategory.setHasFixedSize(true)
+                    childAdapter.notifyDataSetChanged()
+                }
 
                 binding.itemCategoryTvName.setOnClickListener {
                     listenerParent.onClickItem(lists[position].key)
@@ -53,5 +58,6 @@ class ParentCategoryAdapter(private val listener : OnClickItemCategory , private
         this.lists = list
         notifyDataSetChanged()
     }
+
 
 }

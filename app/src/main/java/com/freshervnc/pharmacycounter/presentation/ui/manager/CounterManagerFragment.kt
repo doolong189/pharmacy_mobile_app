@@ -10,9 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.databinding.FragmentManagerBinding
-import com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.ContactFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.news.NewsFragment
-import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.ProfileFragment
+import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.CounterProfileFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.store.StoreFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.viewmodel.ManagerViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.registration.RegistrationActivity
@@ -47,12 +46,15 @@ class CounterManagerFragment : Fragment() {
 
     private fun init(){
         (activity as MainActivity).showBottomNav()
-        managerViewModel = ViewModelProvider(this,ManagerViewModel.ManagerViewModelFactory(requireActivity().application))[ManagerViewModel::class.java]
+        managerViewModel = ViewModelProvider(
+            this,
+            ManagerViewModel.ManagerViewModelFactory(requireActivity().application)
+        )[ManagerViewModel::class.java]
         mySharedPrefer = SharedPrefer(requireContext())
     }
     private fun features(){
         binding.managerLnInfo.setOnClickListener {
-            (activity as MainActivity).replaceFragment((ProfileFragment()))
+            (activity as MainActivity).replaceFragment((CounterProfileFragment()))
         }
         binding.managerLnStore.setOnClickListener {
             (activity as MainActivity).replaceFragment((StoreFragment()))

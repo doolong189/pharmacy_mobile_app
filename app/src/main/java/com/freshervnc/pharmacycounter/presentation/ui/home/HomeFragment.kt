@@ -90,22 +90,30 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
         binding.homeRcProduct.setHasFixedSize(true)
         binding.homeRcProduct.layoutManager = LinearLayoutManager(requireContext())
         binding.homeRcProduct.adapter = parentProductAdapter
+        binding.homeSwRefresh.setOnRefreshListener {
+            getData()
+        }
         getData()
     }
 
     private fun slideShow(images: List<Banner>) {
-        val adapter = SliderAdapter(images)
-        binding.viewPager.adapter = adapter
-        val handler = Handler(Looper.getMainLooper())
-        val runnable = object : Runnable {
-            override fun run() {
-                val currentItem = binding.viewPager.currentItem
-                val nextItem = if (currentItem == images.size - 1) 0 else currentItem + 1
-                binding.viewPager.currentItem = nextItem
-                handler.postDelayed(this, 3000)
+        if (images.isEmpty()){
+            binding.homeLnEmptyBanner.visibility = View.VISIBLE
+        }else{
+            binding.homeLnEmptyBanner.visibility = View.GONE
+            val adapter = SliderAdapter(images)
+            binding.viewPager.adapter = adapter
+            val handler = Handler(Looper.getMainLooper())
+            val runnable = object : Runnable {
+                override fun run() {
+                    val currentItem = binding.viewPager.currentItem
+                    val nextItem = if (currentItem == images.size - 1) 0 else currentItem + 1
+                    binding.viewPager.currentItem = nextItem
+                    handler.postDelayed(this, 3000)
+                }
             }
+            handler.postDelayed(runnable, 3000)
         }
-        handler.postDelayed(runnable, 3000)
     }
 
     private fun getData() {
@@ -115,14 +123,18 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
                     it?.let { resources ->
                         when (resources.status) {
                             Status.SUCCESS -> {
+                                binding.homeSwRefresh.isRefreshing = false
                                 resources.data?.let { item ->
                                     parentProductAdapter.setList(item.response.products)
                                     slideShow(item.response.banners)
                                 }
                             }
-
-                            Status.ERROR -> {}
-                            Status.LOADING -> {}
+                            Status.ERROR -> {
+                                binding.homeSwRefresh.isRefreshing = false
+                            }
+                            Status.LOADING -> {
+                                binding.homeSwRefresh.isRefreshing = true
+                            }
                         }
                     }
                 }
@@ -132,14 +144,19 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
                     it?.let { resources ->
                         when (resources.status) {
                             Status.SUCCESS -> {
+                                binding.homeSwRefresh.isRefreshing = false
                                 resources.data?.let { item ->
                                     parentProductAdapter.setList(item.response.products)
                                     slideShow(item.response.banners)
                                 }
                             }
 
-                            Status.ERROR -> {}
-                            Status.LOADING -> {}
+                            Status.ERROR -> {
+                                binding.homeSwRefresh.isRefreshing = false
+                            }
+                            Status.LOADING -> {
+                                binding.homeSwRefresh.isRefreshing = true
+                            }
                         }
                     }
                 }

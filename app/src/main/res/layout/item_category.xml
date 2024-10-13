@@ -33,6 +33,26 @@
             android:scaleY="1"
             app:drawableEndCompat="@drawable/custom_image" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/item_category_lnEmptyBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_empty_list"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/validate_category_empty"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_category_rcChildCategory"
         android:layout_width="match_parent"
