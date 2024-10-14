@@ -31,8 +31,10 @@ class ParentProductAdapter(private val listener : OnClickItemProduct , private v
                 binding.itemParentTvCategory.text = this.name
                 if (this.data.isEmpty()){
                     binding.itemParentLnEmptyProduct.visibility = View.VISIBLE
+                    binding.itemParentRcChildProduct.visibility = View.GONE
                 }else{
                     binding.itemParentLnEmptyProduct.visibility = View.GONE
+                    binding.itemParentRcChildProduct.visibility = View.VISIBLE
                     val childAdapter: ChildProductAdapter = ChildProductAdapter(this.data,listener)
                     binding.itemParentRcChildProduct.setLayoutManager(GridLayoutManager(holder.itemView.context, 2))
                     binding.itemParentRcChildProduct.setAdapter(childAdapter)

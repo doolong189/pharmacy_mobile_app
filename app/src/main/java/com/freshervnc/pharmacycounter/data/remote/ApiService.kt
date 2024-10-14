@@ -15,6 +15,7 @@ import com.freshervnc.pharmacycounter.domain.response.bill.RequestDetailBillResp
 import com.freshervnc.pharmacycounter.domain.response.category.CategoryResponse
 import com.freshervnc.pharmacycounter.domain.response.category.CategoryTypeResponse
 import com.freshervnc.pharmacycounter.domain.response.category.RequestCategoryTypeResponse
+import com.freshervnc.pharmacycounter.domain.response.contact.ContactCustomerResponse
 import com.freshervnc.pharmacycounter.domain.response.contact.ContactResponse
 import com.freshervnc.pharmacycounter.domain.response.history.HistoryResponse
 import com.freshervnc.pharmacycounter.domain.response.logout.LogoutResponse
@@ -31,6 +32,7 @@ import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestDelet
 import com.freshervnc.pharmacycounter.domain.response.storecategory.RequestUpdateCategoryResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.RequestVoucherResponse
 import com.freshervnc.pharmacycounter.domain.response.voucher.VoucherResponse
+import com.freshervnc.pharmacycounter.utils.ApiPath
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -110,8 +112,21 @@ interface ApiService {
     @POST("api/v2/history/payment")
     suspend fun getHistoryBill(@Header("Authorization") authHeader: String , @Body page : Int) : HistoryResponse
 
+    @POST("api/v2/agency/history/sales")
+    suspend fun getHistorySellAgency(@Header("Authorization") authHeader: String , @Body page : Int) : HistoryResponse
+
+    @POST("api/v2/customer/history/payment")
+    suspend fun getCustomerHistoryBill(@Header("Authorization") authHeader: String , @Body page : Int) : HistoryResponse
+
     @POST("api/v2/history/payment_details")
     suspend fun getDetailHistoryBill(@Header("Authorization") authHeader: String, @Body request : RequestDetailBillResponse) : DetailBillResponse
+
+    @POST("api/v2/customer/history/payment_details")
+    suspend fun getCustomerDetailHistoryBill(@Header("Authorization") authHeader: String, @Body request : RequestDetailBillResponse) : DetailBillResponse
+
+    @POST("api/v2/agency/history/sales_details")
+    suspend fun getHistoryDetailAgency(@Header("Authorization") authHeader: String, @Body request : RequestDetailBillResponse): DetailBillResponse
+
 
     /* Category */
     @GET("/api/v2/system/category")
@@ -145,8 +160,13 @@ interface ApiService {
     suspend fun logOut(@Header("Authorization") authHeader: String) : LogoutResponse
 
     /* Search */
+    @POST("api/v2/product/index")
+    suspend fun searchProductIndex(@Header("Authorization") authHeader: String, @Body request : RequestSearchResponse) : SearchResponse
+
+
     @POST("api/v2/search")
     suspend fun searchProduct(@Header("Authorization") authHeader: String, @Body request : RequestSearchResponse) : SearchResponse
+
 
     /* Store */
     @POST("api/v2/agency/category_type")
@@ -170,7 +190,15 @@ interface ApiService {
     /* Contact */
     @GET("api/v2/system/contact")
     suspend fun getContact() : ContactResponse
+
+    @GET("api/v2/agency/contact")
+    suspend fun getCustomerContact(@Header("Authorization") authHeader: String) : ContactCustomerResponse
+
     /* News */
     @GET("api/v2/system/list_news")
     suspend fun getNews() : NewsResponse
+
+//    /* Forgot password */
+    @POST("api/v2/customer/reset_password")
+    suspend fun requestForgotPassword() : String
 }

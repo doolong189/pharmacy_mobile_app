@@ -15,21 +15,26 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.freshervnc.pharmacycounter.MainActivity
-import com.freshervnc.pharmacycounter.databinding.FragmentContactBinding
+import com.freshervnc.pharmacycounter.R
+import com.freshervnc.pharmacycounter.databinding.FragmentCustomerContactBinding
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemContact
+import com.freshervnc.pharmacycounter.presentation.ui.manager.ClientManagerFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.CounterManagerFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.adapter.ContactAdapter
 import com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.viewmodel.ContactViewModel
+import com.freshervnc.pharmacycounter.utils.SharedPrefer
 import com.freshervnc.pharmacycounter.utils.Status
 
 
-class ContactFragment : Fragment() , OnClickItemContact {
-    private lateinit var binding : FragmentContactBinding
+class CustomerContactFragment : Fragment(), OnClickItemContact {
+    private lateinit var binding : FragmentCustomerContactBinding
     private lateinit var contactViewModel: ContactViewModel
     private lateinit var adapter : ContactAdapter
     private val REQUEST_CALL_PHONE = 1
+    private lateinit var mySharedPrefer: SharedPrefer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -37,7 +42,7 @@ class ContactFragment : Fragment() , OnClickItemContact {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentContactBinding.inflate(layoutInflater, container, false)
+        binding = FragmentCustomerContactBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -45,6 +50,7 @@ class ContactFragment : Fragment() , OnClickItemContact {
         super.onViewCreated(view, savedInstanceState)
         init()
         initVariable()
+        getData()
         actionButton()
     }
 
@@ -53,6 +59,7 @@ class ContactFragment : Fragment() , OnClickItemContact {
         contactViewModel = ViewModelProvider(this,
             ContactViewModel.ContactViewModelFactory(requireActivity().application))[ContactViewModel::class.java]
         adapter = ContactAdapter(this)
+        mySharedPrefer = SharedPrefer(requireContext())
     }
 
     private fun initVariable() {
@@ -66,14 +73,18 @@ class ContactFragment : Fragment() , OnClickItemContact {
     }
 
     private fun getData() {
-        contactViewModel.getContact()
+        contactViewModel.getCustomerContact("Bearer "+mySharedPrefer.token)
             .observe(viewLifecycleOwner) { it ->
                 it?.let { resources ->
                     when (resources.status) {
                         Status.SUCCESS -> {
                             binding.contactSwRefresh.isRefreshing = false
                             resources.data?.let { item ->
-                                adapter.setList(item.response)
+                                adapter.setList(item.response.contact)
+                                binding.contactTvName.text = "Tên nhà thuốc: "+item.response.info.tenNhaThuoc
+                                binding.contactTvEmail.text = item.response.info.email
+                                binding.contactTvAddress.text = "Địa chỉ: "+item.response.info.diaChi
+                                binding.contactTvProvinces.text = item.response.info.tinh
                             }
                         }
                         Status.ERROR -> {
@@ -134,7 +145,8 @@ class ContactFragment : Fragment() , OnClickItemContact {
 
     private fun actionButton(){
         binding.contactBtnClose.setOnClickListener {
-            (activity as MainActivity).replaceFragment(CounterManagerFragment())
+            (activity as MainActivity).replaceFragment(ClientManagerFragment())
         }
     }
+
 }

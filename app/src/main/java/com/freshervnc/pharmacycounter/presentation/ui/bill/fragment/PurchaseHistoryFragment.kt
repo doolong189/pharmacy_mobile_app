@@ -66,43 +66,76 @@ class PurchaseHistoryFragment : Fragment(), OnClickItemHistory {
     }
 
     private fun getData(){
-        historyViewModel.getHistory("Bearer " + mySharedPrefer.token,current_page).observe(viewLifecycleOwner,
-            Observer { it ->
-                it?.let { resources ->
-                    when(resources.status){
-                        Status.SUCCESS -> {
-                            resources.data.let { item ->
-                                binding.dialogHistorySwLoading.isRefreshing = false
-                                val listTemp = mutableListOf<Data>()
-                                for (x in item!!.response.data){
-                                    if (x.status == 0){
+        if (mySharedPrefer.status == 1){
+            historyViewModel.getHistory("Bearer " + mySharedPrefer.token,current_page).observe(viewLifecycleOwner,
+                Observer { it ->
+                    it?.let { resources ->
+                        when(resources.status){
+                            Status.SUCCESS -> {
+                                resources.data.let { item ->
+                                    binding.dialogHistorySwLoading.isRefreshing = false
+                                    val listTemp = mutableListOf<Data>()
+                                    for (x in item!!.response.data){
                                         listTemp.add(x)
                                     }
-                                }
-                                if (listTemp.isEmpty()){
-                                    binding.dialogHistoryLnEmpty.visibility = View.VISIBLE
-                                }else {
-                                    purchaseHistoryAdapter.setList(item.response.data)
-                                    purchaseHistoryAdapter.notifyDataSetChanged()
-                                    binding.dialogHistoryLnEmpty.visibility = View.GONE
+                                    if (listTemp.isEmpty()){
+                                        binding.dialogHistoryLnEmpty.visibility = View.VISIBLE
+                                    }else {
+                                        purchaseHistoryAdapter.setList(item.response.data)
+                                        purchaseHistoryAdapter.notifyDataSetChanged()
+                                        binding.dialogHistoryLnEmpty.visibility = View.GONE
+                                    }
                                 }
                             }
-                        }
-                        Status.ERROR -> {
-                            binding.dialogHistorySwLoading.isRefreshing = false
-                        }
-                        Status.LOADING ->{
-                            binding.dialogHistorySwLoading.isRefreshing = true
+                            Status.ERROR -> {
+                                binding.dialogHistorySwLoading.isRefreshing = false
+                            }
+                            Status.LOADING ->{
+                                binding.dialogHistorySwLoading.isRefreshing = true
+                            }
                         }
                     }
-                }
-            })
+                })
+        }else{
+            historyViewModel.getCustomerHistory("Bearer " + mySharedPrefer.token,current_page).observe(viewLifecycleOwner,
+                Observer { it ->
+                    it?.let { resources ->
+                        when(resources.status){
+                            Status.SUCCESS -> {
+                                resources.data.let { item ->
+                                    binding.dialogHistorySwLoading.isRefreshing = false
+                                    val listTemp = mutableListOf<Data>()
+                                    for (x in item!!.response.data){
+                                        listTemp.add(x)
+
+                                    }
+                                    if (listTemp.isEmpty()){
+                                        binding.dialogHistoryLnEmpty.visibility = View.VISIBLE
+                                    }else {
+                                        purchaseHistoryAdapter.setList(item.response.data)
+                                        purchaseHistoryAdapter.notifyDataSetChanged()
+                                        binding.dialogHistoryLnEmpty.visibility = View.GONE
+                                    }
+                                }
+                            }
+                            Status.ERROR -> {
+                                binding.dialogHistorySwLoading.isRefreshing = false
+                            }
+                            Status.LOADING ->{
+                                binding.dialogHistorySwLoading.isRefreshing = true
+                            }
+                        }
+                    }
+                })
+        }
+
     }
 
     override fun onClickItem(id: Int, page: Int) {
         val args = Bundle()
         args.putInt("id", id)
         args.putInt("page",page)
+        args.putInt("check",1)
         val newFragment: DetailHistoryFragment = DetailHistoryFragment()
         newFragment.setArguments(args)
         (activity as MainActivity).replaceFragment(newFragment)

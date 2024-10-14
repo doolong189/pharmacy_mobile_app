@@ -32,6 +32,20 @@ class ContactViewModel(private val application: Application) : AndroidViewModel(
         }
     }
 
+    fun getCustomerContact(authHeader : String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())) {
+                emit(Resource.success(repository.getCustomerContact(authHeader)))
+            } else {
+                emit(Resource.error(null, application.getString(R.string.string_not_internet)))
+            }
+        } catch (ex: Exception) {
+            emit(Resource.error(null, application.getString(R.string.string_error)))
+            Log.e("zzz1", "" + ex.localizedMessage)
+        }
+    }
+
     class ContactViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ContactViewModel::class.java)) {
