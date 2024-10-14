@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.util.Util
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.ItemProductCartBinding
 import com.freshervnc.pharmacycounter.databinding.ItemProductConfirmPaymentBinding
@@ -14,6 +15,7 @@ import com.freshervnc.pharmacycounter.domain.response.bill.Data
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCart
 import com.freshervnc.pharmacycounter.presentation.ui.home.adapter.TagAdapter
 import com.freshervnc.pharmacycounter.utils.SharedPrefer
+import com.freshervnc.pharmacycounter.utils.Utils
 
 class DetailHistoryAdapter() : RecyclerView.Adapter<DetailHistoryAdapter.DetailHistoryViewHolder>() {
     private var carts: List<Data> = listOf()
@@ -47,13 +49,13 @@ class DetailHistoryAdapter() : RecyclerView.Adapter<DetailHistoryAdapter.DetailH
                 }
                 binding.itemConfirmTvBonusCoin.text = "Tặng ${item.bonusCoins} coin"
 
-                binding.itemConfirmTvPrice.text = "Giá tiền: ${item.discountPrice} VND"
+                binding.itemConfirmTvPrice.text = "Giá tiền: ${Utils.formatTongTien(item.discountPrice)} VND"
                 if (item.khuyenMai <= 0 || item.khuyenMai == null) {
                     binding.itemConfirmTvDiscount.visibility = View.GONE
                     binding.itemConfirmTvDiscountPrice.visibility = View.GONE
                 } else {
                     binding.itemConfirmTvDiscount.text = "${item.khuyenMai}%"
-                    binding.itemConfirmTvDiscountPrice.text = "Giá gốc: ${item.donGia} VND"
+                    binding.itemConfirmTvDiscountPrice.text = "Giá gốc: ${Utils.formatTongTien(item.donGia)} VND"
                     binding.itemConfirmTvDiscountPrice.paintFlags =
                         binding.itemConfirmTvDiscountPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }

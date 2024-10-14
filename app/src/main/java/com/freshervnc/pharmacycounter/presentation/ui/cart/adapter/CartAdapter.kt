@@ -63,8 +63,6 @@ class CartAdapter(private val listener: OnClickItemCart) :
 
                 binding.itemCartTvPrice.text = "${item.price} VND"
 
-//                binding.itemCartTvQualityProduct.text = "Số lượng: ${item.quality}"
-
                 binding.itemCartTvQuality.text = item.quality.toString()
 
                 binding.itemCartTvPrice.text = "Giá tiền: ${item.discountPrice} VND"

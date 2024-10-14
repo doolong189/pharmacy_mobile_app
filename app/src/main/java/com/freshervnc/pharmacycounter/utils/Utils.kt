@@ -44,7 +44,7 @@ object Utils {
         return false
     }
 
-    private fun formatTongTien(tongTien: Int): String {
+    fun formatTongTien(tongTien: Int): String {
         val symbols = DecimalFormatSymbols(Locale.US)
         val df = DecimalFormat("#,###", symbols)
         df.roundingMode = RoundingMode.CEILING
