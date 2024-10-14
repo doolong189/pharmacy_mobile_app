@@ -22,6 +22,7 @@ import com.freshervnc.pharmacycounter.domain.response.news.NewsResponse
 import com.freshervnc.pharmacycounter.domain.response.product.ProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestDeleteProductResponse
 import com.freshervnc.pharmacycounter.domain.response.product.RequestProductResponse
+import com.freshervnc.pharmacycounter.domain.response.product.RequestShowProduct
 import com.freshervnc.pharmacycounter.domain.response.profile.ProfileResponse
 import com.freshervnc.pharmacycounter.domain.response.search.RequestSearchResponse
 import com.freshervnc.pharmacycounter.domain.response.search.SearchResponse
@@ -119,15 +120,26 @@ interface ApiService {
     @POST("api/v2/system/category_type")
     suspend fun getCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestCategoryTypeResponse) : CategoryTypeResponse
 
+    @GET("/api/v2/customer/category")
+    suspend fun getCustomerCategory(@Header("Authorization") authHeader: String) : CategoryResponse
+
+    @POST("api/v2/customer/category_type")
+    suspend fun getCustomerCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestCategoryTypeResponse) : CategoryTypeResponse
+
     /* Product */
     @POST("/api/v2/product/index")
     suspend fun getProduct(@Header("Authorization") authHeader: String, @Body request : RequestProductResponse) : ProductResponse
     @POST("/api/v2/agency/products")
     suspend fun getStoreProduct(@Header("Authorization") authHeader: String, @Body request : RequestProductResponse) : ProductResponse
 
+    @POST("/api/v2/agency/product/change_of_status")
+    suspend fun getShowProduct(@Header("Authorization") authHeader: String, @Body id : RequestShowProduct) : RegisterResponse
+
     @POST("api/v2/agency/product/delete")
     suspend fun deleteProduct(@Header("Authorization") authHeader: String, @Body request : RequestDeleteProductResponse) : RegisterResponse
 
+    @POST("/api/v2/agency/product/bestseller")
+    suspend fun getBestSellerProduct(@Header("Authorization") authHeader: String, @Body id : RequestShowProduct) : RegisterResponse
     /* Logout */
     @POST("api/v2/member/logout")
     suspend fun logOut(@Header("Authorization") authHeader: String) : LogoutResponse
@@ -145,6 +157,9 @@ interface ApiService {
 
     @GET("api/v2/member/profile")
     suspend fun getProfile(@Header("Authorization") authHeader: String) : ProfileResponse
+
+    @GET("api/v2/customer/profile")
+    suspend fun getCustomerProfile(@Header("Authorization") authHeader: String) : ProfileResponse
 
     @POST("api/v2/agency/category_type/create")
     suspend fun getCreateStoreCategoryType(@Header("Authorization") authHeader: String , @Body request : RequestCreateCategoryResponse) : CategoryTypeResponse

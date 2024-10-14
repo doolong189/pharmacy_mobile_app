@@ -54,13 +54,16 @@ class CategoryTypeFragment : Fragment() , OnClickItemCategory {
     private fun init() {
         (activity as MainActivity).hideBottomNav()
         categoryViewModel = ViewModelProvider(this, CategoryViewModel.CategoryViewModelFactory(requireActivity().application))[CategoryViewModel::class.java]
-        childCategoryAdapter = ChildCategoryAdapter(this)
+        childCategoryAdapter = ChildCategoryAdapter(this,"")
         mySharedPrefer = SharedPrefer(requireContext())
     }
     private fun initVariable() {
         binding.categoryTypeRcView.setHasFixedSize(true)
         binding.categoryTypeRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.categoryTypeRcView.adapter = childCategoryAdapter
+        binding.categoryTypeSwRefresh.setOnRefreshListener {
+            getData()
+        }
         getData()
     }
     private fun getData() {
@@ -69,20 +72,58 @@ class CategoryTypeFragment : Fragment() , OnClickItemCategory {
             val myInt = b.getString("key_category")
             val categoryTypeTemp = RequestCategoryTypeResponse(myInt.toString())
             checkCategoryType = myInt.toString()
-            categoryViewModel.getCategoryType("Bearer " +mySharedPrefer.token , categoryTypeTemp)
-                .observe(viewLifecycleOwner) { it ->
-                    it?.let { resources ->
-                        when (resources.status) {
-                            Status.SUCCESS -> {
-                                resources.data?.let { item ->
-                                    childCategoryAdapter.setList(item.response.data)
+            if (mySharedPrefer.status == 1){
+                categoryViewModel.getCategoryType("Bearer " +mySharedPrefer.token , categoryTypeTemp)
+                    .observe(viewLifecycleOwner) { it ->
+                        it?.let { resources ->
+                            when (resources.status) {
+                                Status.SUCCESS -> {
+                                    binding.categoryTypeSwRefresh.isRefreshing = false
+                                    resources.data?.let { item ->
+                                        if (item.response.data.isEmpty()){
+                                            binding.categoryTypeLnEmpty.visibility = View.VISIBLE
+                                        }else{
+                                            binding.categoryTypeLnEmpty.visibility = View.GONE
+                                            childCategoryAdapter.setList(item.response.data)
+                                        }
+                                    }
+
+                                }
+                                Status.ERROR -> {
+                                    binding.categoryTypeSwRefresh.isRefreshing = false
+                                }
+                                Status.LOADING -> {
+                                    binding.categoryTypeSwRefresh.isRefreshing = true
                                 }
                             }
-                            Status.ERROR -> {}
-                            Status.LOADING -> {}
                         }
                     }
-                }
+            }else{
+                categoryViewModel.getCustomerCategoryType("Bearer " +mySharedPrefer.token , categoryTypeTemp)
+                    .observe(viewLifecycleOwner) { it ->
+                        it?.let { resources ->
+                            when (resources.status) {
+                                Status.SUCCESS -> {
+                                    binding.categoryTypeSwRefresh.isRefreshing = false
+                                    resources.data?.let { item ->
+                                        if (item.response.data.isEmpty()){
+                                            binding.categoryTypeLnEmpty.visibility = View.VISIBLE
+                                        }else{
+                                            binding.categoryTypeLnEmpty.visibility = View.GONE
+                                            childCategoryAdapter.setList(item.response.data)
+                                        }
+                                    }
+                                }
+                                Status.ERROR -> {
+                                    binding.categoryTypeSwRefresh.isRefreshing = false
+                                }
+                                Status.LOADING -> {
+                                    binding.categoryTypeSwRefresh.isRefreshing = true
+                                }
+                            }
+                        }
+                    }
+            }
         }else{
             Log.e("log bundle o day","null")
         }
@@ -94,7 +135,7 @@ class CategoryTypeFragment : Fragment() , OnClickItemCategory {
         }
     }
 
-    override fun onClickItem(item: Category) {
+    override fun onClickItem(item: Category , key : String) {
         val args = Bundle()
         args.putInt("key_product", item.value)
         args.putString("key_category",checkCategoryType)

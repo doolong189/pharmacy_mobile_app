@@ -9,7 +9,7 @@ import com.freshervnc.pharmacycounter.databinding.ItemChildCategoryBinding
 import com.freshervnc.pharmacycounter.domain.models.Category
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCategory
 
-class ChildCategoryAdapter( private val listener : OnClickItemCategory) :
+class ChildCategoryAdapter( private val listener : OnClickItemCategory , val key : String) :
     RecyclerView.Adapter<ChildCategoryAdapter.HomeViewHolder>() {
     private var categorys : List<Category> = mutableListOf()
     inner class HomeViewHolder(val binding : ItemChildCategoryBinding) : RecyclerView.ViewHolder(binding.root)
@@ -28,7 +28,7 @@ class ChildCategoryAdapter( private val listener : OnClickItemCategory) :
             with(categorys[position]){
                 binding.itemChildCategoryTvName.text = this.name
                 holder.itemView.setOnClickListener {
-                    listener.onClickItem(categorys[position])
+                    listener.onClickItem(categorys[position],key)
                 }
             }
         }

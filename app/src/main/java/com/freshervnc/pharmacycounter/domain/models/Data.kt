@@ -37,5 +37,11 @@ data class Data(
     var tags : List<Tag>,
     var imgSanPhams : List<ImageSanPhams>,
     var productTags : List<ProductTags>,
-    val hoaChatSanPhams : List<HoaChatSanPhams>
+    val hoaChatSanPhams : List<HoaChatSanPhams>,
+
+    //store _ product
+    @SerializedName("ban_chay")
+    var banChay : Int,
+    @SerializedName("trang_thai")
+    var trangThai : Int,
 )

@@ -35,6 +35,20 @@ class CategoryViewModel(private val application: Application) : AndroidViewModel
         }
     }
 
+    fun getCustomerCategory(authHeader : String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestGetCustomerCategory(authHeader)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
     fun getStoreCategory(authHeader : String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
@@ -54,6 +68,20 @@ class CategoryViewModel(private val application: Application) : AndroidViewModel
         try {
             if (Utils.hasInternetConnection(getApplication<MyApplication>())){
                 emit(Resource.success(repository.requestGetCategoryType(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }
+        catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun getCustomerCategoryType(authHeader : String  , request : RequestCategoryTypeResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.requestGetCustomerCategoryType(authHeader,request)))
             }else{
                 emit(Resource.error(null,application.getString(R.string.string_not_internet)))
             }

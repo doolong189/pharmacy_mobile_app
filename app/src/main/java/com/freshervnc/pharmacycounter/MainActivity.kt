@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.icon_manager_store -> {
+                    //status : 1 -> counter
+                    // status : 0 -> client
                     if (mySharedPrefer.status == 1){
                         replaceFragment(CounterManagerFragment())
                     }else{

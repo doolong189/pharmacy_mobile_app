@@ -63,6 +63,9 @@ class SearchProductFragment : Fragment(), OnClickItemSearch {
         binding.searchRcView.setHasFixedSize(true)
         binding.searchRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.searchRcView.adapter = searchAdapter
+        binding.searchSwRefresh.setOnRefreshListener {
+            binding.searchSwRefresh.isRefreshing = false
+        }
         searchProduct()
     }
 
@@ -81,14 +84,23 @@ class SearchProductFragment : Fragment(), OnClickItemSearch {
                             when (resource.status) {
                                 Status.SUCCESS -> {
                                     resource.data.let { item ->
-                                        searchAdapter.setList(item!!.response)
+                                        binding.searchSwRefresh.isRefreshing = false
+                                        if (item!!.response.isEmpty()){
+                                            binding.searchLnSearchEmpty.visibility = View.VISIBLE
+                                        }else{
+                                            binding.searchLnSearchEmpty.visibility = View.GONE
+                                        }
+                                        searchAdapter.setList(item.response)
                                     }
                                 }
 
                                 Status.ERROR -> {
+                                    binding.searchSwRefresh.isRefreshing = false
                                     Snackbar.make(requireView(),resource.data!!.message.toString(),2000).show()
                                 }
-                                Status.LOADING -> {}
+                                Status.LOADING -> {
+                                    binding.searchSwRefresh.isRefreshing = true
+                                }
                             }
                         }
                     })

@@ -133,7 +133,7 @@ class StoreCategoryTypeFragment : Fragment(), OnClickItemCategory {
         }
     }
 
-    override fun onClickItem(item: Category) {
+    override fun onClickItem(item: Category , key : String) {
         val args = Bundle()
         args.putInt("key_product", item.value)
         args.putString("key_category", checkCategoryType)

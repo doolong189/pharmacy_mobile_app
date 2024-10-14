@@ -131,25 +131,25 @@
                     android:id="@+id/item_store_eye"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:src="@drawable/baseline_remove_red_eye_24"/>
                 <ImageView
                     android:id="@+id/item_store_haveInStore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:src="@drawable/baseline_data_exploration_24_1"/>
                 <ImageView
                     android:id="@+id/item_store_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:src="@drawable/baseline_edit_note_24"/>
                 <ImageView
                     android:id="@+id/item_store_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:src="@drawable/baseline_delete_forever_24"/>
             </LinearLayout>
 

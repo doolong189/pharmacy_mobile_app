@@ -1,9 +1,11 @@
 package com.freshervnc.pharmacycounter.presentation.ui.manager.product.adapter
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -85,12 +87,37 @@ class StoreProductAdapter (private var datas: List<Data>, private val listener: 
                 tagsAdapter.notifyDataSetChanged()
             }
 
-            //action image button
-            binding.itemStoreEye.setOnClickListener {
+            if (item.trangThai == 1) {
+                binding.itemStoreEye.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.green))
+            } else {
+                binding.itemStoreEye.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.gray))
+            }
 
+            if (item.banChay == 1) {
+                binding.itemStoreHaveInStore.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.green))
+            }else{
+                binding.itemStoreHaveInStore.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.gray))
+            }
+
+            //action image button
+            holder.binding.itemStoreEye.setOnClickListener {
+                item.trangThai = if (item.trangThai == 1) 0 else 1
+                if (item.trangThai == 1) {
+                    holder.binding.itemStoreEye.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                } else {
+                    holder.binding.itemStoreEye.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.gray))
+                }
+                listener.onClickHaveInStore(item.id)
+//                 notifyItemChanged(position)
             }
             binding.itemStoreHaveInStore.setOnClickListener {
-
+                item.banChay = if (item.banChay == 1) 0 else 1
+                if (item.banChay == 1) {
+                    binding.itemStoreHaveInStore.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                }else{
+                    binding.itemStoreHaveInStore.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.gray))
+                }
+                listener.onClickBestSeller(item.id)
             }
             binding.itemStoreDelete.setOnClickListener {
                 listener.onClickDelete(item)

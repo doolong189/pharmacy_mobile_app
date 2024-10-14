@@ -6,63 +6,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.product.ProductFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/product_swRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 >
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="18dp"
-                    android:layout_margin="10dp"
+                    android:background="@drawable/custom_button"
                     >
-                    <RelativeLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        app:cardCornerRadius="18dp"
+                        android:layout_margin="10dp"
                         >
-                        <EditText
-                            android:id="@+id/product_edSearch"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#FFF"
-                            android:hint="@string/t_m_ki_m_s_n_ph_m"
-                            android:textStyle="bold"
-                            android:layout_centerVertical="true"
-                            android:layout_toStartOf="@id/product_imgSearchView"
-                            />
-                        <ImageView
-                            android:id="@+id/product_imgSearchView"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_search"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                            android:padding="10dp"
+                            >
+                            <EditText
+                                android:id="@+id/product_edSearch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#FFF"
+                                android:hint="@string/t_m_ki_m_s_n_ph_m"
+                                android:textStyle="bold"
+                                android:layout_centerVertical="true"
+                                android:layout_toStartOf="@id/product_imgSearchView"
+                                />
+                            <ImageView
+                                android:id="@+id/product_imgSearchView"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_search"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/product_lnEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    >
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_empty_list"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validate_product_empty"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/product_lnSearchEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    >
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_empty_search"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/validate_search_empty"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_rcView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_child_product"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
+                    android:scrollbars="none"
+                    />
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/product_rcView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_child_product"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
-                android:scrollbars="none"
-                />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

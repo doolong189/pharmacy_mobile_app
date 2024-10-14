@@ -25,7 +25,7 @@ class CategoryTypeAdapter(private var categorytypes : List<Category>, private va
             with(categorytypes[position]){
                 binding.itemChildCategoryTvName.text = this.name
                 holder.itemView.setOnClickListener {
-                    listener.onClickItem(categorytypes[position])
+                    listener.onClickItem(categorytypes[position],"")
                 }
             }
         }

@@ -28,6 +28,19 @@ class ProfileViewModel(private val application: Application) : AndroidViewModel(
         }
     }
 
+    fun getCustomerProfile(authHeader : String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.getCustomerProfile(authHeader)))
+            }else{
+                emit(Resource.error(null, application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,ex.message?:application.getString(R.string.string_error)))
+        }
+    }
+
     class ProfileViewModelFactory(val application: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ProfileViewModel::class.java)){
