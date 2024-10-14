@@ -46,18 +46,9 @@ class SharedPrefer(private val context: Context) {
         private const val KEY_EMAIL = "email"
         private const val KEY_ADDRESS = "address"
         private const val KEY_STATUS = "status"
+        private const val KEY_ID_AGENCY = "agency"
+        private const val KEY_ID_PROVINCES = "provinces"
+
     }
 
-//    LOGIN_CUSTOMER = "customer/login";
-//    REGISTER_CUSTOMER = "customer/register";
-//    FORGOT_PASSWORD_CUSTOMER = "customer/reset_password";
-//    LOGOUT_CUSTOMER = "customer/logout";
-//    HOME_CUSTOMER = "customer/homepage";
-//    CATEGORY_CUSTOMER = "customer/category";
-//    CATEGORY_TYPE_CUSTOMER = "customer/category_type";
-//    HISTORY_CUSTOMER = "customer/history/payment";
-//    HISTORY_DETAIL_CUSTOMER = "customer/history/payment_details";
-//    PROFILE_CUSTOMER = "customer/profile";
-//    CONTACT_CUSTOMER = "agency/contact";
-//    agency/products/create
 }

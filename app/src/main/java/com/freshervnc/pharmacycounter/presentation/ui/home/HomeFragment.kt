@@ -256,7 +256,9 @@ class HomeFragment : Fragment(), OnClickItemProduct, OnClickItemHomePage {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_home, menu)
+        if (mySharedPrefer.status == 1) {
+            inflater.inflate(R.menu.toolbar_home, menu)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
