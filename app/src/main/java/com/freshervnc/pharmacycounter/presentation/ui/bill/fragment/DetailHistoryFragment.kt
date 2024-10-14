@@ -32,8 +32,6 @@ class DetailHistoryFragment : Fragment() {
     private lateinit var detailHistoryAdapter: DetailHistoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("log o day 1" , "onCreate")
-
     }
 
     override fun onCreateView(
@@ -42,7 +40,6 @@ class DetailHistoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentDetailHistoryBinding.inflate(layoutInflater, container, false)
-        Log.e("log o day 1" , "onCreateView")
 
         return binding.root
     }
@@ -51,7 +48,6 @@ class DetailHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         initVariable()
-        Log.e("log o day 1" , "onViewCreated")
 
     }
 
@@ -74,43 +70,126 @@ class DetailHistoryFragment : Fragment() {
         val b = arguments
         val id = b!!.getInt("id")
         val page = b.getInt("page")
-
+        val check = b.getInt("check")
         val requestDetailBillTemp = RequestDetailBillResponse(id,page)
-        historyViewModel.detailBill("Bearer "+mySharedPrefer.token ,requestDetailBillTemp).observe(viewLifecycleOwner, Observer { it ->
-            it?.let { resources ->
-                when(resources.status){
-                    Status.SUCCESS -> {
-                        detailHistoryAdapter.setList(resources.data!!.response.products.data)
-                        detailHistoryAdapter.notifyDataSetChanged()
-                        binding.detailHistoryTvQuality.text = "Số lượng: "+resources.data.response.totalProduct.toString()
-                        binding.detailHistoryTvTotalAmount.text = "Tổng tiền: "+resources.data.response.totalPrice.toString() + " VND"
+        if (mySharedPrefer.status == 1){ // counter - customer
+            //check buy history - sell history
+            //1 : buy - !1 : sell
+            if (check == 1){
+                historyViewModel.detailBill("Bearer "+mySharedPrefer.token ,requestDetailBillTemp).observe(viewLifecycleOwner, Observer { it ->
+                    it?.let { resources ->
+                        when(resources.status){
+                            Status.SUCCESS -> {
+                                detailHistoryAdapter.setList(resources.data!!.response.products.data)
+                                detailHistoryAdapter.notifyDataSetChanged()
+                                binding.detailHistoryTvQuality.text = "Số lượng: "+resources.data.response.totalProduct.toString()
+                                binding.detailHistoryTvTotalAmount.text = "Tổng tiền: "+resources.data.response.totalPrice.toString() + " VND"
 
-                        //
-                        binding.detailHistoryBtnInfoDetail.setOnClickListener {
-                            val viewBinding = DialogInfoDetailHistoryBinding.inflate(layoutInflater, null, false)
-                            val dialogBinding = BottomSheetDialog(requireContext())
-                            dialogBinding.setContentView(viewBinding.root)
-                            dialogBinding.show()
-                            viewBinding.dialogInfoDetailTvIdBill.text = "Đơn hàng số " +id.toString()
-                            viewBinding.dialogInfoDetailTvDate.text = resources.data.response.dateTime
-                            viewBinding.dialogInfoDetailTvTotalAmount.text = resources.data.response.totalPrice.toString() + " VND"
-                            viewBinding.dialogInfoDetailTvTotal.text = resources.data.response.price.toString() + " VND"
-                            if (resources.data.response.coinBonus == 0){
-                                viewBinding.dialogInfoDetailLnUsingCoin.visibility = View.GONE
-                                viewBinding.dialogInfoDetailLnCoin.visibility = View.GONE
-                            }else {
-                                viewBinding.dialogInfoDetailTvCoin.text =
-                                    "+" + resources.data.response.coinBonus.toString() + " VND"
-                                viewBinding.dialogInfoDetailTvUsingCoin.text =
-                                    "-" + (resources.data.response.coinBonus * 10).toString() + " coin"
+                                //
+                                binding.detailHistoryBtnInfoDetail.setOnClickListener {
+                                    val viewBinding = DialogInfoDetailHistoryBinding.inflate(layoutInflater, null, false)
+                                    val dialogBinding = BottomSheetDialog(requireContext())
+                                    dialogBinding.setContentView(viewBinding.root)
+                                    dialogBinding.show()
+                                    viewBinding.dialogInfoDetailTvIdBill.text = "Đơn hàng số " +id.toString()
+                                    viewBinding.dialogInfoDetailTvDate.text = resources.data.response.dateTime
+                                    viewBinding.dialogInfoDetailTvTotalAmount.text = resources.data.response.totalPrice.toString() + " VND"
+                                    viewBinding.dialogInfoDetailTvTotal.text = resources.data.response.price.toString() + " VND"
+                                    if (resources.data.response.coinBonus == 0){
+                                        viewBinding.dialogInfoDetailLnUsingCoin.visibility = View.GONE
+                                        viewBinding.dialogInfoDetailLnCoin.visibility = View.GONE
+                                    }else {
+                                        viewBinding.dialogInfoDetailTvCoin.text =
+                                            "+" + resources.data.response.coinBonus.toString() + " VND"
+                                        viewBinding.dialogInfoDetailTvUsingCoin.text =
+                                            "-" + (resources.data.response.coinBonus * 10).toString() + " coin"
+                                    }
+                                }
                             }
+                            Status.ERROR -> {}
+                            Status.LOADING -> {}
                         }
                     }
-                    Status.ERROR -> {}
-                    Status.LOADING -> {}
-                }
+                })
+            }else{
+                historyViewModel.detailAgencyHistory("Bearer "+mySharedPrefer.token ,requestDetailBillTemp).observe(viewLifecycleOwner, Observer { it ->
+                    it?.let { resources ->
+                        when(resources.status){
+                            Status.SUCCESS -> {
+                                detailHistoryAdapter.setList(resources.data!!.response.products.data)
+                                detailHistoryAdapter.notifyDataSetChanged()
+                                binding.detailHistoryTvQuality.text = "Số lượng: "+resources.data.response.totalProduct.toString()
+                                binding.detailHistoryTvTotalAmount.text = "Tổng tiền: "+resources.data.response.totalPrice.toString() + " VND"
+
+                                //
+                                binding.detailHistoryBtnInfoDetail.setOnClickListener {
+                                    val viewBinding = DialogInfoDetailHistoryBinding.inflate(layoutInflater, null, false)
+                                    val dialogBinding = BottomSheetDialog(requireContext())
+                                    dialogBinding.setContentView(viewBinding.root)
+                                    dialogBinding.show()
+                                    viewBinding.dialogInfoDetailTvIdBill.text = "Đơn hàng số " +id.toString()
+                                    viewBinding.dialogInfoDetailTvDate.text = resources.data.response.dateTime
+                                    viewBinding.dialogInfoDetailTvTotalAmount.text = resources.data.response.totalPrice.toString() + " VND"
+                                    viewBinding.dialogInfoDetailTvTotal.text = resources.data.response.price.toString() + " VND"
+                                    if (resources.data.response.coinBonus == 0){
+                                        viewBinding.dialogInfoDetailLnUsingCoin.visibility = View.GONE
+                                        viewBinding.dialogInfoDetailLnCoin.visibility = View.GONE
+                                    }else {
+                                        viewBinding.dialogInfoDetailTvCoin.text =
+                                            "+" + resources.data.response.coinBonus.toString() + " VND"
+                                        viewBinding.dialogInfoDetailTvUsingCoin.text =
+                                            "-" + (resources.data.response.coinBonus * 10).toString() + " coin"
+                                    }
+                                }
+                            }
+                            Status.ERROR -> {}
+                            Status.LOADING -> {}
+                        }
+                    }
+                })
             }
-        })
+
+        }else{
+            if (check == 1){
+                historyViewModel.detailCustomerBill("Bearer "+mySharedPrefer.token ,requestDetailBillTemp).observe(viewLifecycleOwner, Observer { it ->
+                    it?.let { resources ->
+                        when(resources.status){
+                            Status.SUCCESS -> {
+                                detailHistoryAdapter.setList(resources.data!!.response.products.data)
+                                detailHistoryAdapter.notifyDataSetChanged()
+                                binding.detailHistoryTvQuality.text = "Số lượng: "+resources.data.response.totalProduct.toString()
+                                binding.detailHistoryTvTotalAmount.text = "Tổng tiền: "+resources.data.response.totalPrice.toString() + " VND"
+
+                                //
+                                binding.detailHistoryBtnInfoDetail.setOnClickListener {
+                                    val viewBinding = DialogInfoDetailHistoryBinding.inflate(layoutInflater, null, false)
+                                    val dialogBinding = BottomSheetDialog(requireContext())
+                                    dialogBinding.setContentView(viewBinding.root)
+                                    dialogBinding.show()
+                                    viewBinding.dialogInfoDetailTvIdBill.text = "Đơn hàng số " +id.toString()
+                                    viewBinding.dialogInfoDetailTvDate.text = resources.data.response.dateTime
+                                    viewBinding.dialogInfoDetailTvTotalAmount.text = resources.data.response.totalPrice.toString() + " VND"
+                                    viewBinding.dialogInfoDetailTvTotal.text = resources.data.response.price.toString() + " VND"
+                                    if (resources.data.response.coinBonus == 0){
+                                        viewBinding.dialogInfoDetailLnUsingCoin.visibility = View.GONE
+                                        viewBinding.dialogInfoDetailLnCoin.visibility = View.GONE
+                                    }else {
+                                        viewBinding.dialogInfoDetailTvCoin.text =
+                                            "+" + resources.data.response.coinBonus.toString() + " VND"
+                                        viewBinding.dialogInfoDetailTvUsingCoin.text =
+                                            "-" + (resources.data.response.coinBonus * 10).toString() + " coin"
+                                    }
+                                }
+                            }
+                            Status.ERROR -> {}
+                            Status.LOADING -> {}
+                        }
+                    }
+                })
+            }else{
+
+            }
+        }
 
     }
 

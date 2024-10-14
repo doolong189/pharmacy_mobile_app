@@ -108,6 +108,9 @@ class CounterProfileFragment : Fragment() {
                                             Status.SUCCESS -> {
                                                 val adapter = ArrayAdapter(requireContext(),  R.layout.list_item, it.data!!.response)
                                                 binding.profileSpGenCy.setAdapter(adapter)
+                                                for (x in it.data.response){
+
+                                                }
                                                 binding.profileSpGenCy.setOnItemClickListener { parent, view, position, id ->
                                                     val selectedItem = item.response.tinh.toString()
                                                     binding.profileSpGenCy.setText(selectedItem, false)

@@ -13,11 +13,11 @@ import com.freshervnc.pharmacycounter.databinding.ItemProductConfirmPaymentBindi
 import com.freshervnc.pharmacycounter.domain.response.bill.Data
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemCart
 import com.freshervnc.pharmacycounter.presentation.ui.home.adapter.TagAdapter
+import com.freshervnc.pharmacycounter.utils.SharedPrefer
 
 class DetailHistoryAdapter() : RecyclerView.Adapter<DetailHistoryAdapter.DetailHistoryViewHolder>() {
     private var carts: List<Data> = listOf()
-    private var selectedPosition = RecyclerView.NO_POSITION
-    private val checkedItems = mutableSetOf<Int>()
+    private lateinit var mySharedPrefer : SharedPrefer
     inner class DetailHistoryViewHolder(val binding: ItemProductConfirmPaymentBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -64,11 +64,15 @@ class DetailHistoryAdapter() : RecyclerView.Adapter<DetailHistoryAdapter.DetailH
                     binding.itemConfirmTvQuality.text = "x${item.soLuong}"
                 }
 
-                val tagsAdapter = TagAdapter(item.tags)
-                binding.itemConfirmRcTags.setLayoutManager(LinearLayoutManager(holder.itemView.context))
-                binding.itemConfirmRcTags.setAdapter(tagsAdapter)
-                binding.itemConfirmRcTags.setHasFixedSize(true)
-                tagsAdapter.notifyDataSetChanged()
+                mySharedPrefer = SharedPrefer(holder.itemView.context)
+                if (mySharedPrefer.status != 1) {
+                    val tagsAdapter = TagAdapter(item.tags)
+                    binding.itemConfirmRcTags.setLayoutManager(LinearLayoutManager(holder.itemView.context))
+                    binding.itemConfirmRcTags.setAdapter(tagsAdapter)
+                    binding.itemConfirmRcTags.setHasFixedSize(true)
+                    tagsAdapter.notifyDataSetChanged()
+                }
+
             }
         }
     }

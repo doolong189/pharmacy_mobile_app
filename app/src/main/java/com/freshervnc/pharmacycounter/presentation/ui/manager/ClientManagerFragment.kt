@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.MainActivity
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.FragmentClientManagerBinding
+import com.freshervnc.pharmacycounter.presentation.ui.manager.contacts.CustomerContactFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.CustomerProfileFragment
 import com.freshervnc.pharmacycounter.presentation.ui.manager.profile.viewmodel.ProfileViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.manager.viewmodel.ManagerViewModel
@@ -71,6 +72,9 @@ class ClientManagerFragment : Fragment() {
                         }
                     }
                 })
+        }
+        binding.clientLnContact.setOnClickListener {
+            (activity as MainActivity).replaceFragment(CustomerContactFragment())
         }
     }
 

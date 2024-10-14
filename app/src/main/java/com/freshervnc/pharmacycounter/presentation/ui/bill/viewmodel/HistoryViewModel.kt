@@ -1,6 +1,7 @@
 package com.freshervnc.pharmacycounter.presentation.ui.bill.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -29,11 +30,64 @@ class HistoryViewModel(private val application: Application) : AndroidViewModel(
         }
     }
 
+    fun getCustomerHistory(authHeader : String , page : Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.getCustomerHistory(authHeader,page)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun getHistorySellAgency(authHeader : String , page : Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.getHistorySellAgency(authHeader,page)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,ex.localizedMessage.toString() ?: application.getString(R.string.string_error)))
+            Log.e("o day co loi",ex.localizedMessage.toString())
+        }
+    }
+
     fun detailBill(authHeader: String , request : RequestDetailBillResponse) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
             if (Utils.hasInternetConnection(getApplication<MyApplication>())){
                 emit(Resource.success(repository.detailHistory(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun detailCustomerBill(authHeader: String , request : RequestDetailBillResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.detailCustomerHistory(authHeader,request)))
+            }else{
+                emit(Resource.error(null,application.getString(R.string.string_not_internet)))
+            }
+        }catch (ex : Exception){
+            emit(Resource.error(null,application.getString(R.string.string_error)))
+        }
+    }
+
+    fun detailAgencyHistory(authHeader: String , request : RequestDetailBillResponse) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            if (Utils.hasInternetConnection(getApplication<MyApplication>())){
+                emit(Resource.success(repository.detailAgencyHistory(authHeader,request)))
             }else{
                 emit(Resource.error(null,application.getString(R.string.string_not_internet)))
             }

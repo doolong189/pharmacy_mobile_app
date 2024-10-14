@@ -12,12 +12,13 @@ import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.ItemChildProductBinding
 import com.freshervnc.pharmacycounter.domain.models.Data
 import com.freshervnc.pharmacycounter.presentation.listener.OnClickItemProduct
+import com.freshervnc.pharmacycounter.utils.SharedPrefer
 
 class ChildProductAdapter(private var datas: List<Data>, private val listener: OnClickItemProduct) :
     RecyclerView.Adapter<ChildProductAdapter.HomeViewHolder>() {
     inner class HomeViewHolder(val binding: ItemChildProductBinding) :
         RecyclerView.ViewHolder(binding.root)
-
+    private lateinit var mySharedPrefer: SharedPrefer
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding =
             ItemChildProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -76,13 +77,14 @@ class ChildProductAdapter(private var datas: List<Data>, private val listener: O
             } else {
                 binding.itemChildTvQuality.text = "Số lượng: ${item.quality}"
             }
-
-            val tagsAdapter = TagAdapter(item.tags)
-            binding.itemChildRcTags.setLayoutManager(LinearLayoutManager(holder.itemView.context))
-            binding.itemChildRcTags.setAdapter(tagsAdapter)
-            binding.itemChildRcTags.setHasFixedSize(true)
-            tagsAdapter.notifyDataSetChanged()
-
+            mySharedPrefer = SharedPrefer(holder.itemView.context)
+            if (mySharedPrefer.status == 1) {
+                val tagsAdapter = TagAdapter(item.tags)
+                binding.itemChildRcTags.setLayoutManager(LinearLayoutManager(holder.itemView.context))
+                binding.itemChildRcTags.setAdapter(tagsAdapter)
+                binding.itemChildRcTags.setHasFixedSize(true)
+                tagsAdapter.notifyDataSetChanged()
+            }
             binding.itemChildBtnAddCart.setOnClickListener {
                 listener.onClickItem(datas[position])
             }

@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.freshervnc.pharmacycounter.R
 import com.freshervnc.pharmacycounter.databinding.DialogChooseCameraOrGalleryBinding
 import com.freshervnc.pharmacycounter.databinding.FragmentClientSignUpBinding
+import com.freshervnc.pharmacycounter.domain.models.Agency
 import com.freshervnc.pharmacycounter.presentation.ui.registration.register.viewmodel.RegisterViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.registration.viewmodel.AgencyViewModel
 import com.freshervnc.pharmacycounter.presentation.ui.registration.viewmodel.ProvinceViewModel
@@ -131,6 +132,7 @@ class ClientSignUpFragment : Fragment() {
                         Status.SUCCESS -> {
                             val adapterSpAgency = ArrayAdapter(requireContext(), R.layout.list_item, it.data!!.response)
                             binding.clientSignUpSpAgency.adapter = adapterSpAgency
+
                         }
 
                         Status.ERROR -> {
@@ -144,15 +146,18 @@ class ClientSignUpFragment : Fragment() {
                 }
             })
 
-        binding.clientSignUpSpAgency.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
+        binding.clientSignUpSpAgency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View,
                     position: Int,
                     id: Long
                 ) {
-                    itrAgency = position + 1
+                    val selectedItem = parent!!.getItemAtPosition(position) as Agency // Thay YourDataType bằng kiểu dữ liệu thực tế
+                    val selectedId = selectedItem.id // Giả sử đối tượng có thuộc tính id
+                    // Xử lý ID đã chọn
+                    Log.d("Selected ID", "ID: $selectedId")
+                    itrAgency = selectedId
                     Log.e("itrAgency", "" + itrAgency)
                 }
 
@@ -284,6 +289,7 @@ class ClientSignUpFragment : Fragment() {
                     RequestBody.create("{multipart/form-data}".toMediaTypeOrNull(), file);
                 filePart = MultipartBody.Part.createFormData("img", file.name, requestFile);
             }
+            Log.e("register",""+strFullName + "\n" + itrAgency + "\n" + strAddressCounter + "\n" + itrProvinces + "\n" + strPhone + "\n" + strEmail + "\n" + strPassword )
             clientViewModel.requestRegisterCustomer(fullNameBody, idAgency, address, provinces, phone, email, password, filePart)
                 .observe(viewLifecycleOwner, Observer { it ->
                     it?.let { resources ->

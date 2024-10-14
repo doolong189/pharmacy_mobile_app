@@ -104,8 +104,7 @@ class CustomerProfileFragment : Fragment() {
                                             Status.SUCCESS -> {
                                                 val adapter = ArrayAdapter(requireContext(),  R.layout.list_item, it.data!!.response)
                                                 for (i in 0 until resources.data!!.response.size) {
-                                                    if (item.response.tinh == resources.data.response[i].id
-                                                    ) {
+                                                    if (item.response.tinh == resources.data.response[i].id) {
                                                         binding.profileSpGenCy.setSelection(i)
                                                     }
                                                 }
